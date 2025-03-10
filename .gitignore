@@ -1,0 +1,14 @@
+# Ignorer virtual environment
+.venv/
+venv/
+
+# Ignorer cache-filer
+__pycache__/
+*.pyc
+
+# Ignorer databasefiler (hvis du bruker SQLite)
+db.sqlite3
+
+# Ignorer OS-filer (Mac/Windows)
+.DS_Store
+Thumbs.db
