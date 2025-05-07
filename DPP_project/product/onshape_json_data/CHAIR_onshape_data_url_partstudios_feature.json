@@ -1,0 +1,1683 @@
+{
+  "features": [
+    {
+      "type": 151,
+      "typeName": "BTMSketch",
+      "message": {
+        "entities": [
+          {
+            "type": 155,
+            "typeName": "BTMSketchCurveSegment",
+            "message": {
+              "startPointId": "2d7f86ed1c54481ba6fe0268fd66731a.start",
+              "endPointId": "2d7f86ed1c54481ba6fe0268fd66731a.end",
+              "startParam": 0.0,
+              "endParam": 0.06999999999999999,
+              "offsetCurveExtensions": [],
+              "geometry": {
+                "type": 117,
+                "typeName": "BTCurveGeometryLine",
+                "message": {
+                  "pntX": 0.0,
+                  "pntY": 0.0,
+                  "dirX": 1.0,
+                  "dirY": 0.0
+                }
+              },
+              "centerId": "",
+              "internalIds": [],
+              "isConstruction": false,
+              "parameters": [],
+              "isFromSplineHandle": false,
+              "isFromEndpointSplineHandle": false,
+              "isFromSplineControlPolygon": false,
+              "entityId": "2d7f86ed1c54481ba6fe0268fd66731a",
+              "namespace": "",
+              "index": 1,
+              "hasUserCode": false,
+              "nodeId": "MD/SS/jvnl52R/JS2"
+            }
+          },
+          {
+            "type": 155,
+            "typeName": "BTMSketchCurveSegment",
+            "message": {
+              "startPointId": "1f97e3c4b28b49e18bea9ed61bf545dc.start",
+              "endPointId": "1f97e3c4b28b49e18bea9ed61bf545dc.end",
+              "startParam": 0.0,
+              "endParam": 0.06999999999999999,
+              "offsetCurveExtensions": [],
+              "geometry": {
+                "type": 117,
+                "typeName": "BTCurveGeometryLine",
+                "message": {
+                  "pntX": 0.0,
+                  "pntY": 0.45,
+                  "dirX": 1.0,
+                  "dirY": 0.0
+                }
+              },
+              "centerId": "",
+              "internalIds": [],
+              "isConstruction": false,
+              "parameters": [],
+              "isFromSplineHandle": false,
+              "isFromEndpointSplineHandle": false,
+              "isFromSplineControlPolygon": false,
+              "entityId": "1f97e3c4b28b49e18bea9ed61bf545dc",
+              "namespace": "",
+              "index": 2,
+              "hasUserCode": false,
+              "nodeId": "M6KJsl2MMBJ8yn1UK"
+            }
+          },
+          {
+            "type": 155,
+            "typeName": "BTMSketchCurveSegment",
+            "message": {
+              "startPointId": "7fdbfd1ff4b34ebcb4057f18fb159490.start",
+              "endPointId": "7fdbfd1ff4b34ebcb4057f18fb159490.end",
+              "startParam": 0.0,
+              "endParam": 0.0699999999999999,
+              "offsetCurveExtensions": [],
+              "geometry": {
+                "type": 117,
+                "typeName": "BTCurveGeometryLine",
+                "message": {
+                  "pntX": 0.45,
+                  "pntY": 0.45,
+                  "dirX": 1.0,
+                  "dirY": 0.0
+                }
+              },
+              "centerId": "",
+              "internalIds": [],
+              "isConstruction": false,
+              "parameters": [],
+              "isFromSplineHandle": false,
+              "isFromEndpointSplineHandle": false,
+              "isFromSplineControlPolygon": false,
+              "entityId": "7fdbfd1ff4b34ebcb4057f18fb159490",
+              "namespace": "",
+              "index": 3,
+              "hasUserCode": false,
+              "nodeId": "M+/riXUE/VKnS5iy2"
+            }
+          },
+          {
+            "type": 155,
+            "typeName": "BTMSketchCurveSegment",
+            "message": {
+              "startPointId": "76ef1c51d1b74d4f85d68fa179e962eb.start",
+              "endPointId": "76ef1c51d1b74d4f85d68fa179e962eb.end",
+              "startParam": 0.0,
+              "endParam": 0.0699999999999999,
+              "offsetCurveExtensions": [],
+              "geometry": {
+                "type": 117,
+                "typeName": "BTCurveGeometryLine",
+                "message": {
+                  "pntX": 0.5199999999999999,
+                  "pntY": 0.45,
+                  "dirX": 6.123233995736766e-17,
+                  "dirY": 1.0
+                }
+              },
+              "centerId": "",
+              "internalIds": [],
+              "isConstruction": false,
+              "parameters": [],
+              "isFromSplineHandle": false,
+              "isFromEndpointSplineHandle": false,
+              "isFromSplineControlPolygon": false,
+              "entityId": "76ef1c51d1b74d4f85d68fa179e962eb",
+              "namespace": "",
+              "index": 4,
+              "hasUserCode": false,
+              "nodeId": "MJ0HDh/M3+Nfi765u"
+            }
+          },
+          {
+            "type": 155,
+            "typeName": "BTMSketchCurveSegment",
+            "message": {
+              "startPointId": "2cf8ca0c8b7644ec848a3d7fe437df76.start",
+              "endPointId": "2cf8ca0c8b7644ec848a3d7fe437df76.end",
+              "startParam": 0.0,
+              "endParam": 0.06999999999999999,
+              "offsetCurveExtensions": [],
+              "geometry": {
+                "type": 117,
+                "typeName": "BTCurveGeometryLine",
+                "message": {
+                  "pntX": 0.06999999999999999,
+                  "pntY": 0.5199999999999999,
+                  "dirX": -1.0,
+                  "dirY": 1.2246467991473532e-16
+                }
+              },
+              "centerId": "",
+              "internalIds": [],
+              "isConstruction": false,
+              "parameters": [],
+              "isFromSplineHandle": false,
+              "isFromEndpointSplineHandle": false,
+              "isFromSplineControlPolygon": false,
+              "entityId": "2cf8ca0c8b7644ec848a3d7fe437df76",
+              "namespace": "",
+              "index": 5,
+              "hasUserCode": false,
+              "nodeId": "MhsUn5+5/vW2HMQT4"
+            }
+          },
+          {
+            "type": 155,
+            "typeName": "BTMSketchCurveSegment",
+            "message": {
+              "startPointId": "7c20d1b3d1a84a689bc7cdbc01c1d064.start",
+              "endPointId": "7c20d1b3d1a84a689bc7cdbc01c1d064.end",
+              "startParam": 0.0,
+              "endParam": 0.06999999999999999,
+              "offsetCurveExtensions": [],
+              "geometry": {
+                "type": 117,
+                "typeName": "BTCurveGeometryLine",
+                "message": {
+                  "pntX": 0.0,
+                  "pntY": 0.0,
+                  "dirX": 6.123233995736766e-17,
+                  "dirY": 1.0
+                }
+              },
+              "centerId": "",
+              "internalIds": [],
+              "isConstruction": false,
+              "parameters": [],
+              "isFromSplineHandle": false,
+              "isFromEndpointSplineHandle": false,
+              "isFromSplineControlPolygon": false,
+              "entityId": "7c20d1b3d1a84a689bc7cdbc01c1d064",
+              "namespace": "",
+              "index": 6,
+              "hasUserCode": false,
+              "nodeId": "MC8MX/11oS3ZWxBeC"
+            }
+          },
+          {
+            "type": 155,
+            "typeName": "BTMSketchCurveSegment",
+            "message": {
+              "startPointId": "c6b44e0f505846ec8aa009ba2654e8da.start",
+              "endPointId": "c6b44e0f505846ec8aa009ba2654e8da.end",
+              "startParam": 0.0,
+              "endParam": 0.0699999999999999,
+              "offsetCurveExtensions": [],
+              "geometry": {
+                "type": 117,
+                "typeName": "BTCurveGeometryLine",
+                "message": {
+                  "pntX": 0.45,
+                  "pntY": 0.0,
+                  "dirX": 1.0,
+                  "dirY": 0.0
+                }
+              },
+              "centerId": "",
+              "internalIds": [],
+              "isConstruction": false,
+              "parameters": [],
+              "isFromSplineHandle": false,
+              "isFromEndpointSplineHandle": false,
+              "isFromSplineControlPolygon": false,
+              "entityId": "c6b44e0f505846ec8aa009ba2654e8da",
+              "namespace": "",
+              "index": 7,
+              "hasUserCode": false,
+              "nodeId": "Mjsa5BscnhQYt7/1z"
+            }
+          },
+          {
+            "type": 155,
+            "typeName": "BTMSketchCurveSegment",
+            "message": {
+              "startPointId": "ee8f4536d18a45c19e99fd7615db9392.start",
+              "endPointId": "ee8f4536d18a45c19e99fd7615db9392.end",
+              "startParam": 0.0,
+              "endParam": 0.06999999999999999,
+              "offsetCurveExtensions": [],
+              "geometry": {
+                "type": 117,
+                "typeName": "BTCurveGeometryLine",
+                "message": {
+                  "pntX": 0.5199999999999999,
+                  "pntY": 0.0,
+                  "dirX": 6.123233995736766e-17,
+                  "dirY": 1.0
+                }
+              },
+              "centerId": "",
+              "internalIds": [],
+              "isConstruction": false,
+              "parameters": [],
+              "isFromSplineHandle": false,
+              "isFromEndpointSplineHandle": false,
+              "isFromSplineControlPolygon": false,
+              "entityId": "ee8f4536d18a45c19e99fd7615db9392",
+              "namespace": "",
+              "index": 8,
+              "hasUserCode": false,
+              "nodeId": "MClSTi24eRL8IzULQ"
+            }
+          },
+          {
+            "type": 155,
+            "typeName": "BTMSketchCurveSegment",
+            "message": {
+              "startPointId": "191a29eb656e4cb694d3cc796e7fb72e.start",
+              "endPointId": "191a29eb656e4cb694d3cc796e7fb72e.end",
+              "startParam": 0.0,
+              "endParam": 0.0699999999999999,
+              "offsetCurveExtensions": [],
+              "geometry": {
+                "type": 117,
+                "typeName": "BTCurveGeometryLine",
+                "message": {
+                  "pntX": 0.0,
+                  "pntY": 0.45,
+                  "dirX": 6.123233995736766e-17,
+                  "dirY": 1.0
+                }
+              },
+              "centerId": "",
+              "internalIds": [],
+              "isConstruction": false,
+              "parameters": [],
+              "isFromSplineHandle": false,
+              "isFromEndpointSplineHandle": false,
+              "isFromSplineControlPolygon": false,
+              "entityId": "191a29eb656e4cb694d3cc796e7fb72e",
+              "namespace": "",
+              "index": 9,
+              "hasUserCode": false,
+              "nodeId": "MvJSPr09MleVfo8xD"
+            }
+          },
+          {
+            "type": 155,
+            "typeName": "BTMSketchCurveSegment",
+            "message": {
+              "startPointId": "c764ece206ef4be9aa35f9ffc7f1d925.start",
+              "endPointId": "c764ece206ef4be9aa35f9ffc7f1d925.end",
+              "startParam": 0.0,
+              "endParam": 0.06999999999999999,
+              "offsetCurveExtensions": [],
+              "geometry": {
+                "type": 117,
+                "typeName": "BTCurveGeometryLine",
+                "message": {
+                  "pntX": 0.06999999999999999,
+                  "pntY": 0.0,
+                  "dirX": 6.123233995736766e-17,
+                  "dirY": 1.0
+                }
+              },
+              "centerId": "",
+              "internalIds": [],
+              "isConstruction": false,
+              "parameters": [],
+              "isFromSplineHandle": false,
+              "isFromEndpointSplineHandle": false,
+              "isFromSplineControlPolygon": false,
+              "entityId": "c764ece206ef4be9aa35f9ffc7f1d925",
+              "namespace": "",
+              "index": 10,
+              "hasUserCode": false,
+              "nodeId": "Mw5vqT4TirQDQnfLW"
+            }
+          },
+          {
+            "type": 155,
+            "typeName": "BTMSketchCurveSegment",
+            "message": {
+              "startPointId": "eb6b9bd2131a4591aae20a1f2f027d4a.start",
+              "endPointId": "eb6b9bd2131a4591aae20a1f2f027d4a.end",
+              "startParam": 0.0,
+              "endParam": 0.0699999999999999,
+              "offsetCurveExtensions": [],
+              "geometry": {
+                "type": 117,
+                "typeName": "BTCurveGeometryLine",
+                "message": {
+                  "pntX": 0.5199999999999999,
+                  "pntY": 0.06999999999999999,
+                  "dirX": -1.0,
+                  "dirY": 1.2246467991473532e-16
+                }
+              },
+              "centerId": "",
+              "internalIds": [],
+              "isConstruction": false,
+              "parameters": [],
+              "isFromSplineHandle": false,
+              "isFromEndpointSplineHandle": false,
+              "isFromSplineControlPolygon": false,
+              "entityId": "eb6b9bd2131a4591aae20a1f2f027d4a",
+              "namespace": "",
+              "index": 11,
+              "hasUserCode": false,
+              "nodeId": "MIBatw3UCODiG4Pl2"
+            }
+          },
+          {
+            "type": 155,
+            "typeName": "BTMSketchCurveSegment",
+            "message": {
+              "startPointId": "cb79870896904864908fc0832026bc99.start",
+              "endPointId": "cb79870896904864908fc0832026bc99.end",
+              "startParam": 0.0,
+              "endParam": 0.0699999999999999,
+              "offsetCurveExtensions": [],
+              "geometry": {
+                "type": 117,
+                "typeName": "BTCurveGeometryLine",
+                "message": {
+                  "pntX": 0.45,
+                  "pntY": 0.45,
+                  "dirX": 6.123233995736766e-17,
+                  "dirY": 1.0
+                }
+              },
+              "centerId": "",
+              "internalIds": [],
+              "isConstruction": false,
+              "parameters": [],
+              "isFromSplineHandle": false,
+              "isFromEndpointSplineHandle": false,
+              "isFromSplineControlPolygon": false,
+              "entityId": "cb79870896904864908fc0832026bc99",
+              "namespace": "",
+              "index": 12,
+              "hasUserCode": false,
+              "nodeId": "MmRYKXtub8jkl687a"
+            }
+          },
+          {
+            "type": 155,
+            "typeName": "BTMSketchCurveSegment",
+            "message": {
+              "startPointId": "f20021aaaef840b3b3cbb12c61fd3a08.start",
+              "endPointId": "f20021aaaef840b3b3cbb12c61fd3a08.end",
+              "startParam": 0.0,
+              "endParam": 0.06999999999999999,
+              "offsetCurveExtensions": [],
+              "geometry": {
+                "type": 117,
+                "typeName": "BTCurveGeometryLine",
+                "message": {
+                  "pntX": 0.06999999999999999,
+                  "pntY": 0.06999999999999999,
+                  "dirX": -1.0,
+                  "dirY": 1.2246467991473532e-16
+                }
+              },
+              "centerId": "",
+              "internalIds": [],
+              "isConstruction": false,
+              "parameters": [],
+              "isFromSplineHandle": false,
+              "isFromEndpointSplineHandle": false,
+              "isFromSplineControlPolygon": false,
+              "entityId": "f20021aaaef840b3b3cbb12c61fd3a08",
+              "namespace": "",
+              "index": 13,
+              "hasUserCode": false,
+              "nodeId": "MC6ypycYOn+Hw3AEH"
+            }
+          },
+          {
+            "type": 155,
+            "typeName": "BTMSketchCurveSegment",
+            "message": {
+              "startPointId": "d9705d9a19b94b98bbc5cff11ef78eee.start",
+              "endPointId": "d9705d9a19b94b98bbc5cff11ef78eee.end",
+              "startParam": 0.0,
+              "endParam": 0.0699999999999999,
+              "offsetCurveExtensions": [],
+              "geometry": {
+                "type": 117,
+                "typeName": "BTCurveGeometryLine",
+                "message": {
+                  "pntX": 0.06999999999999999,
+                  "pntY": 0.45,
+                  "dirX": 6.123233995736766e-17,
+                  "dirY": 1.0
+                }
+              },
+              "centerId": "",
+              "internalIds": [],
+              "isConstruction": false,
+              "parameters": [],
+              "isFromSplineHandle": false,
+              "isFromEndpointSplineHandle": false,
+              "isFromSplineControlPolygon": false,
+              "entityId": "d9705d9a19b94b98bbc5cff11ef78eee",
+              "namespace": "",
+              "index": 14,
+              "hasUserCode": false,
+              "nodeId": "MYLL7phpvEeHsE/L6"
+            }
+          },
+          {
+            "type": 155,
+            "typeName": "BTMSketchCurveSegment",
+            "message": {
+              "startPointId": "a830ca0bcbd145e2a90eac58ba5fdcda.start",
+              "endPointId": "a830ca0bcbd145e2a90eac58ba5fdcda.end",
+              "startParam": 0.0,
+              "endParam": 0.0699999999999999,
+              "offsetCurveExtensions": [],
+              "geometry": {
+                "type": 117,
+                "typeName": "BTCurveGeometryLine",
+                "message": {
+                  "pntX": 0.5199999999999999,
+                  "pntY": 0.5199999999999999,
+                  "dirX": -1.0,
+                  "dirY": 1.2246467991473532e-16
+                }
+              },
+              "centerId": "",
+              "internalIds": [],
+              "isConstruction": false,
+              "parameters": [],
+              "isFromSplineHandle": false,
+              "isFromEndpointSplineHandle": false,
+              "isFromSplineControlPolygon": false,
+              "entityId": "a830ca0bcbd145e2a90eac58ba5fdcda",
+              "namespace": "",
+              "index": 15,
+              "hasUserCode": false,
+              "nodeId": "MGggXzoU8pXWPezI7"
+            }
+          },
+          {
+            "type": 155,
+            "typeName": "BTMSketchCurveSegment",
+            "message": {
+              "startPointId": "321ca63c22b94612bd84a7b42f90ddfd.start",
+              "endPointId": "321ca63c22b94612bd84a7b42f90ddfd.end",
+              "startParam": 0.0,
+              "endParam": 0.06999999999999999,
+              "offsetCurveExtensions": [],
+              "geometry": {
+                "type": 117,
+                "typeName": "BTCurveGeometryLine",
+                "message": {
+                  "pntX": 0.45,
+                  "pntY": 0.0,
+                  "dirX": 6.123233995736766e-17,
+                  "dirY": 1.0
+                }
+              },
+              "centerId": "",
+              "internalIds": [],
+              "isConstruction": false,
+              "parameters": [],
+              "isFromSplineHandle": false,
+              "isFromEndpointSplineHandle": false,
+              "isFromSplineControlPolygon": false,
+              "entityId": "321ca63c22b94612bd84a7b42f90ddfd",
+              "namespace": "",
+              "index": 16,
+              "hasUserCode": false,
+              "nodeId": "MRkjbQqogy0b/5VKv"
+            }
+          }
+        ],
+        "constraints": [],
+        "featureType": "newSketch",
+        "featureId": "FA2JM1pjnjiRW5M_0",
+        "name": "Base Bottom Sketch",
+        "parameters": [
+          {
+            "type": 148,
+            "typeName": "BTMParameterQueryList",
+            "message": {
+              "queries": [
+                {
+                  "type": 138,
+                  "typeName": "BTMIndividualQuery",
+                  "message": {
+                    "geometryIds": [
+                      "JDC"
+                    ],
+                    "hasUserCode": false,
+                    "nodeId": "Mvd1TfPlWUxTPB5Wt"
+                  }
+                }
+              ],
+              "parameterId": "sketchPlane",
+              "hasUserCode": false,
+              "nodeId": "MAUo09pPDlJaW8OgW"
+            }
+          },
+          {
+            "type": 144,
+            "typeName": "BTMParameterBoolean",
+            "message": {
+              "value": true,
+              "parameterId": "disableImprinting",
+              "hasUserCode": false,
+              "nodeId": "M+2DgBjn30SgzQHAX"
+            }
+          }
+        ],
+        "suppressed": false,
+        "namespace": "",
+        "subFeatures": [],
+        "returnAfterSubfeatures": false,
+        "suppressionState": {
+          "type": 0
+        },
+        "hasUserCode": false,
+        "nodeId": "MchOnJp+/x+m2UYaH"
+      }
+    },
+    {
+      "type": 134,
+      "typeName": "BTMFeature",
+      "message": {
+        "featureType": "extrude",
+        "featureId": "Fo55tmXjP6M8csN_0",
+        "name": "Legs",
+        "parameters": [
+          {
+            "type": 145,
+            "typeName": "BTMParameterEnum",
+            "message": {
+              "enumName": "ExtendedToolBodyType",
+              "value": "SOLID",
+              "namespace": "",
+              "parameterId": "bodyType",
+              "hasUserCode": false,
+              "nodeId": "MAFnxmeV6D1SytHzC"
+            }
+          },
+          {
+            "type": 145,
+            "typeName": "BTMParameterEnum",
+            "message": {
+              "enumName": "NewBodyOperationType",
+              "value": "NEW",
+              "namespace": "",
+              "parameterId": "operationType",
+              "hasUserCode": false,
+              "nodeId": "MZLQE+whOgBwM0Itc"
+            }
+          },
+          {
+            "type": 148,
+            "typeName": "BTMParameterQueryList",
+            "message": {
+              "queries": [
+                {
+                  "type": 138,
+                  "typeName": "BTMIndividualQuery",
+                  "message": {
+                    "geometryIds": [
+                      "JGC",
+                      "JGG",
+                      "JGK",
+                      "JGO"
+                    ],
+                    "hasUserCode": false,
+                    "nodeId": "Mae7SFIGsoDCy2MKi"
+                  }
+                }
+              ],
+              "parameterId": "entities",
+              "hasUserCode": false,
+              "nodeId": "MIBSEUMZEwe7XCnEX"
+            }
+          },
+          {
+            "type": 145,
+            "typeName": "BTMParameterEnum",
+            "message": {
+              "enumName": "BoundingType",
+              "value": "BLIND",
+              "namespace": "",
+              "parameterId": "endBound",
+              "hasUserCode": false,
+              "nodeId": "MNMU0p2DUNrZOBK5J"
+            }
+          },
+          {
+            "type": 147,
+            "typeName": "BTMParameterQuantity",
+            "message": {
+              "units": "",
+              "value": 0.0,
+              "expression": "18.11023622047244 in",
+              "isInteger": false,
+              "parameterId": "depth",
+              "hasUserCode": false,
+              "nodeId": "M8KbMLsgayUsZ7h7t"
+            }
+          },
+          {
+            "type": 148,
+            "typeName": "BTMParameterQueryList",
+            "message": {
+              "queries": [
+                {
+                  "type": 138,
+                  "typeName": "BTMIndividualQuery",
+                  "message": {
+                    "geometryIds": [],
+                    "hasUserCode": false,
+                    "nodeId": "MUDbio1YojmgRRxqA"
+                  }
+                }
+              ],
+              "parameterId": "booleanScope",
+              "hasUserCode": false,
+              "nodeId": "MczwSAmYl3LmlZqbI"
+            }
+          }
+        ],
+        "suppressed": false,
+        "namespace": "",
+        "subFeatures": [],
+        "returnAfterSubfeatures": false,
+        "suppressionState": {
+          "type": 0
+        },
+        "hasUserCode": false,
+        "nodeId": "MFC9YuFsnJFplJC/p"
+      }
+    },
+    {
+      "type": 134,
+      "typeName": "BTMFeature",
+      "message": {
+        "featureType": "cPlane",
+        "featureId": "FgILQDktwvTVzHO_4",
+        "name": "Seating Plane",
+        "parameters": [
+          {
+            "type": 148,
+            "typeName": "BTMParameterQueryList",
+            "message": {
+              "queries": [
+                {
+                  "type": 138,
+                  "typeName": "BTMIndividualQuery",
+                  "message": {
+                    "geometryIds": [
+                      "JDC"
+                    ],
+                    "hasUserCode": false,
+                    "nodeId": "MRZ9X2YetwTi6T+Ui"
+                  }
+                }
+              ],
+              "parameterId": "entities",
+              "hasUserCode": false,
+              "nodeId": "MULIUpvBeu0HQvYA4"
+            }
+          },
+          {
+            "type": 145,
+            "typeName": "BTMParameterEnum",
+            "message": {
+              "enumName": "CPlaneType",
+              "value": "OFFSET",
+              "namespace": "",
+              "parameterId": "cplaneType",
+              "hasUserCode": false,
+              "nodeId": "MdjXQoupqAjM0huap"
+            }
+          },
+          {
+            "type": 147,
+            "typeName": "BTMParameterQuantity",
+            "message": {
+              "units": "",
+              "value": 0.0,
+              "expression": "18.11023622047244 in",
+              "isInteger": false,
+              "parameterId": "offset",
+              "hasUserCode": false,
+              "nodeId": "MRD7MH4m3jpQ3DNRy"
+            }
+          },
+          {
+            "type": 144,
+            "typeName": "BTMParameterBoolean",
+            "message": {
+              "value": false,
+              "parameterId": "oppositeDirection",
+              "hasUserCode": false,
+              "nodeId": "MK9wwpgXAFteSpUSU"
+            }
+          }
+        ],
+        "suppressed": false,
+        "namespace": "",
+        "subFeatures": [],
+        "returnAfterSubfeatures": false,
+        "suppressionState": {
+          "type": 0
+        },
+        "hasUserCode": false,
+        "nodeId": "M+1kOQh9/hLPfL87H"
+      }
+    },
+    {
+      "type": 151,
+      "typeName": "BTMSketch",
+      "message": {
+        "entities": [
+          {
+            "type": 155,
+            "typeName": "BTMSketchCurveSegment",
+            "message": {
+              "startPointId": "69a686943e6445baa5fc61a74919fb32.start",
+              "endPointId": "69a686943e6445baa5fc61a74919fb32.end",
+              "startParam": 0.0,
+              "endParam": 0.5199999999999999,
+              "offsetCurveExtensions": [],
+              "geometry": {
+                "type": 117,
+                "typeName": "BTCurveGeometryLine",
+                "message": {
+                  "pntX": 0.0,
+                  "pntY": 0.0,
+                  "dirX": 6.123233995736766e-17,
+                  "dirY": 1.0
+                }
+              },
+              "centerId": "",
+              "internalIds": [],
+              "isConstruction": false,
+              "parameters": [],
+              "isFromSplineHandle": false,
+              "isFromEndpointSplineHandle": false,
+              "isFromSplineControlPolygon": false,
+              "entityId": "69a686943e6445baa5fc61a74919fb32",
+              "namespace": "",
+              "index": 1,
+              "hasUserCode": false,
+              "nodeId": "MeYF838FBWAcJA8pR"
+            }
+          },
+          {
+            "type": 155,
+            "typeName": "BTMSketchCurveSegment",
+            "message": {
+              "startPointId": "7a0c39a2869443e2a84281b0de54fabd.start",
+              "endPointId": "7a0c39a2869443e2a84281b0de54fabd.end",
+              "startParam": 0.0,
+              "endParam": 0.5199999999999999,
+              "offsetCurveExtensions": [],
+              "geometry": {
+                "type": 117,
+                "typeName": "BTCurveGeometryLine",
+                "message": {
+                  "pntX": 0.0,
+                  "pntY": 0.0,
+                  "dirX": 1.0,
+                  "dirY": 0.0
+                }
+              },
+              "centerId": "",
+              "internalIds": [],
+              "isConstruction": false,
+              "parameters": [],
+              "isFromSplineHandle": false,
+              "isFromEndpointSplineHandle": false,
+              "isFromSplineControlPolygon": false,
+              "entityId": "7a0c39a2869443e2a84281b0de54fabd",
+              "namespace": "",
+              "index": 2,
+              "hasUserCode": false,
+              "nodeId": "MZaf5UCSZOpQkA0iC"
+            }
+          },
+          {
+            "type": 155,
+            "typeName": "BTMSketchCurveSegment",
+            "message": {
+              "startPointId": "7354d15946404bab842c6e2b4bd58132.start",
+              "endPointId": "7354d15946404bab842c6e2b4bd58132.end",
+              "startParam": 0.0,
+              "endParam": 0.5199999999999999,
+              "offsetCurveExtensions": [],
+              "geometry": {
+                "type": 117,
+                "typeName": "BTCurveGeometryLine",
+                "message": {
+                  "pntX": 0.5199999999999999,
+                  "pntY": 0.0,
+                  "dirX": 6.123233995736766e-17,
+                  "dirY": 1.0
+                }
+              },
+              "centerId": "",
+              "internalIds": [],
+              "isConstruction": false,
+              "parameters": [],
+              "isFromSplineHandle": false,
+              "isFromEndpointSplineHandle": false,
+              "isFromSplineControlPolygon": false,
+              "entityId": "7354d15946404bab842c6e2b4bd58132",
+              "namespace": "",
+              "index": 3,
+              "hasUserCode": false,
+              "nodeId": "MtKFBS7klWtbpB2db"
+            }
+          },
+          {
+            "type": 155,
+            "typeName": "BTMSketchCurveSegment",
+            "message": {
+              "startPointId": "46a5c6b0628c40d8877fe02ebebdc76a.start",
+              "endPointId": "46a5c6b0628c40d8877fe02ebebdc76a.end",
+              "startParam": 0.0,
+              "endParam": 0.5199999999999999,
+              "offsetCurveExtensions": [],
+              "geometry": {
+                "type": 117,
+                "typeName": "BTCurveGeometryLine",
+                "message": {
+                  "pntX": 0.5199999999999999,
+                  "pntY": 0.5199999999999999,
+                  "dirX": -1.0,
+                  "dirY": 1.2246467991473532e-16
+                }
+              },
+              "centerId": "",
+              "internalIds": [],
+              "isConstruction": false,
+              "parameters": [],
+              "isFromSplineHandle": false,
+              "isFromEndpointSplineHandle": false,
+              "isFromSplineControlPolygon": false,
+              "entityId": "46a5c6b0628c40d8877fe02ebebdc76a",
+              "namespace": "",
+              "index": 4,
+              "hasUserCode": false,
+              "nodeId": "MZNHycqbv9Jtvq/2a"
+            }
+          }
+        ],
+        "constraints": [],
+        "featureType": "newSketch",
+        "featureId": "FpeVUcUXserysXo_4",
+        "name": "Seating Sketch",
+        "parameters": [
+          {
+            "type": 148,
+            "typeName": "BTMParameterQueryList",
+            "message": {
+              "queries": [
+                {
+                  "type": 138,
+                  "typeName": "BTMIndividualQuery",
+                  "message": {
+                    "geometryIds": [
+                      "JIC"
+                    ],
+                    "hasUserCode": false,
+                    "nodeId": "MzG4syLUmGJMFteCZ"
+                  }
+                }
+              ],
+              "parameterId": "sketchPlane",
+              "hasUserCode": false,
+              "nodeId": "M1PsVHLoISWOWGKWI"
+            }
+          },
+          {
+            "type": 144,
+            "typeName": "BTMParameterBoolean",
+            "message": {
+              "value": true,
+              "parameterId": "disableImprinting",
+              "hasUserCode": false,
+              "nodeId": "MmYGRPK6LnJggpn5l"
+            }
+          }
+        ],
+        "suppressed": false,
+        "namespace": "",
+        "subFeatures": [],
+        "returnAfterSubfeatures": false,
+        "suppressionState": {
+          "type": 0
+        },
+        "hasUserCode": false,
+        "nodeId": "M4Bn63uDCi+yKyTX6"
+      }
+    },
+    {
+      "type": 134,
+      "typeName": "BTMFeature",
+      "message": {
+        "featureType": "extrude",
+        "featureId": "FtlEgeChrEzHmmr_4",
+        "name": "Seat",
+        "parameters": [
+          {
+            "type": 145,
+            "typeName": "BTMParameterEnum",
+            "message": {
+              "enumName": "ExtendedToolBodyType",
+              "value": "SOLID",
+              "namespace": "",
+              "parameterId": "bodyType",
+              "hasUserCode": false,
+              "nodeId": "MLIbndMXJfhLnpgQf"
+            }
+          },
+          {
+            "type": 145,
+            "typeName": "BTMParameterEnum",
+            "message": {
+              "enumName": "NewBodyOperationType",
+              "value": "NEW",
+              "namespace": "",
+              "parameterId": "operationType",
+              "hasUserCode": false,
+              "nodeId": "Mm187Qcj8FI4RHuu4"
+            }
+          },
+          {
+            "type": 148,
+            "typeName": "BTMParameterQueryList",
+            "message": {
+              "queries": [
+                {
+                  "type": 138,
+                  "typeName": "BTMIndividualQuery",
+                  "message": {
+                    "geometryIds": [
+                      "JKC"
+                    ],
+                    "hasUserCode": false,
+                    "nodeId": "M8l2tgfn7lfYaEPP5"
+                  }
+                }
+              ],
+              "parameterId": "entities",
+              "hasUserCode": false,
+              "nodeId": "McnFBmh4eaEviLC4X"
+            }
+          },
+          {
+            "type": 145,
+            "typeName": "BTMParameterEnum",
+            "message": {
+              "enumName": "BoundingType",
+              "value": "BLIND",
+              "namespace": "",
+              "parameterId": "endBound",
+              "hasUserCode": false,
+              "nodeId": "Mtj175HOEH1bylrVv"
+            }
+          },
+          {
+            "type": 147,
+            "typeName": "BTMParameterQuantity",
+            "message": {
+              "units": "",
+              "value": 0.0,
+              "expression": "1.968503937007874 in",
+              "isInteger": false,
+              "parameterId": "depth",
+              "hasUserCode": false,
+              "nodeId": "MG6YC+lceRvQ6TPC+"
+            }
+          },
+          {
+            "type": 148,
+            "typeName": "BTMParameterQueryList",
+            "message": {
+              "queries": [
+                {
+                  "type": 138,
+                  "typeName": "BTMIndividualQuery",
+                  "message": {
+                    "geometryIds": [],
+                    "hasUserCode": false,
+                    "nodeId": "MAQ/L57nXyOmPGyIm"
+                  }
+                }
+              ],
+              "parameterId": "booleanScope",
+              "hasUserCode": false,
+              "nodeId": "MIvVEKIJj+TDjczvB"
+            }
+          }
+        ],
+        "suppressed": false,
+        "namespace": "",
+        "subFeatures": [],
+        "returnAfterSubfeatures": false,
+        "suppressionState": {
+          "type": 0
+        },
+        "hasUserCode": false,
+        "nodeId": "MpeZqTvKmgkp/OM/y"
+      }
+    },
+    {
+      "type": 134,
+      "typeName": "BTMFeature",
+      "message": {
+        "featureType": "cPlane",
+        "featureId": "FO4zVIQ0rSTXgTm_5",
+        "name": "Back Plane",
+        "parameters": [
+          {
+            "type": 148,
+            "typeName": "BTMParameterQueryList",
+            "message": {
+              "queries": [
+                {
+                  "type": 138,
+                  "typeName": "BTMIndividualQuery",
+                  "message": {
+                    "geometryIds": [
+                      "JCC"
+                    ],
+                    "hasUserCode": false,
+                    "nodeId": "Mm94i4D/Nq7FlMZ6o"
+                  }
+                }
+              ],
+              "parameterId": "entities",
+              "hasUserCode": false,
+              "nodeId": "MhB8UaXs6Rp5NOGrW"
+            }
+          },
+          {
+            "type": 145,
+            "typeName": "BTMParameterEnum",
+            "message": {
+              "enumName": "CPlaneType",
+              "value": "OFFSET",
+              "namespace": "",
+              "parameterId": "cplaneType",
+              "hasUserCode": false,
+              "nodeId": "MDOMymFAk06er54Z+"
+            }
+          },
+          {
+            "type": 147,
+            "typeName": "BTMParameterQuantity",
+            "message": {
+              "units": "",
+              "value": 0.0,
+              "expression": "20.47244094488189 in",
+              "isInteger": false,
+              "parameterId": "offset",
+              "hasUserCode": false,
+              "nodeId": "MuXg4OABjmnk0h5U4"
+            }
+          },
+          {
+            "type": 144,
+            "typeName": "BTMParameterBoolean",
+            "message": {
+              "value": true,
+              "parameterId": "oppositeDirection",
+              "hasUserCode": false,
+              "nodeId": "MhLr23eHWdzHTNPGG"
+            }
+          }
+        ],
+        "suppressed": false,
+        "namespace": "",
+        "subFeatures": [],
+        "returnAfterSubfeatures": false,
+        "suppressionState": {
+          "type": 0
+        },
+        "hasUserCode": false,
+        "nodeId": "MQ+u3R3kQ9eREepFx"
+      }
+    },
+    {
+      "type": 151,
+      "typeName": "BTMSketch",
+      "message": {
+        "entities": [
+          {
+            "type": 155,
+            "typeName": "BTMSketchCurveSegment",
+            "message": {
+              "startPointId": "c94a264d8d204715ae4b2810445104f5.start",
+              "endPointId": "c94a264d8d204715ae4b2810445104f5.end",
+              "startParam": 0.0,
+              "endParam": 0.47999999999999987,
+              "offsetCurveExtensions": [],
+              "geometry": {
+                "type": 117,
+                "typeName": "BTCurveGeometryLine",
+                "message": {
+                  "pntX": 0.0,
+                  "pntY": 0.51,
+                  "dirX": 6.123233995736766e-17,
+                  "dirY": 1.0
+                }
+              },
+              "centerId": "",
+              "internalIds": [],
+              "isConstruction": false,
+              "parameters": [],
+              "isFromSplineHandle": false,
+              "isFromEndpointSplineHandle": false,
+              "isFromSplineControlPolygon": false,
+              "entityId": "c94a264d8d204715ae4b2810445104f5",
+              "namespace": "",
+              "index": 1,
+              "hasUserCode": false,
+              "nodeId": "MOIEW0L8+or2y3EPr"
+            }
+          },
+          {
+            "type": 155,
+            "typeName": "BTMSketchCurveSegment",
+            "message": {
+              "startPointId": "0773d7fb31e84434a7a3a04e66bc9341.start",
+              "endPointId": "0773d7fb31e84434a7a3a04e66bc9341.end",
+              "startParam": 0.0,
+              "endParam": 0.5199999999999999,
+              "offsetCurveExtensions": [],
+              "geometry": {
+                "type": 117,
+                "typeName": "BTCurveGeometryLine",
+                "message": {
+                  "pntX": 0.5199999999999999,
+                  "pntY": 0.9899999999999999,
+                  "dirX": -1.0,
+                  "dirY": 1.2246467991473532e-16
+                }
+              },
+              "centerId": "",
+              "internalIds": [],
+              "isConstruction": false,
+              "parameters": [],
+              "isFromSplineHandle": false,
+              "isFromEndpointSplineHandle": false,
+              "isFromSplineControlPolygon": false,
+              "entityId": "0773d7fb31e84434a7a3a04e66bc9341",
+              "namespace": "",
+              "index": 2,
+              "hasUserCode": false,
+              "nodeId": "Mkw6bENTe6mw/Clmw"
+            }
+          },
+          {
+            "type": 155,
+            "typeName": "BTMSketchCurveSegment",
+            "message": {
+              "startPointId": "be6ed2e1e34e49cab858345634282f54.start",
+              "endPointId": "be6ed2e1e34e49cab858345634282f54.end",
+              "startParam": 0.0,
+              "endParam": 0.5199999999999999,
+              "offsetCurveExtensions": [],
+              "geometry": {
+                "type": 117,
+                "typeName": "BTCurveGeometryLine",
+                "message": {
+                  "pntX": 0.0,
+                  "pntY": 0.51,
+                  "dirX": 1.0,
+                  "dirY": 0.0
+                }
+              },
+              "centerId": "",
+              "internalIds": [],
+              "isConstruction": false,
+              "parameters": [],
+              "isFromSplineHandle": false,
+              "isFromEndpointSplineHandle": false,
+              "isFromSplineControlPolygon": false,
+              "entityId": "be6ed2e1e34e49cab858345634282f54",
+              "namespace": "",
+              "index": 3,
+              "hasUserCode": false,
+              "nodeId": "MHlE8qdi2M8DbL/oI"
+            }
+          },
+          {
+            "type": 155,
+            "typeName": "BTMSketchCurveSegment",
+            "message": {
+              "startPointId": "760374038060434fb9b22ba552ccbf58.start",
+              "endPointId": "760374038060434fb9b22ba552ccbf58.end",
+              "startParam": 0.0,
+              "endParam": 0.47999999999999987,
+              "offsetCurveExtensions": [],
+              "geometry": {
+                "type": 117,
+                "typeName": "BTCurveGeometryLine",
+                "message": {
+                  "pntX": 0.5199999999999999,
+                  "pntY": 0.51,
+                  "dirX": 6.123233995736766e-17,
+                  "dirY": 1.0
+                }
+              },
+              "centerId": "",
+              "internalIds": [],
+              "isConstruction": false,
+              "parameters": [],
+              "isFromSplineHandle": false,
+              "isFromEndpointSplineHandle": false,
+              "isFromSplineControlPolygon": false,
+              "entityId": "760374038060434fb9b22ba552ccbf58",
+              "namespace": "",
+              "index": 4,
+              "hasUserCode": false,
+              "nodeId": "MCzx4yH8DMG3PBdmC"
+            }
+          }
+        ],
+        "constraints": [],
+        "featureType": "newSketch",
+        "featureId": "FDA4sk8EXqtgaiR_5",
+        "name": "Back Sketch",
+        "parameters": [
+          {
+            "type": 148,
+            "typeName": "BTMParameterQueryList",
+            "message": {
+              "queries": [
+                {
+                  "type": 138,
+                  "typeName": "BTMIndividualQuery",
+                  "message": {
+                    "geometryIds": [
+                      "JMC"
+                    ],
+                    "hasUserCode": false,
+                    "nodeId": "MLLG9rg10nWTEZNmA"
+                  }
+                }
+              ],
+              "parameterId": "sketchPlane",
+              "hasUserCode": false,
+              "nodeId": "MtxKZHVwx1GSLxUaY"
+            }
+          },
+          {
+            "type": 144,
+            "typeName": "BTMParameterBoolean",
+            "message": {
+              "value": true,
+              "parameterId": "disableImprinting",
+              "hasUserCode": false,
+              "nodeId": "MwJ4vDEQ2MaKqJQaM"
+            }
+          }
+        ],
+        "suppressed": false,
+        "namespace": "",
+        "subFeatures": [],
+        "returnAfterSubfeatures": false,
+        "suppressionState": {
+          "type": 0
+        },
+        "hasUserCode": false,
+        "nodeId": "MptlGNUZT/vWccC17"
+      }
+    },
+    {
+      "type": 134,
+      "typeName": "BTMFeature",
+      "message": {
+        "featureType": "extrude",
+        "featureId": "FXJ4tRKwiqh4nJa_5",
+        "name": "Back",
+        "parameters": [
+          {
+            "type": 145,
+            "typeName": "BTMParameterEnum",
+            "message": {
+              "enumName": "ExtendedToolBodyType",
+              "value": "SOLID",
+              "namespace": "",
+              "parameterId": "bodyType",
+              "hasUserCode": false,
+              "nodeId": "M0hKR4sPoDlE/FG+N"
+            }
+          },
+          {
+            "type": 145,
+            "typeName": "BTMParameterEnum",
+            "message": {
+              "enumName": "NewBodyOperationType",
+              "value": "NEW",
+              "namespace": "",
+              "parameterId": "operationType",
+              "hasUserCode": false,
+              "nodeId": "MNzrQtMug29H/qVaw"
+            }
+          },
+          {
+            "type": 148,
+            "typeName": "BTMParameterQueryList",
+            "message": {
+              "queries": [
+                {
+                  "type": 138,
+                  "typeName": "BTMIndividualQuery",
+                  "message": {
+                    "geometryIds": [
+                      "JOC"
+                    ],
+                    "hasUserCode": false,
+                    "nodeId": "McNFAhz8JWZVI3zsj"
+                  }
+                }
+              ],
+              "parameterId": "entities",
+              "hasUserCode": false,
+              "nodeId": "MKMLT7iP6+tuV/OOk"
+            }
+          },
+          {
+            "type": 145,
+            "typeName": "BTMParameterEnum",
+            "message": {
+              "enumName": "BoundingType",
+              "value": "BLIND",
+              "namespace": "",
+              "parameterId": "endBound",
+              "hasUserCode": false,
+              "nodeId": "Mhs5a8nOCfsi7c6Ei"
+            }
+          },
+          {
+            "type": 147,
+            "typeName": "BTMParameterQuantity",
+            "message": {
+              "units": "",
+              "value": 0.0,
+              "expression": "1.968503937007874 in",
+              "isInteger": false,
+              "parameterId": "depth",
+              "hasUserCode": false,
+              "nodeId": "MC0IBp48TA/wTvNE6"
+            }
+          },
+          {
+            "type": 148,
+            "typeName": "BTMParameterQueryList",
+            "message": {
+              "queries": [
+                {
+                  "type": 138,
+                  "typeName": "BTMIndividualQuery",
+                  "message": {
+                    "geometryIds": [],
+                    "hasUserCode": false,
+                    "nodeId": "MLopz12Zf7+vjnSMz"
+                  }
+                }
+              ],
+              "parameterId": "booleanScope",
+              "hasUserCode": false,
+              "nodeId": "MqjQDRel8zOe1dUO2"
+            }
+          }
+        ],
+        "suppressed": false,
+        "namespace": "",
+        "subFeatures": [],
+        "returnAfterSubfeatures": false,
+        "suppressionState": {
+          "type": 0
+        },
+        "hasUserCode": false,
+        "nodeId": "M6ASMu03+KN4gnf9g"
+      }
+    }
+  ],
+  "imports": [
+    {
+      "type": 136,
+      "typeName": "BTMImport",
+      "message": {
+        "path": "onshape/std/geometry.fs",
+        "version": "2625.0",
+        "namespace": "",
+        "hasUserCode": false,
+        "nodeId": "MLvI2JwDmAHikbk1S"
+      }
+    }
+  ],
+  "featureStates": [
+    {
+      "key": "Origin",
+      "value": {
+        "type": 1688,
+        "typeName": "BTFeatureState",
+        "message": {
+          "featureStatus": "OK",
+          "inactive": false
+        }
+      }
+    },
+    {
+      "key": "FDA4sk8EXqtgaiR_5",
+      "value": {
+        "type": 1688,
+        "typeName": "BTFeatureState",
+        "message": {
+          "featureStatus": "OK",
+          "inactive": false
+        }
+      }
+    },
+    {
+      "key": "Top",
+      "value": {
+        "type": 1688,
+        "typeName": "BTFeatureState",
+        "message": {
+          "featureStatus": "OK",
+          "inactive": false
+        }
+      }
+    },
+    {
+      "key": "Fo55tmXjP6M8csN_0",
+      "value": {
+        "type": 1688,
+        "typeName": "BTFeatureState",
+        "message": {
+          "featureStatus": "OK",
+          "inactive": false
+        }
+      }
+    },
+    {
+      "key": "FpeVUcUXserysXo_4",
+      "value": {
+        "type": 1688,
+        "typeName": "BTFeatureState",
+        "message": {
+          "featureStatus": "OK",
+          "inactive": false
+        }
+      }
+    },
+    {
+      "key": "Front",
+      "value": {
+        "type": 1688,
+        "typeName": "BTFeatureState",
+        "message": {
+          "featureStatus": "OK",
+          "inactive": false
+        }
+      }
+    },
+    {
+      "key": "FXJ4tRKwiqh4nJa_5",
+      "value": {
+        "type": 1688,
+        "typeName": "BTFeatureState",
+        "message": {
+          "featureStatus": "OK",
+          "inactive": false
+        }
+      }
+    },
+    {
+      "key": "FtlEgeChrEzHmmr_4",
+      "value": {
+        "type": 1688,
+        "typeName": "BTFeatureState",
+        "message": {
+          "featureStatus": "OK",
+          "inactive": false
+        }
+      }
+    },
+    {
+      "key": "Right",
+      "value": {
+        "type": 1688,
+        "typeName": "BTFeatureState",
+        "message": {
+          "featureStatus": "OK",
+          "inactive": false
+        }
+      }
+    },
+    {
+      "key": "FgILQDktwvTVzHO_4",
+      "value": {
+        "type": 1688,
+        "typeName": "BTFeatureState",
+        "message": {
+          "featureStatus": "OK",
+          "inactive": false
+        }
+      }
+    },
+    {
+      "key": "FA2JM1pjnjiRW5M_0",
+      "value": {
+        "type": 1688,
+        "typeName": "BTFeatureState",
+        "message": {
+          "featureStatus": "OK",
+          "inactive": false
+        }
+      }
+    },
+    {
+      "key": "FO4zVIQ0rSTXgTm_5",
+      "value": {
+        "type": 1688,
+        "typeName": "BTFeatureState",
+        "message": {
+          "featureStatus": "OK",
+          "inactive": false
+        }
+      }
+    }
+  ],
+  "isComplete": true,
+  "rollbackIndex": 8,
+  "defaultFeatures": [
+    {
+      "type": 134,
+      "typeName": "BTMFeature",
+      "message": {
+        "featureType": "origin",
+        "featureId": "Origin",
+        "name": "Origin",
+        "parameters": [],
+        "suppressed": false,
+        "namespace": "",
+        "subFeatures": [],
+        "returnAfterSubfeatures": false,
+        "suppressionState": {
+          "type": 0
+        },
+        "hasUserCode": false,
+        "nodeId": "Maj1vGTfkOyRLghVp"
+      }
+    },
+    {
+      "type": 134,
+      "typeName": "BTMFeature",
+      "message": {
+        "featureType": "defaultPlane",
+        "featureId": "Top",
+        "name": "Top",
+        "parameters": [],
+        "suppressed": false,
+        "namespace": "",
+        "subFeatures": [],
+        "returnAfterSubfeatures": false,
+        "suppressionState": {
+          "type": 0
+        },
+        "hasUserCode": false,
+        "nodeId": "Mq6X8s1aDm/DCgHa8"
+      }
+    },
+    {
+      "type": 134,
+      "typeName": "BTMFeature",
+      "message": {
+        "featureType": "defaultPlane",
+        "featureId": "Front",
+        "name": "Front",
+        "parameters": [],
+        "suppressed": false,
+        "namespace": "",
+        "subFeatures": [],
+        "returnAfterSubfeatures": false,
+        "suppressionState": {
+          "type": 0
+        },
+        "hasUserCode": false,
+        "nodeId": "Ma6/aIV2Jifrr8zZN"
+      }
+    },
+    {
+      "type": 134,
+      "typeName": "BTMFeature",
+      "message": {
+        "featureType": "defaultPlane",
+        "featureId": "Right",
+        "name": "Right",
+        "parameters": [],
+        "suppressed": false,
+        "namespace": "",
+        "subFeatures": [],
+        "returnAfterSubfeatures": false,
+        "suppressionState": {
+          "type": 0
+        },
+        "hasUserCode": false,
+        "nodeId": "Mh5kEarwr2eZbCASP"
+      }
+    }
+  ],
+  "serializationVersion": "1.2.10",
+  "sourceMicroversion": "175576fb4d9d3a0b22a3e558",
+  "rejectMicroversionSkew": false,
+  "microversionSkew": false,
+  "libraryVersion": 2625
+}

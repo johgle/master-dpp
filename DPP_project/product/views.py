@@ -1,9 +1,16 @@
+"""
+Django views for the product app.
+This file contains the logic for handling requests and rendering templates.
+"""
+
+
 from django.shortcuts import render
 
 # Create your views here.
 from django.http import HttpResponse
 
 def product_view(request):
+    """dette er det som lastes inn på nettsiden"""
     # product_id = request.GET.get('id')  # Henter ?id=xxx fra URL-en
     # if product_id == 'stol_123':
     #     # Returner litt HTML-streng

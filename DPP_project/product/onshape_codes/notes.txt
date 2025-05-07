@@ -1,0 +1,47 @@
+GUIDE ONPY:
+https://github.com/kyle-tennison/onpy/blob/main/guide.md
+
+OnShape documents contain everything related to a project. In OnPy, you can fetch or create documents with the following syntax:
+
+import onpy
+
+document = onpy.create_document("my document") # creates a new document
+
+document = onpy.get_document(name="my document") # get a document by name
+
+THIS: document = onpy.get_document("5aaf074sd1sabcc2bebb6ecf") # or, reference by id
+
+-------------------------------------------------------------------------------------------
+
+Old queries: (now kept for structure)
+# QUERY = ('''
+#     PREFIX ks: <https://w3id.org/klesskap#>
+#     SELECT ?plagg ?farge ?str
+#     WHERE {
+#     ?plagg ks:farge ?farge;
+#             ks:størrelse ?str
+#     FILTER (?farge = "rosa" )
+#     }
+# 	''')
+
+# QUERY_insert_plagg = ('''
+#     PREFIX ks: <https://w3id.org/klesskap#>
+#     INSERT {ks:poppy_genser a ks:langermet.
+#     ks:poppy_genser ks:farge "rosa".
+#     ks:poppy_genser ks:størrelse "M".
+#     }
+#     WHERE {
+#     }
+#     ''')
+
+# QUERY_remove_plagg = ('''
+#     PREFIX ks: <https://w3id.org/klesskap#>
+#     DELETE {ks:truse a ks:kortermet .
+# 	ks:truse ks:farge "rosa".
+#     ks:truse ks:størrelse "M".
+#     }
+#     WHERE {ks:truse a ks:kortermet .
+# 	ks:truse ks:farge "rosa".
+#     ks:truse ks:størrelse "M".
+#     }
+# ''')
