@@ -1,0 +1,16 @@
+To metoder slått sammen til en:
+# def add_to_kb(query):
+#     PARAMS = {"update": query}
+#     resp = requests.post(url = URL+"/update", data = PARAMS) 
+#     if resp.status_code == 400 or resp.status_code == 404:
+#         return "Data was not found."
+#     # print("resp: ", resp.text)
+#     return resp
+
+# def remove_from_kb(query):
+#     try:
+#         PARAMS = {"update": query}
+#         resp = requests.post(url = URL+"/update", data = PARAMS)
+#         return 1
+#     except:
+#         return 0

@@ -8,6 +8,8 @@ Master thesis DPP, NTNU
 """
 
 import requests
+import re
+
 
 URL = "http://127.0.0.1:3030/dpp"
 
@@ -26,22 +28,21 @@ def ask_query(query):
         return "Data was not found."
     return resp.json()["results"]["bindings"]
 
-def add_to_kb(query):
+def update_kb(query):
     PARAMS = {"update": query}
-    resp = requests.post(url = URL+"/update", data = PARAMS) 
-    if resp.status_code == 400 or resp.status_code == 404:
-        return "Data was not found."
-    # print("resp: ", resp.text)
-    return resp
-
-def remove_from_kb(query):
     try:
-        PARAMS = {"update": query}
-        resp = requests.post(url = URL+"/update", data = PARAMS)
-        return 1
-    except:
-        return 0
+        resp = requests.post(url=URL + "/update", data=PARAMS, timeout=5)
+        if resp.status_code == 400:
+            return "Bad request (400)"
+        elif resp.status_code == 404:
+            return "Data not found (404)"
+        elif not resp.ok:
+            return f"Unhandled error: {resp.status_code}"
+        return resp
+    except requests.exceptions.RequestException as e:
+        return f"Network or connection error: {e}"
 
+# Skal vi legge til annet enn DPP i databasen?
 def make_insert_product_query(id: str, name: str, type: str, mass: float, volume: float, parts: list[dict]):
     """Create a SPARQL query to insert a product and its parts into the knowledge base."""
     PREFIXES = '''
@@ -79,9 +80,16 @@ def make_insert_product_query(id: str, name: str, type: str, mass: float, volume
     """
     return query
 
-def make_insert_actor_query(id: str, name: str, mail: str, owns: list[str]):
+def make_insert_actor_query(id: str, name: str, mail: str, owns: list[str] = None):
     """Create a SPARQL query to insert an actor into the knowledge base."""
-    owned_items = ", ".join(f"dpp:{item}" for item in owns)
+    
+    owns = owns or []  # Håndterer None som tom liste
+    owns = [item.strip() for item in owns if item.strip()]  # Fjerner tomme strenger
+
+    owner_line = ""
+    if owns:
+        owned_items = ", ".join(f"dpp:{item}" for item in owns)
+        owner_line = f"\n            dpp:ownerOf  {owned_items} ;"
 
     query = f'''
     PREFIX dpp: <http://www.semanticweb.org/johanne/ontologies/2025/2/dpp_ontology/>
@@ -92,10 +100,13 @@ def make_insert_actor_query(id: str, name: str, mail: str, owns: list[str]):
             a            dpp:Actor ;
             dpp:hasName  "{name}" ;
             dpp:hasMail  "{mail}" ;
-            dpp:hasID    "{id}" ;
-            dpp:ownerOf  {owned_items} .
+            dpp:hasID    "{id}" ;{owner_line}
     }}
     '''
+
+    # Fjerner semikolon før siste } hvis owner_line er tom (for korrekt syntaks)
+    query = re.sub(r';\s*}', ' }', query)
+
     return query
 
 def make_insert_DPP_query(dpp_id: str, product_id: str, timestamp: str, actor_id: str):
@@ -114,6 +125,55 @@ def make_insert_DPP_query(dpp_id: str, product_id: str, timestamp: str, actor_id
     }}
     '''
     return query
+
+
+
+actor_id = "Actor_ErikEriksen"
+actor_name = "Erik Eriksen"
+actor_mail = "ee@mail.com"
+owns_list = [""]
+
+# print(make_insert_actor_query(
+#     id=actor_id,
+#     name=actor_name,
+#     mail=actor_mail,
+#     owns=owns_list
+# ))
+
+# print(update_kb(make_insert_actor_query(
+#     id=actor_id,
+#     name=actor_name,
+#     mail=actor_mail,
+#     owns=owns_list
+# )))
+
+request_actor_query = '''
+PREFIX dpp: <http://www.semanticweb.org/johanne/ontologies/2025/2/dpp_ontology/>
+
+SELECT ?id ?name ?mail ?ownerOf WHERE {
+  ?actor dpp:hasID ?id ;
+        dpp:hasName ?name ;
+        dpp:hasMail ?mail .
+  OPTIONAL {
+    ?actor dpp:ownerOf ?ownerOf .
+  }
+}
+
+ '''
+# print(ask_query(request_actor_query))
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -263,34 +323,3 @@ QUERY_request_Product_DPP_data = ('''
             dpp:describes ?describes;
             dpp:hasTimeStampCreation ?timeStamp;
             dpp:responsibleActor ?responsibleActor. }''')
-
-
-actor_id = "Actor_KariNordmann"
-actor_name = "Kari Nordmann"
-actor_mail = "kn@mail.com"
-owns_list = [""]
-
-query = make_insert_actor_query(
-    id=actor_id,
-    name=actor_name,
-    mail=actor_mail,
-    owns=owns_list
-)
-
-# print(query)
-# print(add_to_kb(make_insert_actor_query(
-#     id=actor_id,
-#     name=actor_name,
-#     mail=actor_mail,
-#     owns=owns_list
-# )))
-
-request_actor_query = '''
-PREFIX dpp: <http://www.semanticweb.org/johanne/ontologies/2025/2/dpp_ontology/>
-
-SELECT ?name ?mail ?ownerOf WHERE {
-  ?actor dpp:hasName ?name;
-         dpp:hasMail ?mail;
-         dpp:ownerOf ?ownerOf .}
- '''
-print(ask_query(request_actor_query))

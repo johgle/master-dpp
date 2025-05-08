@@ -123,7 +123,7 @@ def write_data_to_file_from_single_api_url(url_name:str, url:str):
         print("Kunne ikke hente data:", resp.text)
 
 def get_api_data(url:str):
-    """Fetch data from Onshape API and return as JSON."""
+    """Fetch data from Onshape API and return as json response."""
     h = signed_headers("GET", url)
     resp = requests.get(url, headers=h)
 
@@ -136,9 +136,14 @@ def get_api_data(url:str):
         print("Kunne ikke hente data:", resp.text)
     return data
 
-def get_materials_of_product(DID:str, WID:str, EID:str):
+def get_product_parts(DID:str, WID:str, EID:str):
+    """Returns parsed part data for the given product from the API."""
+    return get_api_data(f"{BASE}/parts/d/{DID}/w/{WID}/e/{EID}") #.json response
+
+
+def get_product_materials(DID:str, WID:str, EID:str):
     """Return ({partId: material_or_None}, sorted_unique_materials)"""
-    parts_data = get_api_data(f"{BASE}/parts/d/{DID}/w/{WID}/e/{EID}") #.json file
+    parts_data = get_product_parts(DID, WID, EID)
 
     material_per_part = {}
     for p in parts_data:
@@ -149,9 +154,9 @@ def get_materials_of_product(DID:str, WID:str, EID:str):
     all_materials = sorted({m for m in material_per_part.values() if m})
     return material_per_part, all_materials
 
-def get_mass_of_product(DID:str, WID:str, EID:str):
+def get_product_mass(DID:str, WID:str, EID:str):
     """Return mass from return-object from api."""
-    parts_data = get_api_data(f"{BASE}/parts/d/{DID}/w/{WID}/e/{EID}") #.json file
+    parts_data = get_product_parts(DID, WID, EID)
 
     mass_kg_by_part = {}
     for p in parts_data:
@@ -167,9 +172,9 @@ def get_mass_of_product(DID:str, WID:str, EID:str):
     
     return mass_kg_by_part, total_mass #total mass of all parts in kg
 
-def get_volume_of_product(DID:str, WID:str, EID:str):
+def get_product_volume(DID:str, WID:str, EID:str):
     """Return volume from return-object from api."""
-    parts_data = get_api_data(f"{BASE}/parts/d/{DID}/w/{WID}/e/{EID}") #.json file
+    parts_data = get_product_parts(DID, WID, EID)
 
     volume_by_part = {}
     for p in parts_data:
@@ -185,13 +190,13 @@ def get_volume_of_product(DID:str, WID:str, EID:str):
     
     return volume_by_part, total_volume
 
-def get_owner_of_document(DID:str):
+def get_document_owner(DID:str):
     """Return name of owner of document."""
     metadata_data = get_api_data(f"{BASE}/documents/{DID}") #.json file
     owner_name = metadata_data["owner"]["name"]
     return owner_name
 
-def get_creater_of_document(DID:str):
+def get_document_creator(DID:str):
     """Return name of creator of document."""
     metadata_data = get_api_data(f"{BASE}/documents/{DID}") #.json file
     creator_name = metadata_data["createdBy"]["name"]
@@ -207,17 +212,17 @@ def get_document_name(DID:str):
 
 # write_data_to_file()
 # write_data_to_file_from_single_api_url("url_documents", f"{BASE}/documents/{DID}")
-# print("materials:", get_materials_of_product(DID,WID,EID)[0],
-#       "\nsorted unique materials:", get_materials_of_product(DID,WID,EID)[1])
+# print("materials:", get_product_materials(DID,WID,EID)[0],
+#       "\nsorted unique materials:", get_product_materials(DID,WID,EID)[1])
 # print()
-# print("mass:", get_mass_of_product(DID,WID,EID)[0],
-#       "\ntotal mass:", get_mass_of_product(DID,WID,EID)[1])
+# print("mass:", get_product_mass(DID,WID,EID)[0],
+#       "\ntotal mass:", get_product_mass(DID,WID,EID)[1])
 # print()
-# print("volume:", get_volume_of_product(DID,WID,EID)[0],
-#       "\ntotal volume:", get_volume_of_product(DID,WID,EID)[1])
+# print("volume:", get_product_volume(DID,WID,EID)[0],
+#       "\ntotal volume:", get_product_volume(DID,WID,EID)[1])
 
-# print("owner:", get_owner_of_document(DID))
-# print("creator:", get_creater_of_document(DID))
+# print("owner:", get_document_owner(DID))
+# print("creator:", get_document_creator(DID))
 # print("document name:", get_document_name(DID))
 
 
