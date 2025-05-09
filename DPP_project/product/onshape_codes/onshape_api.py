@@ -52,9 +52,9 @@ def signed_headers(method:str, url:str, ctype:str = ""):
 DATA_DIR = "onshape_json_data"
 
 # ----------------  ID FROM URLs  -----------------------------
-DID_stol = "3cc9b7f1331165f8fa1d4630"  # Document ID
-WID_stol = "3ec8b42b563ac643e55281f2"  # Workspace ID
-EID_stol = "f0f23b975a63a60a8e3c1e2a"  # Element ID
+DID_stol1 = "3cc9b7f1331165f8fa1d4630"  # Document ID
+WID_stol1 = "3ec8b42b563ac643e55281f2"  # Workspace ID
+EID_stol1 = "f0f23b975a63a60a8e3c1e2a"  # Element ID
 
 DID_chair = "ddd738631676985828abef74"  # Document ID
 WID_chair = "76466b78737892550146d811"  # Workspace ID

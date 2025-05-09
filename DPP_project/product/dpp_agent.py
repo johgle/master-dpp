@@ -97,4 +97,3 @@ kb_client.update_kb(kb_client.make_remove_actor_query(value_chain_actor_chair)) 
 
 # REMOVE PRODUCT_DPP:
 # kb_client.update_kb(kb_client.make_remove_dpp_query(product_DPP))  # Remove DPP from the knowledge base
-print("ferdig")
