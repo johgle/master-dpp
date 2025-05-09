@@ -1,11 +1,10 @@
 from abc import ABC, abstractmethod
 
 class Actor(ABC):
-    def __init__(self, id: str, name: str, mail: str, owner_of: list[str] = None):
+    def __init__(self, id: str, name: str, mail: str):
         self.id = id
         self.name = name
         self.mail = mail
-        self.owner_of = owner_of or []  # Håndterer None som tom liste
 
     def __repr__(self):
         return f"Actor(id='{self.id}', name='{self.name}', mail='{self.mail}', owner_of={self.owner_of})"

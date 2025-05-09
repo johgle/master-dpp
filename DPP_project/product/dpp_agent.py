@@ -4,19 +4,12 @@ Date: Spring 2025
 Master thesis DPP, NTNU
 """
 
-from DPP_project.product import kb_client as KBClient
+from DPP_project.product import kb_client
 from DPP_project.product.onshape_codes import onshape_api
 from DPP_project.product.digital_product_passport.product_dpp import DPP
 from DPP_project.product.actual_product.product import Product
 from DPP_project.product.actor.value_chain_actor import ValueChainActor
 from DPP_project.product.actual_product.part import Part
-
-
-# bruke klassen til:
-# å hente data fra onshapeAPI
-# lagre data i instanser av product, parts osv
-# lagre det i instans av DPP
-# lagre DPP i knowledge base.
 
 DID_chair = "ddd738631676985828abef74"  # Document ID
 WID_chair = "76466b78737892550146d811"  # Workspace ID
@@ -30,8 +23,6 @@ EID = EID_chair # Element ID
 
 # Parts
 # --------
-
-#DATA:
 volume_parts, total_product_volume = onshape_api.get_product_volume(DID, WID, EID)
 mass_parts, total_product_mass = onshape_api.get_product_mass(DID, WID, EID)
 material_parts, total_product_material = onshape_api.get_product_materials(DID, WID, EID)
@@ -76,6 +67,34 @@ example_dpp_timeStamp = "2030-01-01T00:00:00Z"  # Example timestamp format
 product_DPP = DPP(example_dpp_ID, example_dpp_timeStamp, value_chain_actor_chair, product_chair)
 # print(product_DPP.__repr__()+"\n")
 
-#Update actor with owned product
-value_chain_actor_chair.owner_of.append(product_DPP)
+# Update actor with owned product - must be done after DPP is added to the KB
+# value_chain_actor_chair.add_owner_of(product_DPP)
 # print(value_chain_actor_chair.__repr__())
+
+
+
+# ---------------- INSERT DATA TO KB ------------------ #
+
+# INSERT PRODUCT:
+kb_client.update_kb(kb_client.make_insert_product_query(product_chair))  # Insert product into the knowledge base
+
+# INSERT ACTOR (actor is without owner_of):
+kb_client.update_kb(kb_client.make_insert_actor_query(value_chain_actor_chair))  # Insert actor into the knowledge base
+
+# INSERT PRODUCT_DPP (and additionally update the actor with owner_of):
+kb_client.update_kb(kb_client.make_insert_dpp_query(product_DPP))  # Insert DPP into the knowledge base
+
+# Update actor with owned product. Cant do this before the DPP is inserted in the KB, because it needs to be in the KB to be able to be added to the actor.
+value_chain_actor_chair.add_owner_of(product_DPP) #So that the datacase and instances are consistent. 
+
+
+# ---------------- REMOVE DATA FROM KB ------------------ #
+# REMOVE PRODUCT:
+kb_client.update_kb(kb_client.make_remove_product_query(product_chair))  # Remove product from the knowledge base
+
+# REMOVE ACTOR:
+kb_client.update_kb(kb_client.make_remove_actor_query(value_chain_actor_chair))  # Remove actor from the knowledge base
+
+# REMOVE PRODUCT_DPP:
+# kb_client.update_kb(kb_client.make_remove_dpp_query(product_DPP))  # Remove DPP from the knowledge base
+print("ferdig")

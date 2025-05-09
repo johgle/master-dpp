@@ -10,6 +10,10 @@ Master thesis DPP, NTNU
 import requests
 import re
 
+from DPP_project.product.actual_product.product import Product
+from DPP_project.product.actor.actor import Actor
+from DPP_project.product.digital_product_passport.product_dpp import DPP
+
 
 URL = "http://127.0.0.1:3030/dpp"
 
@@ -18,7 +22,8 @@ URL = "http://127.0.0.1:3030/dpp"
 # cd C:\Users\Johanne\Downloads\apache-jena-fuseki-5.3.0\apache-jena-fuseki-5.3.0>
 # fuseki-server
 
-
+# Method to get data from the knowledge base
+# --------------------------------------------------
 def ask_query(query):
     PARAMS = {"query": query}
     # print("PARAMS:", PARAMS)
@@ -28,6 +33,8 @@ def ask_query(query):
         return "Data was not found."
     return resp.json()["results"]["bindings"]
 
+# Methos to update the knowledge base
+# --------------------------------------------------
 def update_kb(query):
     PARAMS = {"update": query}
     try:
@@ -42,21 +49,28 @@ def update_kb(query):
     except requests.exceptions.RequestException as e:
         return f"Network or connection error: {e}"
 
-# Skal vi legge til annet enn DPP i databasen?
-def make_insert_product_query(id: str, name: str, type: str, mass: float, volume: float, parts: list[dict]):
+# Methods that makes queries to add data to the knowledge base
+# --------------------------------------------------
+def make_insert_product_query(product: Product):
     """Create a SPARQL query to insert a product and its parts into the knowledge base."""
+    
+    # Extract product properties
+    id = product.id
+    name = product.name
+    parts = product.parts # a list with Part instances [Part1, Part2, etc.]
+    
     PREFIXES = '''
     PREFIX dpp: <http://www.semanticweb.org/johanne/ontologies/2025/2/dpp_ontology/>
     PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
     '''
-
-    # The product
-    product_part_ids = ", ".join(f'dpp:{p["id"]}' for p in parts)
+    
+    # Build the product properties
+    product_part_ids = ", ".join(f'dpp:{p.id}' for p in parts)
+    # print("product_part_ids:",product_part_ids)
     product = f'''
-    dpp:{id} a dpp:{type} ;
+    dpp:{id} a dpp:Product ;
+        dpp:hasID      "{id}" ;
         dpp:hasName    "{name}" ;
-        dpp:hasMass    "{mass}"^^xsd:float ;
-        dpp:hasVolume  "{volume}"^^xsd:float ;
         dpp:consistsOf {product_part_ids} .
     '''
 
@@ -64,14 +78,15 @@ def make_insert_product_query(id: str, name: str, type: str, mass: float, volume
     parts_block = ""
     for part in parts:
         parts_block += f'''
-    dpp:{part["id"]} a dpp:Part ;
-        dpp:hasName     "{part["name"]}" ;
-        dpp:hasMass     "{part["mass"]}"^^xsd:float ;
-        dpp:hasVolume   "{part["volume"]}"^^xsd:float ;
-        dpp:hasMaterial "{part["material"]}" .
+    dpp:{part.id} a dpp:Part ;
+        dpp:hasID       "{part.id}" ;
+        dpp:hasName     "{part.name}" ;
+        dpp:hasMass     "{part.mass}"^^xsd:float ;
+        dpp:hasVolume   "{part.volume}"^^xsd:float ;
+        dpp:hasMaterial "{part.material}" .
     '''
 
-    # Put the query together
+    # Construct the full query
     query = f"""{PREFIXES}
     INSERT DATA {{
     {product}
@@ -80,37 +95,51 @@ def make_insert_product_query(id: str, name: str, type: str, mass: float, volume
     """
     return query
 
-def make_insert_actor_query(id: str, name: str, mail: str, owns: list[str] = None):
+def make_insert_actor_query(actor: Actor):
     """Create a SPARQL query to insert an actor into the knowledge base."""
     
-    owns = owns or []  # Håndterer None som tom liste
-    owns = [item.strip() for item in owns if item.strip()]  # Fjerner tomme strenger
-
-    owner_line = ""
+    # Extract actor properties
+    id = actor.id
+    name = actor.name
+    mail = actor.mail
+    owns = actor.owner_of or []  # Handle None as empty list
+    
+    # Build the properties list
+    properties = [
+        f"a            dpp:Actor",
+        f'dpp:hasName  "{name}"',
+        f'dpp:hasMail  "{mail}"',
+        f'dpp:hasID    "{id}"'
+    ]
+    
     if owns:
-        owned_items = ", ".join(f"dpp:{item}" for item in owns)
-        owner_line = f"\n            dpp:ownerOf  {owned_items} ;"
-
+        owned_items = ", ".join(f"dpp:{item.id}" for item in owns)
+        properties.append(f"dpp:ownerOf  {owned_items}")
+    
+    properties_str = " ;\n            ".join(properties) + " ."
+    
+    # Construct the full query
     query = f'''
     PREFIX dpp: <http://www.semanticweb.org/johanne/ontologies/2025/2/dpp_ontology/>
     PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
 
     INSERT DATA {{
-        dpp:{id}
-            a            dpp:Actor ;
-            dpp:hasName  "{name}" ;
-            dpp:hasMail  "{mail}" ;
-            dpp:hasID    "{id}" ;{owner_line}
+        dpp:{id} {properties_str}
     }}
     '''
-
-    # Fjerner semikolon før siste } hvis owner_line er tom (for korrekt syntaks)
-    query = re.sub(r';\s*}', ' }', query)
-
+    
     return query
 
-def make_insert_DPP_query(dpp_id: str, product_id: str, timestamp: str, actor_id: str):
+def make_insert_dpp_query(dpp: DPP): 
     """Create a SPARQL query to insert a Digital Product Passport (DPP) into the knowledge base."""
+    
+    # Extract dpp properties
+    dpp_id = dpp.id
+    product_id = dpp.describes.id
+    timestamp = dpp.timeStamp
+    actor_id = dpp.responsibleActor.id
+    
+    # Construct query
     query = f'''
     PREFIX dpp: <http://www.semanticweb.org/johanne/ontologies/2025/2/dpp_ontology/>
     PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
@@ -122,45 +151,105 @@ def make_insert_DPP_query(dpp_id: str, product_id: str, timestamp: str, actor_id
             dpp:describes         dpp:{product_id} ;
             dpp:hasTimeStampCreation "{timestamp}"^^xsd:dateTime ;
             dpp:responsibleActor  dpp:{actor_id} .
+
+        dpp:{actor_id}
+            a                     dpp:Actor ;
+            dpp:ownerOf           dpp:{dpp_id} .
     }}
     '''
     return query
 
+# Methods that make queries to remove data from the knowledge base
+# --------------------------------------------------
+def make_remove_product_query(product: Product):
+    """Create a SPARQL query to remove a product and its parts from the knowledge base."""
+    
+    product_id = product.id
+    part_ids = [part.id for part in product.parts]
+
+    PREFIXES = '''
+    PREFIX dpp: <http://www.semanticweb.org/johanne/ontologies/2025/2/dpp_ontology/>
+    PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+    '''
+
+    delete_blocks = f'''
+    DELETE {{
+        dpp:{product_id} ?p ?o .
+    }}
+    WHERE {{
+        dpp:{product_id} ?p ?o .
+    }} ;
+
+    DELETE {{
+        ?s ?p dpp:{product_id} .
+    }}
+    WHERE {{
+        ?s ?p dpp:{product_id} .
+    }} ;
+    '''
+
+    for part_id in part_ids:
+        delete_blocks += f'''
+    DELETE {{
+        dpp:{part_id} ?p ?o .
+    }}
+    WHERE {{
+        dpp:{part_id} ?p ?o .
+    }} ;
+    '''
+
+    return f"{PREFIXES}\n{delete_blocks}"
+
+def make_remove_actor_query(actor: Actor):
+    """Create a SPARQL query to remove an actor from the knowledge base."""
+
+    actor_id = actor.id
+
+    return f'''
+    PREFIX dpp: <http://www.semanticweb.org/johanne/ontologies/2025/2/dpp_ontology/>
+    PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+    DELETE {{
+        dpp:{actor_id} ?p ?o .
+    }}
+    WHERE {{
+        dpp:{actor_id} ?p ?o .
+    }} ;
+
+    DELETE {{
+        ?s ?p dpp:{actor_id} .
+    }}
+    WHERE {{
+        ?s ?p dpp:{actor_id} .
+    }} ;
+    '''
+
+def make_remove_dpp_query(dpp: DPP):
+    """Create a SPARQL query to remove a Digital Product Passport (DPP) from the knowledge base."""
+
+    dpp_id = dpp.id
+
+    return f'''
+    PREFIX dpp: <http://www.semanticweb.org/johanne/ontologies/2025/2/dpp_ontology/>
+    PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+    DELETE {{
+        dpp:{dpp_id} ?p ?o .
+    }}
+    WHERE {{
+        dpp:{dpp_id} ?p ?o .
+    }} ;
+
+    DELETE {{
+        ?s ?p dpp:{dpp_id} .
+    }}
+    WHERE {{
+        ?s ?p dpp:{dpp_id} .
+    }} ;
+
+    '''
 
 
-actor_id = "Actor_ErikEriksen"
-actor_name = "Erik Eriksen"
-actor_mail = "ee@mail.com"
-owns_list = [""]
-
-# print(make_insert_actor_query(
-#     id=actor_id,
-#     name=actor_name,
-#     mail=actor_mail,
-#     owns=owns_list
-# ))
-
-# print(update_kb(make_insert_actor_query(
-#     id=actor_id,
-#     name=actor_name,
-#     mail=actor_mail,
-#     owns=owns_list
-# )))
-
-request_actor_query = '''
-PREFIX dpp: <http://www.semanticweb.org/johanne/ontologies/2025/2/dpp_ontology/>
-
-SELECT ?id ?name ?mail ?ownerOf WHERE {
-  ?actor dpp:hasID ?id ;
-        dpp:hasName ?name ;
-        dpp:hasMail ?mail .
-  OPTIONAL {
-    ?actor dpp:ownerOf ?ownerOf .
-  }
-}
-
- '''
-# print(ask_query(request_actor_query))
 
 
 
@@ -173,11 +262,8 @@ SELECT ?id ?name ?mail ?ownerOf WHERE {
 
 
 
-
-
-
-
-
+# ----------------- TEST QUERIES ------------------ #
+# Test queries to add data to the knowledge base
 QUERY_add_chair = (
     # A new chair product
     '''
