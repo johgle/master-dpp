@@ -8,11 +8,10 @@ Master thesis DPP, NTNU
 """
 
 import requests
-import re
 
-from DPP_project.product.actual_product.product import Product
-from DPP_project.product.actor.actor import Actor
-from DPP_project.product.digital_product_passport.product_dpp import DPP
+from product.actual_product.product import Product
+from product.actor.actor import Actor
+from product.digital_product_passport.product_dpp import DPP
 
 
 # For å starte Fuseki server:

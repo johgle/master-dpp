@@ -6,8 +6,8 @@ Date: Spring 2025
 Master thesis DPP, NTNU
 """
 
-from DPP_project.product.actor.actor import Actor
-from DPP_project.product.digital_product_passport.product_dpp import DPP
+from product.actor.actor import Actor
+from product.digital_product_passport.product_dpp import DPP
 
 
 class ValueChainActor(Actor):

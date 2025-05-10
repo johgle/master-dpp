@@ -1,20 +1,22 @@
 import qrcode
+import os
 
-def generate_qr_code(url, filename):
+def generate_qr_code(ip_adress, DID, WID, EID):
     """
-    Genererer en QR-kode for gitt URL og lagrer den som en bildefil (png).
+    Generate Qr code when called, likely when new passport is created and added to KB.
     """
-    # Lag et QRCode-objekt
-    img = qrcode.make(url)
-    # Lagre bildet som filename
-    img.save(filename)
-    print(f"QR-kode generert og lagret som {filename}")
+    url = f"http://{ip_adress}:8000/product?id={DID}_{WID}_{EID}"
+    filename = f"{DID}_{WID}_{EID}_qrcode.png"
 
-if __name__ == "__main__":
-    # Eks. URL
-    my_url = "http://192.168.10.181:8000/product?id=stol_123"
+    # Define the full path to the qrcodes folder
+    qr_code_folder = os.path.join(
+        os.path.dirname(__file__), '..', 'media', 'qrcodes'
+    )
+    full_path = os.path.join(qr_code_folder, filename)
 
-    # Velg filnavn for lagring
-    output_file = "stol_123_qrcode.png"
+    # Ensure the directory exists
+    os.makedirs(qr_code_folder, exist_ok=True)
 
-    generate_qr_code(my_url, output_file)
+    # Generate and save the QR code image
+    qr_code_img = qrcode.make(url)
+    qr_code_img.save(full_path)

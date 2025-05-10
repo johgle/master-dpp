@@ -5,8 +5,8 @@ Author: Johanne Glende
 Date: Spring 2025
 Master thesis DPP, NTNU
 """
-from DPP_project.product.actor.actor import Actor
-from DPP_project.product.actual_product.product import Product
+from product.actor.actor import Actor
+from product.actual_product.product import Product
 
 
 

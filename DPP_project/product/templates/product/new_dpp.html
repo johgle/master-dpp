@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Create New Passport</title>
+  </head>
+  <body>
+    <h1>Create New Passport</h1>
+
+    {% if success %}
+    <p style="color: green">Success! The passport has been created.</p>
+    {% endif %} {% if part_ids %}
+    <h2>Generated Part IDs:</h2>
+    <ul>
+      {% for part_id in part_ids %}
+      <li>{{ part_id }}</li>
+      {% endfor %}
+    </ul>
+    {% endif %} {% if error_message %}
+    <p style="color: red">{{ error_message }}</p>
+    {% endif %}
+
+    <form method="post">
+      {% csrf_token %}
+      <label for="did">DID:</label>
+      <input type="text" id="did" name="did" required /><br /><br />
+
+      <label for="wid">WID:</label>
+      <input type="text" id="wid" name="wid" required /><br /><br />
+
+      <label for="eid">EID:</label>
+      <input type="text" id="eid" name="eid" required /><br /><br />
+
+      <button type="submit">Create New Passport</button>
+    </form>
+  </body>
+</html>

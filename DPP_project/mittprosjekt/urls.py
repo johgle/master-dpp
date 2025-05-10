@@ -16,9 +16,10 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from product.views import product_view
+from product.views import product_view, new_dpp_view
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('product/', product_view, name='product'),
+    path('new_dpp/', new_dpp_view, name='new_dpp'),
 ]
