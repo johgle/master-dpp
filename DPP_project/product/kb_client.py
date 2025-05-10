@@ -15,12 +15,12 @@ from DPP_project.product.actor.actor import Actor
 from DPP_project.product.digital_product_passport.product_dpp import DPP
 
 
-URL = "http://127.0.0.1:3030/dpp"
-
 # For å starte Fuseki server:
 # kjør i Command prompt:
-# cd C:\Users\Johanne\Downloads\apache-jena-fuseki-5.3.0\apache-jena-fuseki-5.3.0>
+# cd C:\Users\Johanne\Downloads\apache-jena-fuseki-5.3.0\apache-jena-fuseki-5.3.0
 # fuseki-server
+
+URL = "http://127.0.0.1:3030/dpp"
 
 # Method to get data from the knowledge base
 # --------------------------------------------------
@@ -33,7 +33,7 @@ def ask_query(query):
         return "Data was not found."
     return resp.json()["results"]["bindings"]
 
-# Methos to update the knowledge base
+# Method to update the knowledge base
 # --------------------------------------------------
 def update_kb(query):
     PARAMS = {"update": query}

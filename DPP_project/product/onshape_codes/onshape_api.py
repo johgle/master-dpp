@@ -122,6 +122,8 @@ def write_data_to_file_from_single_api_url(url_name:str, url:str):
     else:
         print("Kunne ikke hente data:", resp.text)
 
+
+
 def get_api_data(url:str):
     """Fetch data from Onshape API and return as json response."""
     h = signed_headers("GET", url)
