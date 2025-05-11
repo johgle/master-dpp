@@ -478,6 +478,13 @@ def make_remove_product_query(product_id, part_ids):
     WHERE {{
         dpp:{part_id} ?p ?o .
     }} ;
+
+    DELETE {{
+        ?s ?p dpp:{part_id} .
+    }}
+    WHERE {{
+        ?s ?p dpp:{part_id} .
+    }} ;
     '''
     
     return f"{PREFIXES}\n{delete_blocks}"
