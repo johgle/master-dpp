@@ -84,9 +84,9 @@ def make_instances(DID, WID, EID):
     
     product_name = onshape_api.get_document_name(DID)  # antar document = product for nå
     example_dpp_ID = "ID_DPP_" + product_name.lower().replace(" ","_")  # Example ID format DPP
-    example_dpp_timeStamp = "2030-01-01T00:00:00Z"  # Example timestamp format
+    example_dpp_timeStampInvalid = "2030-01-01T00:00:00Z"  # Example timestamp invalid format
     
-    product_DPP = DPP(example_dpp_ID, example_dpp_timeStamp, value_chain_actor_chair, product)
+    product_DPP = DPP(example_dpp_ID, example_dpp_timeStampInvalid, value_chain_actor_chair, product)
     
     return product, value_chain_actor_chair, product_DPP
 

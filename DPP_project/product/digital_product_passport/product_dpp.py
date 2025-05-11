@@ -16,11 +16,11 @@ class DPP:
     RecyclingInformation = None  # Placeholder for recycling information
     DisassemblyInformation = None  # Placeholder for disassembly information
 
-    def __init__(self, id: str, timeStamp:str, responsibleActor: Actor, describes: Product):
+    def __init__(self, id: str, timeStampInvalid:str, responsibleActor: Actor, describes: Product):
         self.id = id
-        self.timeStamp = timeStamp
+        self.timeStampInvalid = timeStampInvalid
         self.responsibleActor = responsibleActor
         self.describes = describes
 
     def __repr__(self):
-        return f"DPP(id='{self.id}', timeStamp='{self.timeStamp}', responsibleActor={self.responsibleActor}, describes={self.describes})"
+        return f"DPP(id='{self.id}', timeStampInvalid='{self.timeStampInvalid}', responsibleActor={self.responsibleActor}, describes={self.describes})"

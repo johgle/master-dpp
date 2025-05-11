@@ -22,11 +22,22 @@ def product_view(request):
     if not dpp_data:
         return HttpResponse(f"No data found for DPP ID: {dpp_id}", status=404)
 
+    # Calculate unique materials, total mass, and total volume
+    parts = dpp_data["parts"]
+    unique_materials = set(part["partMaterial"] for part in parts)
+    total_mass = round(sum(part["partMass"] for part in parts), 2)  # Rounded to 2 decimals
+    total_volume = round(sum(part["partVolume"] for part in parts), 2)  # Rounded to 2 decimals
+
     return render(request, 'product/product.html', {
         'dpp_id': dpp_id,
         'product': dpp_data["describes"],
         'actor': dpp_data["responsibleActor"],
-        'timeStamp': dpp_data["timeStamp"],
+        'timeStampInvalid': dpp_data["timeStampInvalid"],
+        'allPartIDs': dpp_data["allParts"],
+        'parts': parts,
+        'unique_materials': ", ".join(unique_materials),
+        'total_mass': total_mass,
+        'total_volume': total_volume,
     })
 
 @csrf_exempt
@@ -62,10 +73,11 @@ def new_dpp_view(request):
             error_message = f"Error adding product, actor or digital product passport to KB: {e}"
         
         try:
-            ip_address = '10.22.120.185'  # Replace with your actual IP address
-            qr_code_path = qr_generator.generate_qr_code(ip_address, dpp.id)  # Use DPP_ID
-            if qr_code_path:
-                success_qr_code = True
+            if success_create and success_added_to_kb:
+                ip_address = '10.22.120.185'  # Replace with your actual IP address
+                qr_code_path = qr_generator.generate_qr_code(ip_address, dpp.id)  # Use DPP_ID
+                if qr_code_path:
+                    success_qr_code = True
         except Exception as e:
             error_message = f"Error generating QR code: {e}"
 

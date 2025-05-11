@@ -1,21 +1,95 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
-    <meta charset="utf-8" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Digital Product Passport</title>
+    <script src="https://cdn.tailwindcss.com"></script>
   </head>
-  <body>
-    <h1>Digital Product Passport: {{ dpp_id }}</h1>
+  <body class="bg-gray-50 text-gray-900">
+    <div class="max-w-4xl mx-auto p-8">
+      <header class="mb-10">
+        <h1 class="text-4xl font-bold text-center">
+          Digital Product Passport for {{product.productName}}
+        </h1>
+        <p class="text-center text-gray-600 mt-2">
+          A comprehensive overview of the passport, the product and its
+          components
+        </p>
+      </header>
 
-    <h2>Product Details:</h2>
-    <p><strong>Name:</strong> {{ product.name }}</p>
-    <p><strong>ID:</strong> {{ product.id }}</p>
+      <!-- DPP Section -->
+      <section class="mb-8">
+        <div class="bg-blue-100 p-6 rounded-lg shadow">
+          <h2 class="text-2xl font-semibold text-blue-800 mb-4">DPP Details</h2>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <p><strong>DPP ID:</strong> {{ dpp_id }}</p>
+              <p><strong>Timestamp Invalid:</strong> {{ timeStampInvalid }}</p>
+            </div>
+            <div>
+              <p><strong>Describes Product:</strong></p>
+              <ul class="list-disc list-inside">
+                <li><strong>ID:</strong> {{ product.productID }}</li>
+                <li><strong>Name:</strong> {{ product.productName }}</li>
+              </ul>
+            </div>
+          </div>
+          <div class="mt-4">
+            <p><strong>Responsible Actor:</strong></p>
+            <ul class="list-disc list-inside">
+              <li><strong>ID:</strong> {{ actor.actorID }}</li>
+              <li><strong>Name:</strong> {{ actor.actorName }}</li>
+            </ul>
+          </div>
+        </div>
+      </section>
 
-    <h2>Actor Details:</h2>
-    <p><strong>Name:</strong> {{ actor.name }}</p>
-    <p><strong>Mail:</strong> {{ actor.mail }}</p>
+      <!-- Product Section -->
+      <section class="mb-8">
+        <div class="bg-green-100 p-6 rounded-lg shadow">
+          <h2 class="text-2xl font-semibold text-green-800 mb-4">
+            Product Details
+          </h2>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <p><strong>Name:</strong> {{ product.productName }}</p>
+              <p><strong>ID:</strong> {{ product.productID }}</p>
+            </div>
+            <div>
+              <p><strong>Materials:</strong> {{ unique_materials }}</p>
+              <p><strong>Total Mass:</strong> {{ total_mass }} kg</p>
+              <p>
+                <strong>Total Volume:</strong> {{ total_volume }} m<sup>3</sup>
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
 
-    <h2>Timestamp:</h2>
-    <p>{{ timeStamp }}</p>
+      <!-- Product Parts Section -->
+      <section>
+        <div class="bg-purple-100 p-6 rounded-lg shadow">
+          <h2 class="text-2xl font-semibold text-purple-800 mb-4">
+            Product Parts
+          </h2>
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {% for part in parts %}
+            <div class="bg-white p-4 rounded-lg shadow border border-gray-200">
+              <h3 class="text-lg font-medium text-gray-700 mb-2">
+                Part: {{ part.partName }}
+              </h3>
+              <p><strong>ID:</strong> {{ part.partID }}</p>
+              <p><strong>Mass:</strong> {{ part.partMass }} kg</p>
+              <p>
+                <strong>Volume:</strong> {{ part.partVolume }} m<sup>3</sup>
+              </p>
+              <p><strong>Material:</strong> {{ part.partMaterial }}</p>
+            </div>
+            {% endfor %}
+          </div>
+        </div>
+      </section>
+    </div>
   </body>
 </html>

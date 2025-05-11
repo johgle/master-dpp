@@ -14,3 +14,153 @@ To metoder slått sammen til en:
 #         return 1
 #     except:
 #         return 0
+
+
+FROM KB_CLIENT
+# ----------------- TEST QUERIES ------------------ #
+# Test queries to add data to the knowledge base
+QUERY_add_chair = (
+    # A new chair product
+    '''
+    PREFIX dpp: <http://www.semanticweb.org/johanne/ontologies/2025/2/dpp_ontology/>
+    PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+    INSERT DATA {
+    dpp:ChairExample a dpp:Product ;
+        dpp:hasName    "Example Chair" ;
+        dpp:hasMass    "10.0"^^xsd:float ;
+        dpp:hasVolume  "0.014"^^xsd:float ;
+        dpp:consistsOf dpp:Leg1,
+                        dpp:Leg2,
+                        dpp:Leg3,
+                        dpp:Leg4,
+                        dpp:SeatPlate,
+                        dpp:BackPlate .
+
+    # The four legs
+    dpp:Leg1 a dpp:Part ;
+        dpp:hasName     "Chair Leg" ;
+        dpp:hasMass     "1.5"^^xsd:float ;
+        dpp:hasVolume   "0.002"^^xsd:float ;
+        dpp:hasMaterial "Birch" .
+
+    dpp:Leg2 a dpp:Part ;
+        dpp:hasName     "Chair Leg" ;
+        dpp:hasMass     "1.5"^^xsd:float ;
+        dpp:hasVolume   "0.002"^^xsd:float ;
+        dpp:hasMaterial "Birch" .
+
+    dpp:Leg3 a dpp:Part ;
+        dpp:hasName     "Chair Leg" ;
+        dpp:hasMass     "1.5"^^xsd:float ;
+        dpp:hasVolume   "0.002"^^xsd:float ;
+        dpp:hasMaterial "Birch" .
+
+    dpp:Leg4 a dpp:Part ;
+        dpp:hasName     "Chair Leg" ;
+        dpp:hasMass     "1.5"^^xsd:float ;
+        dpp:hasVolume   "0.002"^^xsd:float ;
+        dpp:hasMaterial "Birch" .
+
+    # The seating plate
+    dpp:SeatPlate a dpp:Part ;
+        dpp:hasName     "Seat Plate" ;
+        dpp:hasMass     "2.0"^^xsd:float ;
+        dpp:hasVolume   "0.003"^^xsd:float ;
+        dpp:hasMaterial "Birch" .
+
+    # The back plate
+    dpp:BackPlate a dpp:Part ;
+        dpp:hasName     "Back Plate" ;
+        dpp:hasMass     "2.0"^^xsd:float ;
+        dpp:hasVolume   "0.003"^^xsd:float ;
+        dpp:hasMaterial "Birch" .
+    }
+''')
+
+QUERY_add_chair_DPP = (
+    # A new Digital Product Passport (DPP) for the example chair
+    '''
+    PREFIX dpp: <http://www.semanticweb.org/johanne/ontologies/2025/2/dpp_ontology/>
+    PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+    INSERT DATA {
+    dpp:ChairExample_DPP
+            a               dpp:Product_DPP ;
+            dpp:hasID       "ChairExample_DPP" ;
+            dpp:describes   dpp:ChairExample ;
+            dpp:hasTimeStampCreation "2025-05-07T12:00:00Z"^^xsd:dateTime ;
+            dpp:responsibleActor dpp:Johanne_Glende .  
+    }
+
+
+    
+''')
+
+QUERY_add_actor = (
+    # Define the actor Johanne Glende
+    '''
+    PREFIX dpp: <http://www.semanticweb.org/johanne/ontologies/2025/2/dpp_ontology/>
+    PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+    INSERT DATA {
+    dpp:Actor_JohanneGlende
+            a            dpp:Actor ;
+            dpp:hasName  "Johanne Glende" ;
+            dpp:hasMail  "jg@mail.com" ;
+            dpp:hasID    "JohanneGlende" ;
+            dpp:ownerOf  dpp:ChairExample_DPP .
+    }
+''')
+
+QUERY_update_chair_DPP = ('''
+    PREFIX dpp: <http://www.semanticweb.org/johanne/ontologies/2025/2/dpp_ontology/>
+    PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+    DELETE {
+    dpp:ChairExample_DPP dpp:hasID ?oldID .
+    }
+    INSERT {
+    dpp:ChairExample_DPP dpp:hasID "ChairExample_DPP"^^xsd:string .
+    }
+    WHERE {
+    OPTIONAL { dpp:ChairExample_DPP dpp:hasID ?oldID . }
+    }
+
+''')
+
+QUERY_remove_chair_DPP = ('''
+    PREFIX dpp: <http://www.semanticweb.org/johanne/ontologies/2025/2/dpp_ontology/>
+
+    DELETE WHERE {
+    # ?p and ?o are variables matching any predicate and any object for the given subject, that is, ?p and ?o can be anything.
+    dpp:ChairExample_DPP ?p ?o .
+    }
+''')
+
+QUERY_remove_actor = ('''
+    PREFIX dpp: <http://www.semanticweb.org/johanne/ontologies/2025/2/dpp_ontology/>
+
+    DELETE WHERE {
+    dpp:Actor_JohanneGlende ?p ?o .
+    }
+
+''')
+
+QUERY_remove_chair = ('''
+    PREFIX dpp: <http://www.semanticweb.org/johanne/ontologies/2025/2/dpp_ontology/>
+
+    DELETE WHERE {
+    dpp:ChairExample ?p ?o .
+    }
+''')
+
+QUERY_request_Product_DPP_data = ('''
+    PREFIX dpp: <http://www.semanticweb.org/johanne/ontologies/2025/2/dpp_ontology/>
+
+    SELECT ?id ?describes ?timeStamp ?responsibleActor
+    WHERE {
+        ?Product_DPP dpp:hasID ?id;
+            dpp:describes ?describes;
+            dpp:hasTimeStampCreation ?timeStamp;
+            dpp:responsibleActor ?responsibleActor. }''')

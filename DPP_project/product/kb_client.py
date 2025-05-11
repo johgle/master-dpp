@@ -135,7 +135,7 @@ def make_insert_dpp_query(dpp: DPP):
     # Extract dpp properties
     dpp_id = dpp.id
     product_id = dpp.describes.id
-    timestamp = dpp.timeStamp
+    timestamp = dpp.timeStampInvalid
     actor_id = dpp.responsibleActor.id
     
     # Construct query
@@ -148,7 +148,7 @@ def make_insert_dpp_query(dpp: DPP):
             a                     dpp:Product_DPP ;
             dpp:hasID             "{dpp_id}" ;
             dpp:describes         dpp:{product_id} ;
-            dpp:hasTimeStampCreation "{timestamp}"^^xsd:dateTime ;
+            dpp:hasTimeStampInvalid "{timestamp}"^^xsd:dateTime ;
             dpp:responsibleActor  dpp:{actor_id} .
 
         dpp:{actor_id}
@@ -249,207 +249,118 @@ def make_remove_dpp_query(dpp: DPP):
     '''
 
 def get_dpp_data(dpp_id):
-    """
-    Fetch data for a Digital Product Passport (DPP) from the knowledge base using its ID.
-    """
-    query = f'''
-    PREFIX dpp: <http://www.semanticweb.org/johanne/ontologies/2025/2/dpp_ontology/>
-    PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
-
-    SELECT ?describes ?timeStamp ?responsibleActor ?productName ?productID ?actorName ?actorMail
-    WHERE {{
-        dpp:{dpp_id} a dpp:Product_DPP ;
-            dpp:describes ?describes ;
-            dpp:hasTimeStampCreation ?timeStamp ;
-            dpp:responsibleActor ?responsibleActor .
-
-        ?describes dpp:hasName ?productName ;
-                   dpp:hasID ?productID .
-
-        ?responsibleActor dpp:hasName ?actorName ;
-                          dpp:hasMail ?actorMail .
-    }}
-    '''
     try:
-        results = ask_query(query)
+        results = ask_query(make_get_dpp_product_actor_query(dpp_id))
         if not results:
             return None
 
         # Extract data from the query results
         dpp_data = results[0]  # Assuming one result per DPP_ID
-        return {
+        # print("dpp_data: hvor er allParts? \n", dpp_data)
+        new_dpp_data = {
             "dpp_id": dpp_id,
+            
             "describes": {
-                "id": dpp_data["productID"]["value"],
-                "name": dpp_data["productName"]["value"],
+                "productID": dpp_data["productID"]["value"],
+                "productName": dpp_data["productName"]["value"],
             },
-            "timeStamp": dpp_data["timeStamp"]["value"],
+            
+            "timeStampInvalid": dpp_data["timeStampInvalid"]["value"],
+            
             "responsibleActor": {
-                "id": dpp_data["responsibleActor"]["value"].split("/")[-1],  # Extract ID from URI
-                "name": dpp_data["actorName"]["value"],
-                "mail": dpp_data["actorMail"]["value"],
+                "actorID": dpp_data["actorID"]["value"],
+                "actorName": dpp_data["actorName"]["value"],
+                "actorMail": dpp_data["actorMail"]["value"],
             },
+
+            "allParts": [part.split("/")[-1] for part in dpp_data["allParts"]["value"].split(",")]  # Combined logic
+
         }
+        # print("\nallParts in new_dpp_data: \n", new_dpp_data["allParts"])
+        # print("Type of allParts:", type(new_dpp_data["allParts"]))
+
+        # Fetch parts data
+        parts_query = make_get_parts_data_query(new_dpp_data["allParts"])
+        parts_results = ask_query(parts_query)
+        if not parts_results:
+            return None
+
+        # Create a dictionary for parts data
+        parts_data = []
+        for part in parts_results:
+            part_data = {
+                "partID": part["partID"]["value"],
+                "partName": part["partName"]["value"],
+                "partMass": float(part["partMass"]["value"]),
+                "partVolume": float(part["partVolume"]["value"]),
+                "partMaterial": part["partMaterial"]["value"],
+            }
+            parts_data.append(part_data)
+
+        # Add parts data to new_dpp_data
+        new_dpp_data["parts"] = parts_data
+        # print("new_dpp_data with parts: \n", new_dpp_data)
+        
+        return new_dpp_data
+    
     except Exception as e:
         print(f"Error fetching DPP data for ID {dpp_id}: {e}")
         return None
 
 
+def make_get_dpp_product_actor_query(dpp_id):
+    """
+    Fetch data for a Digital Product Passport (DPP) from the knowledge base using its ID,
+    including details about the product and its parts, with aggregation to avoid long results.
+    """
+    query = f'''
+    PREFIX dpp: <http://www.semanticweb.org/johanne/ontologies/2025/2/dpp_ontology/>
+    PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
 
+    SELECT ?dppID ?timeStampInvalid ?productID ?productName 
+        (GROUP_CONCAT(?product_parts; separator=", ") AS ?allParts)
+        ?actorID ?actorName ?actorMail
+    WHERE {{
+    dpp:{dpp_id} a dpp:Product_DPP ;
+        dpp:hasID ?dppID ;
+        dpp:hasTimeStampInvalid ?timeStampInvalid ;
+        dpp:describes ?product ;
+        dpp:responsibleActor ?actor .
 
+    ?product a dpp:Product ;
+        dpp:hasID ?productID ;
+        dpp:hasName ?productName ;
+        dpp:consistsOf ?product_parts .
 
+    ?actor a dpp:Actor ;
+        dpp:hasID ?actorID ;
+        dpp:hasName ?actorName ;
+        dpp:hasMail ?actorMail .
+    }}
+    GROUP BY ?dppID ?timeStampInvalid ?productID ?productName ?actorID ?actorName ?actorMail
+        '''
+    return query
 
-
-
-
-
-
-
-
-# ----------------- TEST QUERIES ------------------ #
-# Test queries to add data to the knowledge base
-QUERY_add_chair = (
-    # A new chair product
+def make_get_parts_data_query(part_ids):
+    """part_ids: List of part IDs to fetch data for"""
+    PREFIXES = '''
+    PREFIX dpp: <http://www.semanticweb.org/johanne/ontologies/2025/2/dpp_ontology/>
+    PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
     '''
-    PREFIX dpp: <http://www.semanticweb.org/johanne/ontologies/2025/2/dpp_ontology/>
-    PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+    # Construct the FILTER clause
+    filter_clause = "FILTER (?part IN (" + ", ".join(f"dpp:{part_id}" for part_id in part_ids) + "))"
 
-    INSERT DATA {
-    dpp:ChairExample a dpp:Product ;
-        dpp:hasName    "Example Chair" ;
-        dpp:hasMass    "10.0"^^xsd:float ;
-        dpp:hasVolume  "0.014"^^xsd:float ;
-        dpp:consistsOf dpp:Leg1,
-                        dpp:Leg2,
-                        dpp:Leg3,
-                        dpp:Leg4,
-                        dpp:SeatPlate,
-                        dpp:BackPlate .
-
-    # The four legs
-    dpp:Leg1 a dpp:Part ;
-        dpp:hasName     "Chair Leg" ;
-        dpp:hasMass     "1.5"^^xsd:float ;
-        dpp:hasVolume   "0.002"^^xsd:float ;
-        dpp:hasMaterial "Birch" .
-
-    dpp:Leg2 a dpp:Part ;
-        dpp:hasName     "Chair Leg" ;
-        dpp:hasMass     "1.5"^^xsd:float ;
-        dpp:hasVolume   "0.002"^^xsd:float ;
-        dpp:hasMaterial "Birch" .
-
-    dpp:Leg3 a dpp:Part ;
-        dpp:hasName     "Chair Leg" ;
-        dpp:hasMass     "1.5"^^xsd:float ;
-        dpp:hasVolume   "0.002"^^xsd:float ;
-        dpp:hasMaterial "Birch" .
-
-    dpp:Leg4 a dpp:Part ;
-        dpp:hasName     "Chair Leg" ;
-        dpp:hasMass     "1.5"^^xsd:float ;
-        dpp:hasVolume   "0.002"^^xsd:float ;
-        dpp:hasMaterial "Birch" .
-
-    # The seating plate
-    dpp:SeatPlate a dpp:Part ;
-        dpp:hasName     "Seat Plate" ;
-        dpp:hasMass     "2.0"^^xsd:float ;
-        dpp:hasVolume   "0.003"^^xsd:float ;
-        dpp:hasMaterial "Birch" .
-
-    # The back plate
-    dpp:BackPlate a dpp:Part ;
-        dpp:hasName     "Back Plate" ;
-        dpp:hasMass     "2.0"^^xsd:float ;
-        dpp:hasVolume   "0.003"^^xsd:float ;
-        dpp:hasMaterial "Birch" .
-    }
-''')
-
-QUERY_add_chair_DPP = (
-    # A new Digital Product Passport (DPP) for the example chair
-    '''
-    PREFIX dpp: <http://www.semanticweb.org/johanne/ontologies/2025/2/dpp_ontology/>
-    PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
-
-    INSERT DATA {
-    dpp:ChairExample_DPP
-            a               dpp:Product_DPP ;
-            dpp:hasID       "ChairExample_DPP" ;
-            dpp:describes   dpp:ChairExample ;
-            dpp:hasTimeStampCreation "2025-05-07T12:00:00Z"^^xsd:dateTime ;
-            dpp:responsibleActor dpp:Johanne_Glende .  
-    }
-
-
-    
-''')
-
-QUERY_add_actor = (
-    # Define the actor Johanne Glende
-    '''
-    PREFIX dpp: <http://www.semanticweb.org/johanne/ontologies/2025/2/dpp_ontology/>
-    PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
-
-    INSERT DATA {
-    dpp:Actor_JohanneGlende
-            a            dpp:Actor ;
-            dpp:hasName  "Johanne Glende" ;
-            dpp:hasMail  "jg@mail.com" ;
-            dpp:hasID    "JohanneGlende" ;
-            dpp:ownerOf  dpp:ChairExample_DPP .
-    }
-''')
-
-QUERY_update_chair_DPP = ('''
-    PREFIX dpp: <http://www.semanticweb.org/johanne/ontologies/2025/2/dpp_ontology/>
-    PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
-
-    DELETE {
-    dpp:ChairExample_DPP dpp:hasID ?oldID .
-    }
-    INSERT {
-    dpp:ChairExample_DPP dpp:hasID "ChairExample_DPP"^^xsd:string .
-    }
-    WHERE {
-    OPTIONAL { dpp:ChairExample_DPP dpp:hasID ?oldID . }
-    }
-
-''')
-
-QUERY_remove_chair_DPP = ('''
-    PREFIX dpp: <http://www.semanticweb.org/johanne/ontologies/2025/2/dpp_ontology/>
-
-    DELETE WHERE {
-    # ?p and ?o are variables matching any predicate and any object for the given subject, that is, ?p and ?o can be anything.
-    dpp:ChairExample_DPP ?p ?o .
-    }
-''')
-
-QUERY_remove_actor = ('''
-    PREFIX dpp: <http://www.semanticweb.org/johanne/ontologies/2025/2/dpp_ontology/>
-
-    DELETE WHERE {
-    dpp:Actor_JohanneGlende ?p ?o .
-    }
-
-''')
-
-QUERY_remove_chair = ('''
-    PREFIX dpp: <http://www.semanticweb.org/johanne/ontologies/2025/2/dpp_ontology/>
-
-    DELETE WHERE {
-    dpp:ChairExample ?p ?o .
-    }
-''')
-
-QUERY_request_Product_DPP_data = ('''
-    PREFIX dpp: <http://www.semanticweb.org/johanne/ontologies/2025/2/dpp_ontology/>
-
-    SELECT ?id ?describes ?timeStamp ?responsibleActor
-    WHERE {
-        ?Product_DPP dpp:hasID ?id;
-            dpp:describes ?describes;
-            dpp:hasTimeStampCreation ?timeStamp;
-            dpp:responsibleActor ?responsibleActor. }''')
+    # Construct the full query
+    query = f"""{PREFIXES} 
+    SELECT ?partID ?partName ?partMass ?partVolume ?partMaterial
+    WHERE {{
+        ?part a dpp:Part ;
+              dpp:hasID ?partID ;
+              dpp:hasName ?partName ;
+              dpp:hasMass ?partMass ;
+              dpp:hasVolume ?partVolume ;
+              dpp:hasMaterial ?partMaterial .
+        {filter_clause}
+    }}"""
+    # print(query)
+    return query
