@@ -56,17 +56,17 @@ def make_part_instance(DID, WID, EID):
 def make_product_instance(DID, WID, EID):
     product_parts = make_part_instance(DID, WID, EID)
     product_name = onshape_api.get_document_name(DID)    # antar document = product for nå
-    product_owner = onshape_api.get_document_owner(DID)  # antar document = product for nå, dvs dokument og producteier er det samme
 
     example_product_id = "ID_" + product_name.lower().replace(" ","_")  # Example ID format product
-    product_chair = Product(example_product_id, product_name, product_parts)
-    return product_chair
+    product = Product(example_product_id, product_name, product_parts)
+    # print(product.__repr__())
+    return product
 
-# print(product_chair.__repr__())
 
 # Actor
 # -------
-def make_actor_instance(product_name, product_owner):
+def make_actor_instance(DID): #product_name, product_owner
+    product_owner = onshape_api.get_document_owner(DID)  # antar document = product for nå, dvs dokument og producteier er det samme
     example_actor_mail = product_owner.lower().replace(" ","_") + "@example.com"  # Example email format
     example_actor_id = "ID_" + product_owner.lower().replace(" ","_")  # Example ID format actor
 
@@ -76,15 +76,19 @@ def make_actor_instance(product_name, product_owner):
     return value_chain_actor_chair
 
 
-# DPP
+# DPP (with actor and product)
 # -------
-def make_dpp_instance(product_name, product_chair, value_chain_actor_chair):
-    # Example DPP instance
-    # product_name = product_chair.name
+def make_instances(DID, WID, EID):
+    product = make_product_instance(DID, WID, EID)
+    value_chain_actor_chair = make_actor_instance(DID)  # antar document = product for nå, dvs dokument og producteier er det samme
+    
+    product_name = onshape_api.get_document_name(DID)  # antar document = product for nå
     example_dpp_ID = "ID_DPP_" + product_name.lower().replace(" ","_")  # Example ID format DPP
     example_dpp_timeStamp = "2030-01-01T00:00:00Z"  # Example timestamp format
-    product_DPP = DPP(example_dpp_ID, example_dpp_timeStamp, value_chain_actor_chair, product_chair)
-    return product_DPP
+    
+    product_DPP = DPP(example_dpp_ID, example_dpp_timeStamp, value_chain_actor_chair, product)
+    
+    return product, value_chain_actor_chair, product_DPP
 
 
 # Update actor with owned product - must be done after DPP is added to the KB
@@ -115,7 +119,7 @@ ip_address='192.168.1.104'
 
 # ---------------- REMOVE DATA FROM KB ------------------ #
 # # REMOVE PRODUCT:
-# kb_client.update_kb(kb_client.make_remove_product_query(product_chair))  # Remove product from the knowledge base
+# kb_client.update_kb(kb_client.make_remove_product_query(product))  # Remove product from the knowledge base
 
 # # REMOVE ACTOR:
 # kb_client.update_kb(kb_client.make_remove_actor_query(value_chain_actor_chair))  # Remove actor from the knowledge base

@@ -7,7 +7,8 @@ This file contains the logic for handling requests and rendering templates.
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
-from product import dpp_agent
+from product import dpp_agent, kb_client
+from product import qr_generator
 
 # Create your views here.
 
@@ -24,6 +25,9 @@ def product_view(request):
         except ValueError:
             pass  # Handle cases where the ID format is incorrect
 
+    # her vet vi hva did, wid og eid er.
+    # hente ut data fra KB gjennom dpp_agent
+
     return render(request, 'product/product.html', {
         'product_id': product_id,
         'did': did,
@@ -33,9 +37,15 @@ def product_view(request):
 
 @csrf_exempt
 def new_dpp_view(request):
-    success = False
+    success_create = False
+    success_added_to_kb = False
+    success_qr_code = False
+    qr_code_path = None  # Initialize QR code path
     part_ids = []
     error_message = None
+    dpp = None
+    product = None
+    actor = None
 
     if request.method == 'POST':
         did = request.POST.get('did', '')
@@ -44,15 +54,36 @@ def new_dpp_view(request):
 
         # Call make_part_instance and retrieve part IDs
         try:
-            parts = dpp_agent.make_part_instance(did, wid, eid)
-            part_ids = [part.id for part in parts]
-            success = True
+            product, actor, dpp = dpp_agent.make_instances(did, wid, eid)
+            success_create = True
         except Exception as e:
-            error_message = f"Error creating parts: {e}"
+            error_message = f"Error creating product, actor or digital product passport: {e}"
+
+        try:
+            kb_client.update_kb(kb_client.make_insert_product_query(product))
+            kb_client.update_kb(kb_client.make_insert_actor_query(actor))
+            kb_client.update_kb(kb_client.make_insert_dpp_query(dpp))
+            success_added_to_kb = True
+        except Exception as e:
+            error_message = f"Error adding product, actor or digital product passport to KB: {e}"
+        
+        try:
+            ip_address = '10.22.120.185'  # Replace with your actual IP address
+            qr_code_path = qr_generator.generate_qr_code(ip_address, did, wid, eid)
+            if qr_code_path:
+                success_qr_code = True
+        except Exception as e:
+            error_message = f"Error generating QR code: {e}"
 
     return render(request, 'product/new_dpp.html', {
-        'success': success,
-        'part_ids': part_ids,
+        'success_create': success_create,
+        'success_added_to_kb': success_added_to_kb,
+        'success_qr_code': success_qr_code,
+        'qr_code_path': qr_code_path,  # Pass the QR code path to the template
+        'product': product,
+        'part_ids': product.parts if product else [],
+        'actor': actor,
+        'dpp': dpp,
         'error_message': error_message,
     })
 

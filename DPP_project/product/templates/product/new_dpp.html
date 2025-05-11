@@ -7,9 +7,25 @@
   <body>
     <h1>Create New Passport</h1>
 
-    {% if success %}
+    {% if success_create %}
     <p style="color: green">Success! The passport has been created.</p>
-    {% endif %} {% if part_ids %}
+    {% endif %} {% if success_added_to_kb %}
+    <p style="color: green">
+      Success! The passport has been added to the knowledge base.
+    </p>
+    {% endif %} {% if success_qr_code %}
+    <p style="color: green">Success! QR code has been created.</p>
+    <h2>QR Code:</h2>
+    <p>
+      This is the QR code leading to the DPP. Customers can scan this to access
+      the DPP data.
+    </p>
+    <img
+      src="{{ qr_code_path|slice:'..' }}"
+      alt="QR Code"
+      style="max-width: 300px"
+    />
+    {% endif %}{% if part_ids %}
     <h2>Generated Part IDs:</h2>
     <ul>
       {% for part_id in part_ids %}
@@ -18,6 +34,37 @@
     </ul>
     {% endif %} {% if error_message %}
     <p style="color: red">{{ error_message }}</p>
+    {% endif %} {% if actor %}
+    <h2>Actor Details:</h2>
+    <ul>
+      <li><strong>ID:</strong> {{ actor.id }}</li>
+      <li><strong>Name:</strong> {{ actor.name }}</li>
+      <li><strong>Mail:</strong> {{ actor.mail }}</li>
+    </ul>
+    {% endif %} {% if product %}
+    <h2>Product Details:</h2>
+    <ul>
+      <li><strong>ID:</strong> {{ product.id }}</li>
+      <li><strong>Name:</strong> {{ product.name }}</li>
+      <li>
+        <strong>Parts:</strong>
+        <ul>
+          {% for part in product.parts %}
+          <li>{{ part.id }}</li>
+          {% endfor %}
+        </ul>
+      </li>
+    </ul>
+    {% endif %} {% if dpp %}
+    <h2>DPP Details:</h2>
+    <ul>
+      <li><strong>ID:</strong> {{ dpp.id }}</li>
+      <li><strong>Timestamp:</strong> {{ dpp.timeStamp }}</li>
+      <li>
+        <strong>Responsible Actor:</strong> {{ dpp.responsibleActor.name }}
+      </li>
+      <li><strong>Describes Product:</strong> {{ dpp.describes.name }}</li>
+    </ul>
     {% endif %}
 
     <form method="post">

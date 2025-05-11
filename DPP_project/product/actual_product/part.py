@@ -12,7 +12,7 @@ class Part(Component):
     def __init__(self, id: str, name: str, lifetime: float, mass: float, volume: float, material: str):
         super().__init__(id, name, lifetime, mass, volume)
         self.material = material
-        print("sucsess, part created")
+        # print("sucsess, part created")
 
     def __repr__(self):
         return (f"Part(id='{self.id}', name='{self.name}', lifetime={self.lifetime}, "
