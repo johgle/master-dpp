@@ -28,7 +28,7 @@ SECRET_KEY = 'django-insecure-+u&_z^a%a)^v7jtzyqg!j9s0=hul^s7cu6^gck81!&sra3^xw%
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost', '192.168.1.104', '10.22.120.185']
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost', '192.168.1.104', '172.20.10.3'] #local, local, homenet, phone hotspot
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [

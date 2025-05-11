@@ -24,6 +24,7 @@ def product_view(request):
 
     # Calculate unique materials, total mass, and total volume
     parts = dpp_data["parts"]
+    print("views.py - PARTS:",parts)
     unique_materials = set(part["partMaterial"] for part in parts)
     total_mass = round(sum(part["partMass"] for part in parts), 2)  # Rounded to 2 decimals
     total_volume = round(sum(part["partVolume"] for part in parts), 2)  # Rounded to 2 decimals
@@ -74,7 +75,7 @@ def new_dpp_view(request):
         
         try:
             if success_create and success_added_to_kb:
-                ip_address = '10.22.120.185'  # Replace with your actual IP address
+                ip_address = '172.20.10.3'  # Replace with your actual IP address
                 qr_code_path = qr_generator.generate_qr_code(ip_address, dpp.id)  # Use DPP_ID
                 if qr_code_path:
                     success_qr_code = True
@@ -90,6 +91,43 @@ def new_dpp_view(request):
         'part_ids': product.parts if product else [],
         'actor': actor,
         'dpp': dpp,
+        'error_message': error_message,
+    })
+
+@csrf_exempt
+def delete_dpp_view(request):
+    """Handle the deletion of a Digital Product Passport."""
+    success_delete = False
+    error_message = None
+
+    if request.method == 'POST':
+        dpp_id = request.POST.get('dpp_id', '')
+        dpp_data = kb_client.get_dpp_data(dpp_id)
+        product_id = dpp_data["describes"]["productID"]
+        all_part_ids = dpp_data["allParts"]
+        # print("\n\nviews - product_id, all_part_ids", product_id, all_part_ids)
+
+        try:
+            # Check if the DPP ID exists in the database
+            dpp_data = kb_client.get_dpp_data(dpp_id)
+            if not dpp_data:
+                error_message = f"No Digital Product Passport found with ID: {dpp_id}"
+            else:
+                # Generate the DELETE query using the provided DPP ID
+                # delete_dpp_query = kb_client.make_remove_dpp_query(dpp_id)
+                # print("views - delete query: \n",delete_dpp_query)
+                # delete_product_query = kb_client.make_remove_product_query(product_id, all_part_ids)
+                # print("views - delete product query: \n", delete_product_query)
+                
+                # Execute the query to remove the DPP from the knowledge base
+                kb_client.update_kb(kb_client.make_remove_dpp_query(dpp_id))
+                kb_client.update_kb(kb_client.make_remove_product_query(product_id, all_part_ids))
+                success_delete = True
+        except Exception as e:
+            error_message = f"Error deleting the Digital Product Passport: {e}"
+
+    return render(request, 'product/delete_dpp.html', {
+        'success_delete': success_delete,
         'error_message': error_message,
     })
 

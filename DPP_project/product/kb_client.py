@@ -25,9 +25,8 @@ URL = "http://127.0.0.1:3030/dpp"
 # --------------------------------------------------
 def ask_query(query):
     PARAMS = {"query": query}
-    # print("PARAMS:", PARAMS)
     resp = requests.get(url = URL, params = PARAMS) 
-    print("response: ", resp)
+    # print("response: ", resp)
     if resp.status_code == 400 or resp.status_code == 404:
         return "Data was not found."
     return resp.json()["results"]["bindings"]
@@ -35,6 +34,7 @@ def ask_query(query):
 # Method to update the knowledge base
 # --------------------------------------------------
 def update_kb(query):
+    """ Used to INSERT or DELETE data to/from the knowledge base. """
     PARAMS = {"update": query}
     try:
         resp = requests.post(url=URL + "/update", data=PARAMS, timeout=5)
@@ -44,6 +44,7 @@ def update_kb(query):
             return "Data not found (404)"
         elif not resp.ok:
             return f"Unhandled error: {resp.status_code}"
+        # print(resp.text)
         return resp
     except requests.exceptions.RequestException as e:
         return f"Network or connection error: {e}"
@@ -65,7 +66,7 @@ def make_insert_product_query(product: Product):
     
     # Build the product properties
     product_part_ids = ", ".join(f'dpp:{p.id}' for p in parts)
-    # print("product_part_ids:",product_part_ids)
+    # print("kb_client - product_part_ids:",product_part_ids)
     product = f'''
     dpp:{id} a dpp:Product ;
         dpp:hasID      "{id}" ;
@@ -92,6 +93,7 @@ def make_insert_product_query(product: Product):
     {parts_block}
     }}
     """
+    # print(query)
     return query
 
 def make_insert_actor_query(actor: Actor):
@@ -156,6 +158,7 @@ def make_insert_dpp_query(dpp: DPP):
             dpp:ownerOf           dpp:{dpp_id} .
     }}
     '''
+    # print("kb_client - insert DPP query:", query)
     return query
 
 # Methods that make queries to remove data from the knowledge base
@@ -248,6 +251,7 @@ def make_remove_dpp_query(dpp: DPP):
 
     '''
 
+
 def get_dpp_data(dpp_id):
     try:
         results = ask_query(make_get_dpp_product_actor_query(dpp_id))
@@ -284,7 +288,7 @@ def get_dpp_data(dpp_id):
         parts_results = ask_query(parts_query)
         if not parts_results:
             return None
-
+        print("kb_cleint - parts_results:", parts_results)
         # Create a dictionary for parts data
         parts_data = []
         for part in parts_results:
@@ -349,7 +353,6 @@ def make_get_parts_data_query(part_ids):
     '''
     # Construct the FILTER clause
     filter_clause = "FILTER (?part IN (" + ", ".join(f"dpp:{part_id}" for part_id in part_ids) + "))"
-
     # Construct the full query
     query = f"""{PREFIXES} 
     SELECT ?partID ?partName ?partMass ?partVolume ?partMaterial
@@ -364,3 +367,149 @@ def make_get_parts_data_query(part_ids):
     }}"""
     # print(query)
     return query
+
+
+def make_remove_dpp_query(dpp_id):
+    """Create a SPARQL query to remove a Digital Product Passport (DPP), its associated product, and parts from the knowledge base."""
+    return f'''
+    PREFIX dpp: <http://www.semanticweb.org/johanne/ontologies/2025/2/dpp_ontology/>
+    PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+    # Delete the DPP and its properties
+    DELETE {{
+        dpp:{dpp_id} ?p ?o .
+    }}
+    WHERE {{
+        dpp:{dpp_id} ?p ?o .
+    }} ;
+
+    # Delete any references to the DPP
+    DELETE {{
+        ?s ?p dpp:{dpp_id} .
+    }}
+    WHERE {{
+        ?s ?p dpp:{dpp_id} .
+    }} ;
+
+    # Delete the product described by the DPP and its properties
+    DELETE {{
+        ?product ?p ?o .
+    }}
+    WHERE {{
+        dpp:{dpp_id} dpp:describes ?product .
+        ?product ?p ?o .
+    }} ;
+
+    # Delete all parts associated with the product and their properties
+    DELETE {{
+        ?part ?p ?o .
+    }}
+    WHERE {{
+        dpp:{dpp_id} dpp:describes ?product .
+        ?product dpp:consistsOf ?part .
+        ?part ?p ?o .
+    }} ;
+
+    # Delete any references to the product
+    DELETE {{
+        ?s ?p ?product .
+    }}
+    WHERE {{
+        dpp:{dpp_id} dpp:describes ?product .
+        ?s ?p ?product .
+    }} ;
+
+    # Delete any references to the parts
+    DELETE {{
+        ?s ?p ?part .
+    }}
+    WHERE {{
+        dpp:{dpp_id} dpp:describes ?product .
+        ?product dpp:consistsOf ?part .
+        ?s ?p ?part .
+    }} ;
+
+    # Delete any nested references to parts or products
+    DELETE {{
+        ?nested_subject ?nested_predicate ?nested_object .
+    }}
+    WHERE {{
+        {{
+            dpp:{dpp_id} dpp:describes ?product .
+            ?product dpp:consistsOf ?part .
+            ?nested_subject ?nested_predicate ?part .
+        }}
+        UNION
+        {{
+            dpp:{dpp_id} dpp:describes ?product .
+            ?nested_subject ?nested_predicate ?product .
+        }}
+    }} ;
+
+    # Delete any remaining references to the product or parts by their ID
+    DELETE {{
+        ?s ?p ?o .
+    }}
+    WHERE {{
+        ?s ?p ?o .
+        FILTER(CONTAINS(STR(?s), "{dpp_id}") || CONTAINS(STR(?o), "{dpp_id}"))
+    }} ;
+    '''
+    
+def make_remove_product_query(product_id, part_ids):
+    """Create a SPARQL query to remove a product and its parts from the knowledge base."""
+    
+    PREFIXES = '''
+    PREFIX dpp: <http://www.semanticweb.org/johanne/ontologies/2025/2/dpp_ontology/>
+    PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+    '''
+    
+    delete_blocks = f'''
+    DELETE {{
+        dpp:{product_id} ?p ?o .
+    }}
+    WHERE {{
+        dpp:{product_id} ?p ?o .
+    }} ;
+
+    DELETE {{
+        ?s ?p dpp:{product_id} .
+    }}
+    WHERE {{
+        ?s ?p dpp:{product_id} .
+    }} ;
+    '''
+    
+    for part_id in part_ids:
+        delete_blocks += f'''
+    DELETE {{
+        dpp:{part_id} ?p ?o .
+    }}
+    WHERE {{
+        dpp:{part_id} ?p ?o .
+    }} ;
+    '''
+    
+    return f"{PREFIXES}\n{delete_blocks}"
+
+def make_remove_actor_query(actor_id):
+    """Create a SPARQL query to remove an actor from the knowledge base."""
+    
+    return f'''
+    PREFIX dpp: <http://www.semanticweb.org/johanne/ontologies/2025/2/dpp_ontology/>
+    PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+    DELETE {{
+        dpp:{actor_id} ?p ?o .
+    }}
+    WHERE {{
+        dpp:{actor_id} ?p ?o .
+    }} ;
+
+    DELETE {{
+        ?s ?p dpp:{actor_id} .
+    }}
+    WHERE {{
+        ?s ?p dpp:{actor_id} .
+    }} ;
+    '''
