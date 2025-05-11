@@ -24,7 +24,6 @@ def product_view(request):
 
     # Calculate unique materials, total mass, and total volume
     parts = dpp_data["parts"]
-    print("views.py - PARTS:",parts)
     unique_materials = set(part["partMaterial"] for part in parts)
     total_mass = round(sum(part["partMass"] for part in parts), 2)  # Rounded to 2 decimals
     total_volume = round(sum(part["partVolume"] for part in parts), 2)  # Rounded to 2 decimals

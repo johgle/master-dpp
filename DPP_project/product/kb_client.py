@@ -26,7 +26,6 @@ URL = "http://127.0.0.1:3030/dpp"
 def ask_query(query):
     PARAMS = {"query": query}
     resp = requests.get(url = URL, params = PARAMS) 
-    # print("response: ", resp)
     if resp.status_code == 400 or resp.status_code == 404:
         return "Data was not found."
     return resp.json()["results"]["bindings"]
@@ -44,7 +43,6 @@ def update_kb(query):
             return "Data not found (404)"
         elif not resp.ok:
             return f"Unhandled error: {resp.status_code}"
-        # print(resp.text)
         return resp
     except requests.exceptions.RequestException as e:
         return f"Network or connection error: {e}"
@@ -66,7 +64,6 @@ def make_insert_product_query(product: Product):
     
     # Build the product properties
     product_part_ids = ", ".join(f'dpp:{p.id}' for p in parts)
-    # print("kb_client - product_part_ids:",product_part_ids)
     product = f'''
     dpp:{id} a dpp:Product ;
         dpp:hasID      "{id}" ;
@@ -93,7 +90,6 @@ def make_insert_product_query(product: Product):
     {parts_block}
     }}
     """
-    # print(query)
     return query
 
 def make_insert_actor_query(actor: Actor):
@@ -158,7 +154,6 @@ def make_insert_dpp_query(dpp: DPP):
             dpp:ownerOf           dpp:{dpp_id} .
     }}
     '''
-    # print("kb_client - insert DPP query:", query)
     return query
 
 # Methods that make queries to remove data from the knowledge base
@@ -260,7 +255,6 @@ def get_dpp_data(dpp_id):
 
         # Extract data from the query results
         dpp_data = results[0]  # Assuming one result per DPP_ID
-        # print("dpp_data: hvor er allParts? \n", dpp_data)
         new_dpp_data = {
             "dpp_id": dpp_id,
             
@@ -280,15 +274,13 @@ def get_dpp_data(dpp_id):
             "allParts": [part.split("/")[-1] for part in dpp_data["allParts"]["value"].split(",")]  # Combined logic
 
         }
-        # print("\nallParts in new_dpp_data: \n", new_dpp_data["allParts"])
-        # print("Type of allParts:", type(new_dpp_data["allParts"]))
 
         # Fetch parts data
         parts_query = make_get_parts_data_query(new_dpp_data["allParts"])
         parts_results = ask_query(parts_query)
         if not parts_results:
             return None
-        print("kb_cleint - parts_results:", parts_results)
+
         # Create a dictionary for parts data
         parts_data = []
         for part in parts_results:
@@ -303,7 +295,6 @@ def get_dpp_data(dpp_id):
 
         # Add parts data to new_dpp_data
         new_dpp_data["parts"] = parts_data
-        # print("new_dpp_data with parts: \n", new_dpp_data)
         
         return new_dpp_data
     
@@ -365,7 +356,6 @@ def make_get_parts_data_query(part_ids):
               dpp:hasMaterial ?partMaterial .
         {filter_clause}
     }}"""
-    # print(query)
     return query
 
 

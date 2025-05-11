@@ -6,7 +6,7 @@ Date: Spring 2025
 Master thesis DPP, NTNU
 """
 
-from product.component import Component
+from product.actual_product.component import Component
 
 class Assembly(Component):
     pass
