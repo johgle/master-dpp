@@ -1,13 +1,13 @@
 import qrcode
 import os
 
-def generate_qr_code(ip_adress, DID, WID, EID):
+def generate_qr_code(ip_adress, DPP_ID):
     """
-    Generate QR code when called, likely when a new passport is created and added to KB.
+    Generate QR code for the DPP_ID.
     """
     try:
-        url = f"http://{ip_adress}:8000/product?id={DID}_{WID}_{EID}"
-        filename = f"{DID}_{WID}_{EID}_qrcode.png"
+        url = f"http://{ip_adress}:8000/product?id={DPP_ID}"
+        filename = f"{DPP_ID}_qrcode.png"
 
         # Define the relative path to the qrcodes folder (inside the media directory)
         qr_code_folder = os.path.join('media', 'qrcodes')

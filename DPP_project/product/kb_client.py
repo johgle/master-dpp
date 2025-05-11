@@ -248,6 +248,51 @@ def make_remove_dpp_query(dpp: DPP):
 
     '''
 
+def get_dpp_data(dpp_id):
+    """
+    Fetch data for a Digital Product Passport (DPP) from the knowledge base using its ID.
+    """
+    query = f'''
+    PREFIX dpp: <http://www.semanticweb.org/johanne/ontologies/2025/2/dpp_ontology/>
+    PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+    SELECT ?describes ?timeStamp ?responsibleActor ?productName ?productID ?actorName ?actorMail
+    WHERE {{
+        dpp:{dpp_id} a dpp:Product_DPP ;
+            dpp:describes ?describes ;
+            dpp:hasTimeStampCreation ?timeStamp ;
+            dpp:responsibleActor ?responsibleActor .
+
+        ?describes dpp:hasName ?productName ;
+                   dpp:hasID ?productID .
+
+        ?responsibleActor dpp:hasName ?actorName ;
+                          dpp:hasMail ?actorMail .
+    }}
+    '''
+    try:
+        results = ask_query(query)
+        if not results:
+            return None
+
+        # Extract data from the query results
+        dpp_data = results[0]  # Assuming one result per DPP_ID
+        return {
+            "dpp_id": dpp_id,
+            "describes": {
+                "id": dpp_data["productID"]["value"],
+                "name": dpp_data["productName"]["value"],
+            },
+            "timeStamp": dpp_data["timeStamp"]["value"],
+            "responsibleActor": {
+                "id": dpp_data["responsibleActor"]["value"].split("/")[-1],  # Extract ID from URI
+                "name": dpp_data["actorName"]["value"],
+                "mail": dpp_data["actorMail"]["value"],
+            },
+        }
+    except Exception as e:
+        print(f"Error fetching DPP data for ID {dpp_id}: {e}")
+        return None
 
 
 

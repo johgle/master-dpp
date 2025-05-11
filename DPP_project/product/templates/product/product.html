@@ -2,25 +2,20 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <title>Produktinfo</title>
+    <title>Digital Product Passport</title>
   </head>
   <body>
-    <h1>Produkt: {{ product_id }}</h1>
+    <h1>Digital Product Passport: {{ dpp_id }}</h1>
 
-    {% if product_id == "stol_123" %}
-    <p>Her er et bilde av stol_123:</p>
-    <img src="/static/qrcode_new.png" style="max-width: 300px" />
-    <img
-      src="/static/screenshot_stol_cad_onshape.png"
-      style="max-width: 300px"
-    />
-    {% else %}
-    <p>Ingen bilde tilgjengelig for dette produktet.</p>
-    {% endif %}
+    <h2>Product Details:</h2>
+    <p><strong>Name:</strong> {{ product.name }}</p>
+    <p><strong>ID:</strong> {{ product.id }}</p>
 
-    <h2>Details:</h2>
-    <p>DID: {{ did }}</p>
-    <p>WID: {{ wid }}</p>
-    <p>EID: {{ eid }}</p>
+    <h2>Actor Details:</h2>
+    <p><strong>Name:</strong> {{ actor.name }}</p>
+    <p><strong>Mail:</strong> {{ actor.mail }}</p>
+
+    <h2>Timestamp:</h2>
+    <p>{{ timeStamp }}</p>
   </body>
 </html>

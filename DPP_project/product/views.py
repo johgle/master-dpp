@@ -13,26 +13,20 @@ from product import qr_generator
 # Create your views here.
 
 def product_view(request):
-    """dette er det som lastes inn på nettsiden"""
+    """Load the product page based on the DPP_ID."""
     
-    product_id = request.GET.get('id', '')
+    dpp_id = request.GET.get('id', '')  # Extract DPP_ID from the URL
 
-    # Extract DID, WID, and EID from the product_id
-    did, wid, eid = ('', '', '')
-    if product_id:
-        try:
-            did, wid, eid = product_id.split('_')
-        except ValueError:
-            pass  # Handle cases where the ID format is incorrect
-
-    # her vet vi hva did, wid og eid er.
-    # hente ut data fra KB gjennom dpp_agent
+    # Fetch data from the knowledge base using DPP_ID
+    dpp_data = kb_client.get_dpp_data(dpp_id)
+    if not dpp_data:
+        return HttpResponse(f"No data found for DPP ID: {dpp_id}", status=404)
 
     return render(request, 'product/product.html', {
-        'product_id': product_id,
-        'did': did,
-        'wid': wid,
-        'eid': eid,
+        'dpp_id': dpp_id,
+        'product': dpp_data["describes"],
+        'actor': dpp_data["responsibleActor"],
+        'timeStamp': dpp_data["timeStamp"],
     })
 
 @csrf_exempt
@@ -69,7 +63,7 @@ def new_dpp_view(request):
         
         try:
             ip_address = '10.22.120.185'  # Replace with your actual IP address
-            qr_code_path = qr_generator.generate_qr_code(ip_address, did, wid, eid)
+            qr_code_path = qr_generator.generate_qr_code(ip_address, dpp.id)  # Use DPP_ID
             if qr_code_path:
                 success_qr_code = True
         except Exception as e:

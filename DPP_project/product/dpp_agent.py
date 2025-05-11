@@ -113,7 +113,7 @@ def make_instances(DID, WID, EID):
 # Update actor with owned product. Cant do this before the DPP is inserted in the KB, because it needs to be in the KB to be able to be added to the actor.
 # value_chain_actor_chair.add_owner_of(product_DPP) #So that the datacase and instances are consistent. 
 
-ip_address='192.168.1.104'
+# ip_address='192.168.1.104'
 # qr_generator.generate_qr_code(ip_address, DID, WID, EID)
 
 

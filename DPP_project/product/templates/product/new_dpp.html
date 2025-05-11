@@ -17,14 +17,10 @@
     <p style="color: green">Success! QR code has been created.</p>
     <h2>QR Code:</h2>
     <p>
-      This is the QR code leading to the DPP. Customers can scan this to access
-      the DPP data.
+      This is the QR code leading to your DPP passport-site. Customers can scan
+      this to access the DPP data.
     </p>
-    <img
-      src="{{ qr_code_path|slice:'..' }}"
-      alt="QR Code"
-      style="max-width: 300px"
-    />
+    <img src="{{ qr_code_path }}" alt="QR Code" style="max-width: 300px" />
     {% endif %}{% if part_ids %}
     <h2>Generated Part IDs:</h2>
     <ul>
