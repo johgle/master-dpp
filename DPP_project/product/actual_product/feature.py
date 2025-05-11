@@ -10,3 +10,4 @@ from product.actual_product.component import Component
 
 class Feature(Component):
     pass
+
