@@ -15,7 +15,7 @@ from product import qr_generator
 def product_view(request):
     """Load the product page based on the DPP_ID."""
     
-    dpp_id = request.GET.get('id', '')  # Extract DPP_ID from the URL
+    dpp_id = request.GET.get('id', '').strip()  # Extract DPP_ID from the URL
 
     # Fetch data from the knowledge base using DPP_ID
     dpp_data = kb_client.get_dpp_data(dpp_id)
@@ -53,9 +53,9 @@ def new_dpp_view(request):
     actor = None
 
     if request.method == 'POST':
-        did = request.POST.get('did', '')
-        wid = request.POST.get('wid', '')
-        eid = request.POST.get('eid', '')
+        did = request.POST.get('did', '').strip()
+        wid = request.POST.get('wid', '').strip()
+        eid = request.POST.get('eid', '').strip()
 
         # Call make_part_instance and retrieve part IDs
         try:
