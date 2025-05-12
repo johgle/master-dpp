@@ -31,8 +31,9 @@ def make_part_instance(DID, WID, EID):
     for part in product_parts_json:
         part_id = part["partId"]
         part_name = part["name"]
-        part_mass = mass_parts[part_id]
-        part_volume = volume_parts[part_id]
+        # Round mass and volume to 4 decimals before creating Part instance
+        part_mass = round(mass_parts[part_id], 4)
+        part_volume = round(volume_parts[part_id], 4)
         part_material = material_parts[part_id]
         example_part_lifetime = 10.0  # Example lifetime in years
 
@@ -86,4 +87,4 @@ def make_instances(DID, WID, EID):
 
 # TODO: TO-VEIS-PEKING
 # Update actor with owned product. Cant do this before the DPP is inserted in the KB, because it needs to be in the KB to be able to be added to the actor.
-# value_chain_actor_chair.add_owner_of(product_DPP) #So that the datacase and instances are consistent. 
+# value_chain_actor_chair.add_owner_of(product_DPP) #So that the datacase and instances are consistent.
