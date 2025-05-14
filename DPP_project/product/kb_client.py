@@ -21,7 +21,7 @@ from product.digital_product_passport.product_dpp import DPP
 
 URL = "http://127.0.0.1:3030/dpp"
 
-# Method to get data from the knowledge base
+# Method to ask query to the knowledge base
 # --------------------------------------------------
 def ask_query(query):
     PARAMS = {"query": query}
@@ -110,7 +110,7 @@ def get_actor_data(actor_id):
     """Create a SPARQL query to check if an actor exists in the knowledge base."""
     try:
         results = ask_query(make_get_actor_data_query(actor_id))
-        # print("results:",results)
+        print("results:",results)
         if not results:
             return None
         return results
@@ -319,62 +319,6 @@ def make_remove_dpp_query(dpp: DPP):
 
     '''
 
-
-def make_get_dpp_product_actor_query(dpp_id):
-    """
-    Fetch data for a Digital Product Passport (DPP) from the knowledge base using its ID,
-    including details about the product and its parts, with aggregation to avoid long results.
-    """
-    query = f'''
-    PREFIX dpp: <http://www.semanticweb.org/johanne/ontologies/2025/2/dpp_ontology/>
-    PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
-
-    SELECT ?dppID ?timeStampInvalid ?productID ?productName 
-        (GROUP_CONCAT(?product_parts; separator=", ") AS ?allParts)
-        ?actorID ?actorName ?actorMail
-    WHERE {{
-    dpp:{dpp_id} a dpp:Product_DPP ;
-        dpp:hasID ?dppID ;
-        dpp:hasTimeStampInvalid ?timeStampInvalid ;
-        dpp:describes ?product ;
-        dpp:responsibleActor ?actor .
-
-    ?product a dpp:Product ;
-        dpp:hasID ?productID ;
-        dpp:hasName ?productName ;
-        dpp:consistsOf ?product_parts .
-
-    ?actor a dpp:Actor ;
-        dpp:hasID ?actorID ;
-        dpp:hasName ?actorName ;
-        dpp:hasMail ?actorMail .
-    }}
-    GROUP BY ?dppID ?timeStampInvalid ?productID ?productName ?actorID ?actorName ?actorMail
-        '''
-    return query
-
-def make_get_parts_data_query(part_ids):
-    """part_ids: List of part IDs to fetch data for"""
-    PREFIXES = '''
-    PREFIX dpp: <http://www.semanticweb.org/johanne/ontologies/2025/2/dpp_ontology/>
-    PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
-    '''
-    # Construct the FILTER clause
-    filter_clause = "FILTER (?part IN (" + ", ".join(f"dpp:{part_id}" for part_id in part_ids) + "))"
-    # Construct the full query
-    query = f"""{PREFIXES} 
-    SELECT ?partID ?partName ?partMass ?partVolume ?partMaterial
-    WHERE {{
-        ?part a dpp:Part ;
-              dpp:hasID ?partID ;
-              dpp:hasName ?partName ;
-              dpp:hasMass ?partMass ;
-              dpp:hasVolume ?partVolume ;
-              dpp:hasMaterial ?partMaterial .
-        {filter_clause}
-    }}"""
-    return query
-
 def make_remove_dpp_query(dpp_id):
     """Create a SPARQL query to remove a Digital Product Passport (DPP), its associated product, and parts from the knowledge base."""
     return f'''
@@ -527,6 +471,63 @@ def make_remove_actor_query(actor_id):
     }} ;
     '''
 
+# Methods that make queries to get or update data in the knowledge base
+# --------------------------------------------------
+def make_get_dpp_product_actor_query(dpp_id):
+    """
+    Fetch data for a Digital Product Passport (DPP) from the knowledge base using its ID,
+    including details about the product and its parts, with aggregation to avoid long results.
+    """
+    query = f'''
+    PREFIX dpp: <http://www.semanticweb.org/johanne/ontologies/2025/2/dpp_ontology/>
+    PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+    SELECT ?dppID ?timeStampInvalid ?productID ?productName 
+        (GROUP_CONCAT(?product_parts; separator=", ") AS ?allParts)
+        ?actorID ?actorName ?actorMail
+    WHERE {{
+    dpp:{dpp_id} a dpp:Product_DPP ;
+        dpp:hasID ?dppID ;
+        dpp:hasTimeStampInvalid ?timeStampInvalid ;
+        dpp:describes ?product ;
+        dpp:responsibleActor ?actor .
+
+    ?product a dpp:Product ;
+        dpp:hasID ?productID ;
+        dpp:hasName ?productName ;
+        dpp:consistsOf ?product_parts .
+
+    ?actor a dpp:Actor ;
+        dpp:hasID ?actorID ;
+        dpp:hasName ?actorName ;
+        dpp:hasMail ?actorMail .
+    }}
+    GROUP BY ?dppID ?timeStampInvalid ?productID ?productName ?actorID ?actorName ?actorMail
+        '''
+    return query
+
+def make_get_parts_data_query(part_ids):
+    """part_ids: List of part IDs to fetch data for"""
+    PREFIXES = '''
+    PREFIX dpp: <http://www.semanticweb.org/johanne/ontologies/2025/2/dpp_ontology/>
+    PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+    '''
+    # Construct the FILTER clause
+    filter_clause = "FILTER (?part IN (" + ", ".join(f"dpp:{part_id}" for part_id in part_ids) + "))"
+    # Construct the full query
+    query = f"""{PREFIXES} 
+    SELECT ?partID ?partName ?partMass ?partVolume ?partMaterial
+    WHERE {{
+        ?part a dpp:Part ;
+              dpp:hasID ?partID ;
+              dpp:hasName ?partName ;
+              dpp:hasMass ?partMass ;
+              dpp:hasVolume ?partVolume ;
+              dpp:hasMaterial ?partMaterial .
+        {filter_clause}
+    }}"""
+    return query
+
 def make_update_timestamp_query(dpp_id, new_timestamp_invalid):
     """Create a SPARQL query to update the hasTimeStampInvalid field of a DPP."""
     
@@ -573,12 +574,15 @@ def make_get_actor_data_query(actor_id):
     PREFIX dpp: <http://www.semanticweb.org/johanne/ontologies/2025/2/dpp_ontology/>
     PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
 
-    SELECT ?actorID ?actorName ?actorMail
+    SELECT ?actorID ?actorName ?actorMail ?owns
     WHERE {{
     dpp:{actor_id} a dpp:Actor ;
         dpp:hasID ?actorID ;
         dpp:hasName ?actorName ;
         dpp:hasMail ?actorMail .
+    OPTIONAL {{ dpp:{actor_id} dpp:ownerOf ?owns. }}
+
     }}
     '''
+    print(query)
     return query
