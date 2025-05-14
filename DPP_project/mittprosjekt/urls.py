@@ -16,7 +16,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from product.views import product_view, new_dpp_view, delete_dpp_view
+from product.views import product_view, new_dpp_view, delete_dpp_view, update_dpp_view
 from django.conf import settings
 from django.conf.urls.static import static
 
@@ -25,6 +25,8 @@ urlpatterns = [
     path('product/', product_view, name='product'),
     path('new_dpp/', new_dpp_view, name='new_dpp'),
     path('delete_dpp/', delete_dpp_view, name='delete_dpp'),
+    path('update_dpp/', update_dpp_view, name='update_dpp'),
+
 ]
 
 # Serve media files during development

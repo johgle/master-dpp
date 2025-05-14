@@ -30,6 +30,7 @@ def ask_query(query):
         return "Data was not found."
     return resp.json()["results"]["bindings"]
 
+
 # Method to update the knowledge base
 # --------------------------------------------------
 def update_kb(query):
@@ -46,6 +47,78 @@ def update_kb(query):
         return resp
     except requests.exceptions.RequestException as e:
         return f"Network or connection error: {e}"
+
+
+# Method to get data of specific objects from the knowledge base
+# --------------------------------------------------
+def get_dpp_data(dpp_id):
+    try:
+        results = ask_query(make_get_dpp_product_actor_query(dpp_id))
+        if not results:
+            return None
+
+        # Extract data from the query results
+        dpp_data = results[0]  # Assuming one result per DPP_ID
+        new_dpp_data = {
+            "dpp_id": dpp_id,
+            
+            "describes": {
+                "productID": dpp_data["productID"]["value"],
+                "productName": dpp_data["productName"]["value"],
+            },
+
+            "responsibleActor": {
+                "actorID": dpp_data["actorID"]["value"],
+                "actorName": dpp_data["actorName"]["value"],
+                "actorMail": dpp_data["actorMail"]["value"],
+            },
+            
+            "timeStampInvalid": dpp_data["timeStampInvalid"]["value"],
+
+            "allParts": [part.split("/")[-1] for part in dpp_data["allParts"]["value"].split(",")]  # Combined logic
+
+        }
+
+        # Fetch parts data
+        parts_query = make_get_parts_data_query(new_dpp_data["allParts"])
+        parts_results = ask_query(parts_query)
+        if not parts_results:
+            return None
+
+        # Create a dictionary for parts data
+        parts_data = []
+        for part in parts_results:
+            part_data = {
+                "partID": part["partID"]["value"],
+                "partName": part["partName"]["value"],
+                "partMass": float(part["partMass"]["value"]),
+                "partVolume": float(part["partVolume"]["value"]),
+                "partMaterial": part["partMaterial"]["value"],
+            }
+            parts_data.append(part_data)
+
+        # Add parts data to new_dpp_data
+        new_dpp_data["parts"] = parts_data
+        
+        return new_dpp_data
+    
+    except Exception as e:
+        print(f"Error fetching DPP data for ID {dpp_id}: {e}")
+        return None
+
+def get_actor_data(actor_id):
+    """Create a SPARQL query to check if an actor exists in the knowledge base."""
+    try:
+        results = ask_query(make_get_actor_data_query(actor_id))
+        # print("results:",results)
+        if not results:
+            return None
+        return results
+    except Exception as e:
+        print(f"Error fetching data for Actor with ID {actor_id}: {e}")
+        return None
+
+
 
 # Methods that makes queries to add data to the knowledge base
 # --------------------------------------------------
@@ -247,62 +320,6 @@ def make_remove_dpp_query(dpp: DPP):
     '''
 
 
-def get_dpp_data(dpp_id):
-    try:
-        results = ask_query(make_get_dpp_product_actor_query(dpp_id))
-        if not results:
-            return None
-
-        # Extract data from the query results
-        dpp_data = results[0]  # Assuming one result per DPP_ID
-        new_dpp_data = {
-            "dpp_id": dpp_id,
-            
-            "describes": {
-                "productID": dpp_data["productID"]["value"],
-                "productName": dpp_data["productName"]["value"],
-            },
-            
-            "timeStampInvalid": dpp_data["timeStampInvalid"]["value"],
-            
-            "responsibleActor": {
-                "actorID": dpp_data["actorID"]["value"],
-                "actorName": dpp_data["actorName"]["value"],
-                "actorMail": dpp_data["actorMail"]["value"],
-            },
-
-            "allParts": [part.split("/")[-1] for part in dpp_data["allParts"]["value"].split(",")]  # Combined logic
-
-        }
-
-        # Fetch parts data
-        parts_query = make_get_parts_data_query(new_dpp_data["allParts"])
-        parts_results = ask_query(parts_query)
-        if not parts_results:
-            return None
-
-        # Create a dictionary for parts data
-        parts_data = []
-        for part in parts_results:
-            part_data = {
-                "partID": part["partID"]["value"],
-                "partName": part["partName"]["value"],
-                "partMass": float(part["partMass"]["value"]),
-                "partVolume": float(part["partVolume"]["value"]),
-                "partMaterial": part["partMaterial"]["value"],
-            }
-            parts_data.append(part_data)
-
-        # Add parts data to new_dpp_data
-        new_dpp_data["parts"] = parts_data
-        
-        return new_dpp_data
-    
-    except Exception as e:
-        print(f"Error fetching DPP data for ID {dpp_id}: {e}")
-        return None
-
-
 def make_get_dpp_product_actor_query(dpp_id):
     """
     Fetch data for a Digital Product Passport (DPP) from the knowledge base using its ID,
@@ -357,7 +374,6 @@ def make_get_parts_data_query(part_ids):
         {filter_clause}
     }}"""
     return query
-
 
 def make_remove_dpp_query(dpp_id):
     """Create a SPARQL query to remove a Digital Product Passport (DPP), its associated product, and parts from the knowledge base."""
@@ -510,3 +526,59 @@ def make_remove_actor_query(actor_id):
         ?s ?p dpp:{actor_id} .
     }} ;
     '''
+
+def make_update_timestamp_query(dpp_id, new_timestamp_invalid):
+    """Create a SPARQL query to update the hasTimeStampInvalid field of a DPP."""
+    
+    query = f'''
+    PREFIX dpp: <http://www.semanticweb.org/johanne/ontologies/2025/2/dpp_ontology/>
+    PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+    DELETE {{
+        dpp:{dpp_id} dpp:hasTimeStampInvalid ?oldTimestamp .
+    }}
+    INSERT {{
+        dpp:{dpp_id} dpp:hasTimeStampInvalid "{new_timestamp_invalid}"^^xsd:dateTime .
+    }}
+    WHERE {{
+        dpp:{dpp_id} dpp:hasTimeStampInvalid ?oldTimestamp .
+    }}
+    '''
+    return query
+
+def make_update_actor_query(dpp_id, new_actor_id):
+    """Create a SPARQL query to update the responsibleActor of a DPP, using an existing actor."""
+    
+    query = f'''
+    PREFIX dpp: <http://www.semanticweb.org/johanne/ontologies/2025/2/dpp_ontology/>
+    PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+    DELETE {{
+        dpp:{dpp_id} dpp:responsibleActor ?oldActor .
+        ?oldActor dpp:ownerOf dpp:{dpp_id} .
+    }}
+    INSERT {{
+        dpp:{dpp_id} dpp:responsibleActor dpp:{new_actor_id} .
+        dpp:{new_actor_id} dpp:ownerOf dpp:{dpp_id} .
+    }}
+    WHERE {{
+        dpp:{dpp_id} dpp:responsibleActor ?oldActor .
+        ?oldActor dpp:ownerOf dpp:{dpp_id} .
+    }}
+    '''
+    return query
+
+def make_get_actor_data_query(actor_id):
+    query = f'''
+    PREFIX dpp: <http://www.semanticweb.org/johanne/ontologies/2025/2/dpp_ontology/>
+    PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+    SELECT ?actorID ?actorName ?actorMail
+    WHERE {{
+    dpp:{actor_id} a dpp:Actor ;
+        dpp:hasID ?actorID ;
+        dpp:hasName ?actorName ;
+        dpp:hasMail ?actorMail .
+    }}
+    '''
+    return query

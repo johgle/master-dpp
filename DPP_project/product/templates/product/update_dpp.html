@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Update Digital Product Passport</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body class="bg-gray-50 text-gray-900">
+    <div class="max-w-3xl mx-auto p-6">
+      <header class="mb-8">
+        <h1 class="text-3xl font-bold text-center">
+          Update Digital Product Passport
+        </h1>
+        <p class="text-center text-gray-600 mt-2">
+          Provide the DPP ID, new timeStampInvalid, and new Responsible Actor to
+          update the passport.
+        </p>
+      </header>
+
+      <!-- Success and Error Messages -->
+      <section class="mb-6">
+        {% if success_update %}
+        <p class="text-green-600 font-semibold">
+          Success! The passport has been successfully updated.
+        </p>
+        <!-- Display updated DPP data -->
+        <div class="bg-white p-4 rounded-lg shadow mt-4">
+          <h2 class="text-xl font-semibold text-gray-800 mb-2">
+            Updated DPP Details
+          </h2>
+          <ul class="list-disc list-inside">
+            <li><strong>Timestamp Invalid:</strong> {{ timestampinvalid }}</li>
+            <li><strong>Responsible Actor:</strong> {{ actor.actorName }}</li>
+          </ul>
+        </div>
+        {% endif %} {% if error_message %}
+        <p class="text-red-600 font-semibold">Error: {{ error_message }}</p>
+        {% endif %}
+      </section>
+
+      <!-- Form Section -->
+      <section class="bg-white p-6 rounded-lg shadow">
+        <h2 class="text-xl font-semibold text-gray-800 mb-4">
+          Update Passport Form
+        </h2>
+        <form method="post" class="space-y-4">
+          {% csrf_token %}
+          <div>
+            <label for="dpp_id" class="block font-medium">DPP ID:</label>
+            <input
+              type="text"
+              id="dpp_id"
+              name="dpp_id"
+              required
+              class="w-full p-2 border rounded"
+            />
+          </div>
+          <div>
+            <label for="timeStampInvalid" class="block font-medium"
+              >New timeStampInvalid:</label
+            >
+            <input
+              type="text"
+              id="timeStampInvalid"
+              name="timeStampInvalid"
+              class="w-full p-2 border rounded"
+            />
+          </div>
+          <div>
+            <label for="actor_id" class="block font-medium"
+              >New Responsible Actor ID:</label
+            >
+            <input
+              type="text"
+              id="actor_id"
+              name="actor_id"
+              class="w-full p-2 border rounded"
+            />
+          </div>
+          <button
+            type="submit"
+            class="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700"
+          >
+            Update Passport
+          </button>
+        </form>
+      </section>
+    </div>
+  </body>
+</html>
