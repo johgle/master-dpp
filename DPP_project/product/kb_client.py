@@ -1,6 +1,6 @@
 """
-Class to handle the communication with the Knowledge Base server.
-Used to send SPARQL queries to the server and receive the results.
+Methods to handle communication with the Knowledge Base server.
+Used to send SPARQL queries to the server and receive results.
 
 Author: Johanne Glende
 Date: Spring 2025
