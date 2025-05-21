@@ -168,6 +168,10 @@ def update_dpp_view(request):
 
                     
                     # Update the timeStampInvalid and responsibleActor in the knowledge base
+                    if not new_timestamp_invalid and not new_actor_id:
+                        error_mesage = "A valid DPP ID was found, but no new timestamp or actor ID was provided." \
+                                        "Please enter the new data you would like to use to update the passport."
+                        raise ValueError(error_mesage)
                     if new_timestamp_invalid:
                         kb_client.update_kb(kb_client.make_update_timestamp_query(dpp_id, new_timestamp_invalid))
                     if new_actor_id:
