@@ -1,5 +1,6 @@
 # Ignorer virtual environment
 venv/
+dpp_venv/
 
 # Ignorer cache-filer
 __pycache__/

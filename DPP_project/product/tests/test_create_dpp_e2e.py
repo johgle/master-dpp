@@ -1,3 +1,19 @@
+"""
+End-to-end test file for creating a Digital Product Passport (DPP).
+This file contains automated Selenium tests that simulate a user creating a new DPP by providing a Document ID (DID),
+Workspace ID (WID), and Element ID (EID) through the web interface "/new_dpp". The tests verify that the creation
+process completes successfully and that the expected confirmation and QR code are displayed.
+
+Declaration of Assistance
+This test file was developed with the assistance of GitHub Copilot, which provided suggestions during the coding
+process. The author selected, adapted, and integrated these suggestions to align with the project's structure and
+objectives. All code has been critically reviewed and approved by the author.
+
+Author: Johanne Glende
+Date: Spring 2025
+Master thesis DPP, NTNU
+"""
+
 import time
 from selenium import webdriver
 from selenium.webdriver.common.by import By
@@ -5,6 +21,8 @@ from selenium.webdriver.common.by import By
 def run_single_create_dpp_test():
     driver = webdriver.Chrome()
     driver.get("http://127.0.0.1:8000/new_dpp/")
+
+    #Form fields
     driver.find_element(By.ID, "did").send_keys("ddd738631676985828abef74")
     driver.find_element(By.ID, "wid").send_keys("76466b78737892550146d811")
     driver.find_element(By.ID, "eid").send_keys("789de4812fe20a46c3f3962b")
@@ -12,6 +30,7 @@ def run_single_create_dpp_test():
     start = time.time()
     driver.find_element(By.XPATH, "//button[@type='submit']").click()
 
+    # Wait for QR code success message (max 10 seconds)
     for _ in range(100):
         try:
             qr = driver.find_element(By.XPATH, "//img[contains(@src, 'qrcodes')]")
