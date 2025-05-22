@@ -6,7 +6,7 @@ that the expected confirmation is displayed at the web interface.
 
 Declaration of Assistance
 This test file was developed with the assistance of GitHub Copilot, which provided suggestions during the coding
-process. The author selected, adapted, and integrated these suggestions to align with the project's structure and
+process. The author adapted and integrated these suggestions to align with the project's structure and
 objectives. All code has been critically reviewed and approved by the author.
 
 Author: Johanne Glende
@@ -17,6 +17,10 @@ Master thesis DPP, NTNU
 import time
 from selenium import webdriver
 from selenium.webdriver.common.by import By
+
+import psutil
+import os
+
 
 def run_single_delete_dpp_test():
     driver = webdriver.Chrome()
@@ -63,11 +67,42 @@ def run_single_delete_dpp_test():
 def test_delete_dpp_end_to_end_average():
     N = 20
     times = []
+    times_dict = {}
     for i in range(N):
         print(f"Running delete test {i+1}/{N} ...")
         elapsed = run_single_delete_dpp_test()
         print(f"Test {i+1}: {elapsed:.2f} seconds")
         times.append(elapsed)
+        times_dict[i+1] = round(elapsed, 2)
     avg = sum(times) / N
     print(f"\nAverage delete time over {N} runs: {avg:.2f} seconds")
     print(f"Min: {min(times):.2f}, Max: {max(times):.2f}")
+    print(f"Times with test number:", times_dict)
+
+def run_single_delete_dpp_test_with_ram():
+    proc = psutil.Process(os.getpid())
+    mem_before = proc.memory_info().rss / 2**20  # MB
+
+    elapsed = run_single_delete_dpp_test()
+
+    mem_after = proc.memory_info().rss / 2**20  # MB
+    print(f"RAM used for one delete DPP E2E test: {mem_after - mem_before:.2f} MB")
+    return elapsed, mem_after - mem_before
+
+def test_delete_dpp_ram_usage_average():
+    N = 20
+    times = []
+    ram_usages = []
+    ram_usages_dict = {}
+    for i in range(N):
+        print(f"Running RAM test {i+1}/{N} ...")
+        elapsed, ram_used = run_single_delete_dpp_test_with_ram()
+        times.append(elapsed)
+        ram_usages.append(ram_used)
+        ram_usages_dict[i+1] = round(ram_used,2)
+    avg_time = sum(times) / N
+    avg_ram = sum(ram_usages) / N
+    print(f"\nAverage delete time over {N} runs: {avg_time:.2f} seconds")
+    print(f"Average RAM usage over {N} runs: {avg_ram:.2f} MB")
+    print(f"Min RAM: {min(ram_usages):.2f}, Max RAM: {max(ram_usages):.2f}")
+    print(f"All RAM used with test number:", ram_usages_dict)
