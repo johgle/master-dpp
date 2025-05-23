@@ -27,19 +27,22 @@ EID = EID_chair # Element ID
 
 def test_real_onshape_api_response_time_average():
     url = f"https://cad.onshape.com/api/partstudios/d/{DID}/w/{WID}/e/{EID}/features"
+    N = 20
     times = []
-    N = 20  # # of reps
+    times_dict = {}
 
-    for _ in range(N):
+    for i in range(N):
         start_time = time.time()
         result = onshape_api.get_api_data(url)
         elapsed = time.time() - start_time
         times.append(elapsed)
+        times_dict[i+1] = round(elapsed, 2)
         assert isinstance(result, dict)
         assert "features" in result
 
     avg = sum(times) / N
     print(f"\nAverage response time over {N} runs: {avg:.2f} seconds")
     print(f"Min: {min(times):.2f}, Max: {max(times):.2f}")
+    print(f"Test run with time:", times_dict)
 
     assert avg < 5, f"Average API call took too long: {avg} seconds"
