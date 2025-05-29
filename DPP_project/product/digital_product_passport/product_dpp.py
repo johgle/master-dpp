@@ -1,5 +1,5 @@
 """
-Class for digital product passport (DPP) for products in the DPP ontology.
+Class for Digital Product Passport (DPP) for products in the DPP ontology.
 
 Author: Johanne Glende
 Date: Spring 2025

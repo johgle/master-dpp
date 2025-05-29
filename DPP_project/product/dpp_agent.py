@@ -1,4 +1,6 @@
 """
+Module for creating instances of Product, Part, Actor, and DPP.
+
 Author: Johanne Glende
 Date: Spring 2025
 Master thesis DPP, NTNU

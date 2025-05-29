@@ -1,6 +1,10 @@
 """
 Django views for the product app.
 This file contains the logic for handling requests and rendering templates.
+
+Author: Johanne Glende
+Date: Spring 2025
+Master thesis DPP, NTNU
 """
 
 

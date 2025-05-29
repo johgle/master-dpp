@@ -3,6 +3,11 @@ Onshape API example for getting data from Onshape CAD models.
 This example uses the Onshape API to fetch data about a CAD model.
 It provides functions to get the materials, volume and mass of a product, as a start.
 
+Declaration of Assistance
+This template was developed with the assistance of GitHub Copilot, which provided suggestions during the coding
+process. The author adapted and integrated these suggestions to align with the project's structure and
+objectives. All code has been critically reviewed and approved by the author.
+
 Author: Johanne Glende
 Date: Spring 2025
 Master thesis DPP, NTNU
@@ -134,81 +139,3 @@ def get_document_name(DID:str):
     metadata_data = get_api_data(f"{BASE}/documents/{DID}") #.json file
     document_name = metadata_data["name"]
     return document_name
-
-
-
-
-
-
-# --------------- not in use --------------- :
-
-# ----------------  ID FROM URLs  -----------------------------
-# DID_stol1 = "3cc9b7f1331165f8fa1d4630"  # Document ID
-# WID_stol1 = "3ec8b42b563ac643e55281f2"  # Workspace ID
-# EID_stol1 = "f0f23b975a63a60a8e3c1e2a"  # Element ID
-
-# DID_chair = "ddd738631676985828abef74"  # Document ID
-# WID_chair = "76466b78737892550146d811"  # Workspace ID
-# EID_chair = "789de4812fe20a46c3f3962b"  # Element ID
-
-# DID = DID_chair # Document ID
-# WID = WID_chair # Workspace ID
-# EID = EID_chair # Element ID
-
-# --------------- URLs FOR APIs ------------------
-# urls = {
-#     "url_partstudios_feature": f"{BASE}/partstudios/d/{DID}/w/{WID}/e/{EID}/features",
-#     "url_partstudios_massproperties": f"{BASE}/partstudios/d/{DID}/w/{WID}/e/{EID}/massproperties",
-#     "url_partstudios_boundingboxes": f"{BASE}/partstudios/d/{DID}/w/{WID}/e/{EID}/boundingboxes",
-#     "url_partstudios_bodydetails": f"{BASE}/partstudios/d/{DID}/w/{WID}/e/{EID}/bodydetails",
-#     "url_metadata": f"{BASE}/metadata/d/{DID}/w/{WID}/e/{EID}",
-#     "url_parts": f"{BASE}/parts/d/{DID}/w/{WID}/e/{EID}",
-#     # "url_part_massproperties": f"{BASE}/parts/d/{DID}/w/{WID}/e/{EID}/partid/{PID}/massproperties", #this needs a partId
-# }
-
-
-# def write_data_to_file():
-#     """Fetch data from Onshape API and write to JSON files."""
-#     os.makedirs(DATA_DIR, exist_ok=True)
-
-
-#     for url_name, url in urls.items():
-#         h = signed_headers("GET", url)
-#         resp = requests.get(url, headers=h)
-
-#         print(resp.status_code)
-
-#         if resp.ok:
-#             data = resp.json()
-
-#             # Write JSON-data to file
-#             filename = f"CHAIR_onshape_data_{url_name}.json"
-#             filepath = os.path.join(DATA_DIR, filename)
-
-#             with open(filepath, "w", encoding="utf-8") as f:
-#                 json.dump(data, f, indent=2, ensure_ascii=False)
-#             print(f"Data lagret i {filepath}")
-#         else:
-#             print("Kunne ikke hente data:", resp.text)
-
-# def write_data_to_file_from_single_api_url(url_name:str, url:str):
-#     """Fetch data from Onshape API and write to JSON files."""
-#     os.makedirs(DATA_DIR, exist_ok=True)
-#     h = signed_headers("GET", url)
-#     resp = requests.get(url, headers=h)
-
-#     print(resp.status_code)
-
-#     if resp.ok:
-#         data = resp.json()
-
-#         # Write JSON-data to file
-#         filename = f"CHAIR_onshape_data_{url_name}.json"
-#         filepath = os.path.join(DATA_DIR, filename)
-
-#         with open(filepath, "w", encoding="utf-8") as f:
-#             json.dump(data, f, indent=2, ensure_ascii=False)
-#         print(f"Data lagret i {filepath}")
-#     else:
-#         print("Kunne ikke hente data:", resp.text)
-

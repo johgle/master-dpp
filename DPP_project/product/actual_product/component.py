@@ -2,7 +2,6 @@
 Abstract Component class in the DPP ontology.
 This class serves as a base for all components in the DPP ontology, including parts, features assemblies.
 
-
 Author: Johanne Glende
 Date: Spring 2025
 Master thesis DPP, NTNU

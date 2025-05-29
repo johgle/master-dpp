@@ -1,3 +1,11 @@
+"""
+Class for Actor in the DPP ontology.
+
+Author: Johanne Glende
+Date: Spring 2025
+Master thesis DPP, NTNU
+"""
+
 from abc import ABC, abstractmethod
 
 class Actor(ABC):

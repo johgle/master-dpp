@@ -1,3 +1,15 @@
+"""
+Python script to create a chair in Onshape using the Python-API OnPy.
+More about OnPy: https://github.com/kyle-tennison/onpy/blob/main/guide.md
+
+The script creates a simple chair, made up of 4 legs, a seat and a back,
+using given parameters for height and width.
+
+Author: Johanne Glende
+Date: Spring 2025
+Master thesis DPP, NTNU
+"""
+
 import onpy
 
 def create_chair_in_onshape(document_name, height_legs, width_leg, height_back):

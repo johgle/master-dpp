@@ -1,3 +1,18 @@
+"""
+
+Test file for Onshape API integration
+
+Declaration of Assistance
+This test file was developed with the assistance of GitHub Copilot, which provided suggestions during the coding
+process. The author adapted and integrated these suggestions to align with the project's structure and
+objectives. All code has been critically reviewed and approved by the author.
+
+Author: Johanne Glende
+Date: Spring 2025
+Master thesis DPP, NTNU
+"""
+
+
 import time
 from product.onshape_codes import onshape_api
 

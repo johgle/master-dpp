@@ -2,7 +2,7 @@
 End-to-end test file for reading a Digital Product Passport (DPP).
 This file contains automated Selenium tests that simulate a user reading an existing DPP by
 (already having scanned the QR code and) being presented with the web interface 
-"/product/?id=*DPP_ID*". The tests verify that the read process is completed successfully
+"/product/?id={DPP_ID}". The tests verify that the read process is completed successfully
 and that the expected header is displayed.
 
 Declaration of Assistance

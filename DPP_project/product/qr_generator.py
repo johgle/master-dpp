@@ -1,10 +1,15 @@
+"""
+Generate QR code for DPP using DPP ID
+
+Author: Johanne Glende
+Date: Spring 2025
+Master thesis DPP, NTNU
+"""
+
 import qrcode
 import os
 
 def generate_qr_code(ip_adress, DPP_ID):
-    """
-    Generate QR code for the DPP_ID.
-    """
     try:
         url = f"http://{ip_adress}:8000/product?id={DPP_ID}"
         filename = f"{DPP_ID}_qrcode.png"
