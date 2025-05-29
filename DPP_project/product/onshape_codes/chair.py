@@ -13,20 +13,21 @@ import onpy
 
 # Params - the unit is by default [inch] so we must use inch/2.54 to convert to cm.
 origo = (0,0)
-width_leg = 7/2.54  # 7 inch / 2.54 inch/cm = 2.76 inch
+width_leg = 3/2.54  # 7 inch / 2.54 inch/cm = 2.76 inch
 total_width_chair = 52/2.54
 
 height_legs = 46/2.54
 height_back = 48/2.54
-height_seat = 5/2.54
-thickness_back = 5/2.54
+height_seat = 2/2.54
+thickness_back = 1.5/2.54
 height_back_rods = 10/2.54
 height_back_plate = 6/2.54
 
 # Get document and partstudio to work in
-document = onpy.get_document(name = "chair001")
+# document = onpy.get_document(name = "two_boxes")
+document = onpy.create_document("Nordic Chair Kitchen Chair")
 partstudio = document.get_partstudio()
-partstudio.wipe()
+# partstudio.wipe()
 
 # -- LEGS --
 # create a new sketch for legs, select which plane it is based in

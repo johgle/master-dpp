@@ -56,6 +56,23 @@ Master thesis DPP, NTNU
         {% endif %}
       </section>
 
+      <!-- DPP Details -->
+      {% if dpp %}
+      <section class="mb-6 bg-white p-4 rounded-lg shadow">
+        <h2 class="text-xl font-semibold text-purple-600">DPP Details</h2>
+        <ul class="list-disc list-inside mt-2">
+          <li><strong>ID:</strong> {{ dpp.id }}</li>
+          <li>
+            <strong>Timestamp Invalid:</strong> {{ dpp.timeStampInvalid }}
+          </li>
+          <li>
+            <strong>Responsible Actor:</strong> {{ dpp.responsibleActor.name }}
+          </li>
+          <li><strong>Describes Product:</strong> {{ dpp.describes.name }}</li>
+        </ul>
+      </section>
+      {% endif %}
+
       <!-- Actor Details -->
       {% if actor %}
       <section class="mb-6 bg-white p-4 rounded-lg shadow">
@@ -81,23 +98,6 @@ Master thesis DPP, NTNU
             <li>{{ part.id }} - {{ part.name }}</li>
             {% endfor %}
           </ul>
-        </ul>
-      </section>
-      {% endif %}
-
-      <!-- DPP Details -->
-      {% if dpp %}
-      <section class="mb-6 bg-white p-4 rounded-lg shadow">
-        <h2 class="text-xl font-semibold text-purple-600">DPP Details</h2>
-        <ul class="list-disc list-inside mt-2">
-          <li><strong>ID:</strong> {{ dpp.id }}</li>
-          <li>
-            <strong>Timestamp Invalid:</strong> {{ dpp.timeStampInvalid }}
-          </li>
-          <li>
-            <strong>Responsible Actor:</strong> {{ dpp.responsibleActor.name }}
-          </li>
-          <li><strong>Describes Product:</strong> {{ dpp.describes.name }}</li>
         </ul>
       </section>
       {% endif %}
