@@ -26,19 +26,22 @@ def make_part_instance(DID, WID, EID):
     mass_parts, total_product_mass = onshape_api.get_product_mass(DID, WID, EID)
     material_parts, total_product_material = onshape_api.get_product_materials(DID, WID, EID)
     product_parts_json = onshape_api.get_product_parts(DID, WID, EID)
-    
+    document_name = onshape_api.get_document_name(DID)
+
     product_parts = []
     for part in product_parts_json:
         part_id = part["partId"]
         part_name = part["name"]
+        
         # Round mass and volume to 4 decimals before creating Part instance
         part_mass = round(mass_parts[part_id], 4)
         part_volume = round(volume_parts[part_id], 4)
         part_material = material_parts[part_id]
         example_part_lifetime = 10.0  # Example lifetime in years
-
+        specific_part_id = document_name + "_" + part_id
+        
         # Create a Part instance for each part
-        product_part = Part(part_id, part_name, example_part_lifetime, part_mass, part_volume, part_material)
+        product_part = Part(specific_part_id, part_name, example_part_lifetime, part_mass, part_volume, part_material)
         product_parts.append(product_part)
 
     return product_parts #list with [Part1, Part2, Part3...]
