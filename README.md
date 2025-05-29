@@ -1,6 +1,6 @@
 # Digital Product Passport Prototype
 
-A functional proof-of-concept implementation of a Digital Product Passport (DPP) system developed as part of a Master’s thesis at the Norwegian University of Science and Technology (NTNU), June 2025. The prototype implements a modular architecture combining CAD data, a custom-built DPP ontology, and a web-based interface to support circular economy objectives such as product traceability and lifecycle transparency.
+A functional proof-of-concept implementation of a Digital Product Passport (DPP) system developed as part of a Master’s thesis at the Norwegian University of Science and Technology (NTNU), June 2025. The prototype implements a modular architecture combining CAD data, a custom-built DPP ontology, a semantic knowledge base, and a web-based interface to support circular economy objectives such as product traceability and lifecycle transparency.
 
 ## Overview
 
