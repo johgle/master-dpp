@@ -23,7 +23,14 @@ def product_view(request):
     # Fetch data from the knowledge base using DPP_ID
     dpp_data = kb_client.get_dpp_data(dpp_id)
     if not dpp_data:
-        return HttpResponse(f"No data found for DPP ID: {dpp_id}", status=404)
+        # Return a custom 404 Error Page
+        return HttpResponse(
+            '<div style="text-align:center; margin-top:80px; font-family:sans-serif;">'
+            '<h1 style="font-size:2em; color:#b00;">Error 404</h1>'
+            f'<p style="font-size:1.2em;">No data found for DPP ID: <strong>{dpp_id}</strong></p>'
+            '</div>',
+            status=404
+        )
 
     # Calculate unique materials, total mass, and total volume
     parts = dpp_data["parts"]
