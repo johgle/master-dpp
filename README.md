@@ -42,7 +42,7 @@ The custom-built DPP ontology for the prototype.
 ![DPP_master_thesis_figures-DPP_ontology_full](https://github.com/user-attachments/assets/dc77bced-65a8-4352-9a76-f7666b5eae1f)
 
 ## Architecture
-Architecture of the prototype system, with specific components and technologies
+Architecture of the prototype system, with specific components and technologies.
 ![dpp_architecture_specific](https://github.com/user-attachments/assets/7dd99166-1627-45d8-aca9-0dcd02136bd3)
 
 ## Sequence Diagrams
@@ -64,6 +64,4 @@ Four sequence diagrams, one for each of the CRUD operations. Sequence diagrams f
 ### Web Pages interaction
 
 ## Credits
-This prototype is part of:
-Master’s Thesis, NTNU, June 2025. By Johanne Glende, Digital Product Passport as Enabler for Circular Economy − Design, Implementation and Evaluation of a DPP System Architecture.
-Supervisor: Andrei Lobov, NTNU.
+This prototype is part of a Master’s Thesis by Johanne Glende, NTNU, June 2025. Thesis title: Digital Product Passport as Enabler for Circular Economy − Design, Implementation and Evaluation of a Functional DPP Prototype. Supervisor: Andrei Lobov, NTNU.
