@@ -11,7 +11,7 @@ Master thesis DPP, NTNU
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
-from product import dpp_agent, kb_client
+from product import dpp_constructor, kb_client
 from product import qr_generator
 from datetime import datetime
 
@@ -62,7 +62,7 @@ def new_dpp_view(request):
 
         # Call make_part_instance and retrieve part IDs
         try:
-            product, actor, dpp = dpp_agent.make_instances(did, wid, eid)
+            product, actor, dpp = dpp_constructor.make_instances(did, wid, eid)
             success_create = True
         except Exception as e:
             error_message = f"Error creating product, actor or digital product passport: {e}"
