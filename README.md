@@ -35,7 +35,33 @@ The DPP prototype includes:
 - End-to-end and performance testing for CRUD operations
 
 ## Installation
+...
 
+## Ontology Graph
+The custom-built DPP ontology for the prototype.
+![DPP_master_thesis_figures-DPP_ontology_full](https://github.com/user-attachments/assets/dc77bced-65a8-4352-9a76-f7666b5eae1f)
+
+## Architecture
+Architecture of the prototype system, with specific components and technologies
+![dpp_architecture_specific](https://github.com/user-attachments/assets/7dd99166-1627-45d8-aca9-0dcd02136bd3)
+
+## Sequence Diagrams
+Four sequence diagrams, one for each of the CRUD operations. Sequence diagrams for each alternative within the CRUD operations is presented in the master thesis.
+### Create DPP
+![UML_Create_OLD](https://github.com/user-attachments/assets/d46e465c-93cb-43c0-804f-f1afe380e825)
+
+### Read DPP
+![UML_Read](https://github.com/user-attachments/assets/27d3e231-a65c-4db5-952d-3162689f3966)
+
+### Update DPP
+![UML_Update](https://github.com/user-attachments/assets/be11ba55-ef94-4ae5-a6ef-1fda6a72305d)
+
+### Delete DPP
+![UML_Delete](https://github.com/user-attachments/assets/16acff57-5d25-4cba-9bc9-4ab17b5796e0)
+
+## Web Pages
+
+### Web Pages interaction
 
 ## Credits
 This prototype is part of:
