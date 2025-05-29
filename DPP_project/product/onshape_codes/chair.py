@@ -25,7 +25,7 @@ height_back_plate = 6/2.54
 
 # Get document and partstudio to work in
 # document = onpy.get_document(name = "two_boxes")
-document = onpy.create_document("Nordic Chair Kitchen Chair")
+document = onpy.create_document("Nordic Seat Kitchen Chair")
 partstudio = document.get_partstudio()
 # partstudio.wipe()
 
