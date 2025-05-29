@@ -27,7 +27,7 @@ def make_part_instance(DID, WID, EID):
         part_volume = round(volume_parts[part_id], 4)
         part_material = material_parts[part_id]
         example_part_lifetime = 10.0
-        specific_part_id = document_name + "_" + part_id
+        specific_part_id = document_name.lower().replace(" ","_") + "_" + part_id
         product_part = Part(specific_part_id, part_name, example_part_lifetime, part_mass, part_volume, part_material)
         product_parts.append(product_part)
     return product_parts
@@ -51,6 +51,6 @@ def make_instances(DID, WID, EID):
     value_chain_actor_chair = make_actor_instance(DID)
     product_name = onshape_api.get_document_name(DID)
     example_dpp_ID = "ID_DPP_" + product_name.lower().replace(" ","_")
-    example_dpp_timeStampInvalid = "2030-01-01T00:00:00Z"
+    example_dpp_timeStampInvalid = "2030-01-01"
     product_DPP = DPP(example_dpp_ID, example_dpp_timeStampInvalid, value_chain_actor_chair, product)
     return product, value_chain_actor_chair, product_DPP
