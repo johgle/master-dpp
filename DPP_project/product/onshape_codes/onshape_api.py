@@ -4,7 +4,7 @@ This example uses the Onshape API to fetch data about a CAD model.
 It provides functions to get the materials, volume and mass of a product, as a start.
 
 Declaration of Assistance
-This template was developed with the assistance of GitHub Copilot, which provided suggestions during the coding
+This file was developed with the assistance of GitHub Copilot, which provided suggestions during the coding
 process. The author adapted and integrated these suggestions to align with the project's structure and
 objectives. All code has been critically reviewed and approved by the author.
 
