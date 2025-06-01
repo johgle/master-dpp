@@ -19,8 +19,8 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 
 import psutil
-import os
 
+DJANGO_PID = 23172
 
 def run_single_delete_dpp_test():
     driver = webdriver.Chrome()
@@ -33,7 +33,7 @@ def run_single_delete_dpp_test():
     driver.find_element(By.XPATH, "//button[@type='submit']").click()
     
     # Wait for QR code or success message (not timed)
-    for _ in range(150):
+    for _ in range(100):
         try:
             qr = driver.find_element(By.XPATH, "//img[contains(@src, 'qrcodes')]")
             if qr.is_displayed():
@@ -44,7 +44,7 @@ def run_single_delete_dpp_test():
 
     # --- Delete DPP (timed) ---
     driver.get("http://127.0.0.1:8000/delete_dpp/")
-    driver.find_element(By.ID, "dpp_id").send_keys("ID_DPP_chair001")
+    driver.find_element(By.ID, "dpp_id").send_keys("ID_DPP_nordic_seat_kitchen_chair_thick")
     start = time.time()
     driver.find_element(By.XPATH, "//button[@type='submit']").click()
     for _ in range(100):
@@ -80,13 +80,48 @@ def test_delete_dpp_end_to_end_average():
     print(f"Times with test number:", times_dict)
 
 def run_single_delete_dpp_test_with_ram():
-    proc = psutil.Process(os.getpid())
+    driver = webdriver.Chrome()
+
+    # --- Create DPP (not timed, not tracked for RAM) ---
+    driver.get("http://127.0.0.1:8000/new_dpp/")
+    driver.find_element(By.ID, "did").send_keys("ddd738631676985828abef74")
+    driver.find_element(By.ID, "wid").send_keys("76466b78737892550146d811")
+    driver.find_element(By.ID, "eid").send_keys("789de4812fe20a46c3f3962b")
+    driver.find_element(By.XPATH, "//button[@type='submit']").click()
+    for _ in range(150):
+        try:
+            qr = driver.find_element(By.XPATH, "//img[contains(@src, 'qrcodes')]")
+            if qr.is_displayed():
+                break
+        except Exception:
+            pass
+        time.sleep(0.1)
+
+    # --- Delete DPP (timed and RAM tracked) ---
+    proc = psutil.Process(DJANGO_PID)
     mem_before = proc.memory_info().rss / 2**20  # MB
 
-    elapsed = run_single_delete_dpp_test()
+    driver.get("http://127.0.0.1:8000/delete_dpp/")
+    driver.find_element(By.ID, "dpp_id").send_keys("ID_DPP_nordic_seat_kitchen_chair_thick")
+    start = time.time()
+    driver.find_element(By.XPATH, "//button[@type='submit']").click()
+    for _ in range(150):
+        try:
+            success = driver.find_element(By.XPATH, "//*[contains(text(), 'Success! The passport has been successfully deleted.')]")
+            if success.is_displayed():
+                break
+        except Exception:
+            pass
+        time.sleep(0.1)
+    else:
+        driver.quit()
+        raise AssertionError("Success message was not shown within 10 seconds.")
 
+    elapsed = time.time() - start
     mem_after = proc.memory_info().rss / 2**20  # MB
-    print(f"RAM used for one delete DPP E2E test: {mem_after - mem_before:.2f} MB")
+    print(f"Delete DPP E2E test completed in {elapsed:.2f} seconds")
+    driver.quit()
+    print(f"RAM used by Django for one delete DPP E2E test: {mem_after - mem_before:.2f} MB")
     return elapsed, mem_after - mem_before
 
 def test_delete_dpp_ram_usage_average():
@@ -105,4 +140,8 @@ def test_delete_dpp_ram_usage_average():
     print(f"\nAverage delete time over {N} runs: {avg_time:.2f} seconds")
     print(f"Average RAM usage over {N} runs: {avg_ram:.2f} MB")
     print(f"Min RAM: {min(ram_usages):.2f}, Max RAM: {max(ram_usages):.2f}")
-    print(f"All RAM used with test number:", ram_usages_dict)
+    print(f"All RAM used with test number:", ram_usages_dict, "\n")
+
+    avg_ram_without_warmup = sum(ram_usages[1:]) / (N-1)
+    print(f"Average RAM usage over {N-1} runs (without warmup): {avg_ram_without_warmup:.2f} MB")
+    print(f"Min RAM (without warmup): {min(ram_usages[1:]):.2f}, Max RAM (without warmup): {max(ram_usages[1:]):.2f}")
