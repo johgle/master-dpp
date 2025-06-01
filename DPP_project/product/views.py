@@ -72,30 +72,31 @@ def new_dpp_view(request):
             product, actor, dpp = dpp_constructor.make_instances(did, wid, eid)
             success_create = True
         except Exception as e:
-            error_message = f"Error creating product, actor or digital product passport: {e}"
-
-        try:
-            kb_client.update_kb(kb_client.make_insert_product_query(product))
-            kb_client.update_kb(kb_client.make_insert_actor_query(actor))
-            kb_client.update_kb(kb_client.make_insert_dpp_query(dpp))
-            success_added_to_kb = True
-        except Exception as e:
-            error_message = f"Error adding product, actor or digital product passport to KB: {e}"
+            error_message = f"Error creating product, actor or digital product passport: \n{e}. \n Are you sure the IDs are correct?"
         
-        try:
-            if success_create and success_added_to_kb:
-                ip_address = '172.20.10.3'  # Replace with your actual IP address
-                qr_code_path = qr_generator.generate_qr_code(ip_address, dpp.id)  # Use DPP_ID
-                if qr_code_path:
-                    success_qr_code = True
-        except Exception as e:
-            error_message = f"Error generating QR code: {e}"
+        if error_message == None:
+            try:
+                kb_client.update_kb(kb_client.make_insert_product_query(product))
+                kb_client.update_kb(kb_client.make_insert_actor_query(actor))
+                kb_client.update_kb(kb_client.make_insert_dpp_query(dpp))
+                success_added_to_kb = True
+            except Exception as e:
+                error_message = f"Error adding product, actor or digital product passport to KB: {e}"
+            
+            try:
+                if success_create and success_added_to_kb:
+                    ip_address = '172.20.10.3'  # Replace with your actual IP address
+                    qr_code_path = qr_generator.generate_qr_code(ip_address, dpp.id)  # Use DPP_ID
+                    if qr_code_path:
+                        success_qr_code = True
+            except Exception as e:
+                error_message = f"Error generating QR code: {e}"
 
     return render(request, 'product/new_dpp.html', {
         'success_create': success_create,
         'success_added_to_kb': success_added_to_kb,
         'success_qr_code': success_qr_code,
-        'qr_code_path': qr_code_path,  # Pass the QR code path to the template
+        'qr_code_path': qr_code_path,
         'product': product,
         'part_ids': product.parts if product else [],
         'actor': actor,

@@ -52,7 +52,9 @@ Master thesis DPP, NTNU
           <img src="{{ qr_code_path }}" alt="QR Code" class="max-w-xs mt-2" />
         </div>
         {% endif %} {% if error_message %}
-        <p class="text-red-600 font-semibold">Error: {{ error_message }}</p>
+        <p class="text-red-600 font-semibold">
+          Error: {{ error_message|linebreaksbr }}
+        </p>
         {% endif %}
       </section>
 
