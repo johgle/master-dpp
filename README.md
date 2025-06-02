@@ -13,9 +13,9 @@ The DPP prototype includes:
 
 ## Technologies Used
 
-- **Python 3.12** – Backend scripting & agent logic
+- **Python 3.12** – Backend scripting & DPP Agent logic
 - **Django 5.1** – Web framework for backend and web interface
-- **Onshape** – CAD software
+- **OnShape** – CAD software
 - **OnPy** – Python API for Onshape CAD integration ([OnPy GitHub]((https://github.com/kyle-tennison/onpy)))
 - **Apache Jena Fuseki** – Semantic database
 - **RDF / OWL** – Ontology and data modeling
