@@ -59,9 +59,9 @@ Four sequence diagrams, one for each of the CRUD operations. Sequence diagrams f
 ### Delete DPP
 ![UML_Delete](https://github.com/user-attachments/assets/16acff57-5d25-4cba-9bc9-4ab17b5796e0)
 
-## Web Pages
+## User Interface
 
-### Web Pages interaction
+### UI interaction
 
 ## Credits
 This prototype is part of a Master’s Thesis by Johanne Glende, NTNU, June 2025. Thesis title: Digital Product Passport as Enabler for Circular Economy − Design, Implementation and Evaluation of a Functional DPP Prototype. Supervisor: Andrei Lobov, NTNU.
