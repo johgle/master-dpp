@@ -15,9 +15,9 @@ The DPP prototype includes:
 
 - **Python 3.12** – Backend scripting & DPP Agent logic
 - **Django 5.1** – Web framework for backend and web interface
-- **OnShape** – CAD software
-- **OnPy** – Python API for Onshape CAD integration ([OnPy GitHub]((https://github.com/kyle-tennison/onpy)))
-- **Apache Jena Fuseki** – Semantic database
+- **OnShape** – CAD software ([OnShape](https://www.onshape.com/en/))
+- **OnPy** – Python API for Onshape CAD integration ([OnPy GitHub](https://github.com/kyle-tennison/onpy))
+- **Apache Jena Fuseki** – Semantic database ([Apache Jena Fuseki](https://jena.apache.org/documentation/fuseki2/))
 - **RDF / OWL** – Ontology and data modeling
 - **HTML + Tailwind CSS** – Frontend templates and styling
 - **qrcode** (Python lib) – QR code generation
