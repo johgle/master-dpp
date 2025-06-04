@@ -55,7 +55,8 @@ Four sequence diagrams, one for each of the CRUD operations. Sequence diagrams f
 ### Create DPP
 Sequence diagram for creating a new DPP. The stakeholder submits Document ID, Workspace ID and Element ID from the OnShape document into the User Interface of the Web Portal. The DPP Agent requests data from the OnShape API based on the provided identifiers. If the DID, WID or EID is not found, the system returns an error. If the input is valid, the system returns the response body from the API and uses it to create product, part, actor and DPP instances. This is then inserted into the KB with a confirmation of success before proceeding to the next query to ensure consistency. After the sucsessfull intsertion of all components, the system generates a QR code linking to the specific DPP. The QR code, together with a summary of the DPP data, is displayed to the stakeholder in the UI.
 
-![UML_Create_OLD](https://github.com/user-attachments/assets/d46e465c-93cb-43c0-804f-f1afe380e825)
+![UML_Create_full](https://github.com/user-attachments/assets/20bbcdd1-6595-4013-af38-40e2760fa211)
+
 
 ### Read DPP
 Sequence diagram for reading a DPP. A customer scans a QR code and is directed to the endpoint for the specific product. The system requests data for the DPP ID found in the URL encoded in the QR code, and returns it in full. The data is then structured into specific formats, and rendered to the endpoint and displayed for the customer.
@@ -70,7 +71,8 @@ Sequence diagram for updating an existing DPP. A stakeholder submits the DPP ID 
 ### Delete DPP
 Sequence diagram for deleting an existing DPP from the KB. The stakehodler submits the ID of the DPP it wishes to remove. The system then checks wether the DPP exists in the KB. If no, an error is displayed to the stakehodler and the sequence ends. If yes, the system deletes the DPP from the KB together with all data connected to the prouct and parts represented by the DPP. Upon sucessfull operation, a success message is displayed to the stakehodler on the UI.  
 
-![UML_Delete](https://github.com/user-attachments/assets/16acff57-5d25-4cba-9bc9-4ab17b5796e0)
+![UML_Delete_full](https://github.com/user-attachments/assets/35c91498-2774-436b-bd9a-b78dfba71746)
+
 
 ## User Interface
 
