@@ -14,7 +14,7 @@ from django.views.decorators.csrf import csrf_exempt
 from product import dpp_constructor, kb_client
 from product import qr_generator
 from datetime import datetime
-import whatismyip
+from product.utils import get_local_ip_address
 
 def product_view(request):
     """Load the product page based on the DPP_ID."""
@@ -86,7 +86,7 @@ def new_dpp_view(request):
             
             try:
                 if success_create and success_added_to_kb:
-                    ip_address = whatismyip.whatismyipv4()
+                    ip_address = get_local_ip_address()
                     qr_code_path = qr_generator.generate_qr_code(ip_address, dpp.id)  # Use DPP_ID
                     if qr_code_path:
                         success_qr_code = True

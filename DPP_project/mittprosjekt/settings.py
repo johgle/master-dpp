@@ -29,7 +29,7 @@ SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost', '194.19.73.54'] 
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost', '192.168.1.109'] 
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [
