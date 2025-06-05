@@ -42,7 +42,9 @@ The custom-built DPP ontology for the prototype. Each ontology class is marked w
 
 ![DPP_ontology_list_form](https://github.com/user-attachments/assets/ff5b4826-b8e9-44a6-a3b3-02537a31c9bb)        ![DPP_ontology_data_properties](https://github.com/user-attachments/assets/5f456c23-7aac-498b-a896-f3929528900e)
 
+
 ### Ontology Graph
+The ontology represented as a graph, with relations (object properties).
 ![DPP_master_thesis_figures-DPP_ontology_full](https://github.com/user-attachments/assets/dc77bced-65a8-4352-9a76-f7666b5eae1f)
 
 ## Architecture
