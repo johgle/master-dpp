@@ -36,7 +36,7 @@ The DPP prototype includes:
 ...
 
 ## Architecture
-The figure illustrates the architecture of the prototype system, with specific components and technologies. It also presents how they communicate.
+The figure illustrates the architecture of the prototype system, with specific components, technologies, and communications. 
 
 ![dpp_architecture_specific](https://github.com/user-attachments/assets/7dd99166-1627-45d8-aca9-0dcd02136bd3)
 
