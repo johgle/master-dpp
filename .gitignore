@@ -12,3 +12,5 @@ db.sqlite3
 # Ignorer OS-filer (Mac/Windows)
 .DS_Store
 Thumbs.db
+
+.env
