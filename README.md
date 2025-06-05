@@ -119,7 +119,7 @@ View any existing DPP by scanning its QR code.
 <img src="https://github.com/user-attachments/assets/b0290f1a-36f6-4dd6-9631-8ae888f6095e" width="600"/>
 
 #### Update DPP
-Update a DPP’s data (currently limited to `timestamp` and `responsible actor ID`). The system checks input validity and reflects updates in real-time.
+Update a DPP’s data (currently limited to `timestamp` and `actorID`). The system checks input validity and reflects updates in real-time.
 
 ##### Update DPP Form
 <img src="https://github.com/user-attachments/assets/a0daa245-2f91-41bf-a4d6-8dd5b2ec4e2e" width="600"/>
