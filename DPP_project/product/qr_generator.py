@@ -11,7 +11,7 @@ import os
 
 def generate_qr_code(ip_adress, DPP_ID):
     try:
-        url = f"http://{ip_adress}:8000/product?id={DPP_ID}"
+        url = f"http://{ip_adress}:8000/product/?id={DPP_ID}"
         filename = f"{DPP_ID}_qrcode.png"
 
         # Define the relative path to the qrcodes folder (inside the media directory)
