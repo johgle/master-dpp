@@ -153,7 +153,5 @@ https://github.com/user-attachments/assets/3a042ae9-76f2-472d-81bb-8309fa51839b
 #### Scan a QR Code on a Computer Screen
 The video demonstrates scanning a QR code displayed on a computer screen, which redirects the user to the DPP site on their mobile phone.
 
-https://github.com/user-attachments/assets/976f2a67-2162-49d2-a9ed-d315ef59e1f1
-
 ## Credits
 This prototype is part of a Master’s Thesis by Johanne Glende, NTNU, June 2025. Thesis title: Digital Product Passport as Enabler of the Circular Economy: Design, Implementation and Evaluation of a Functional DPP Prototype. Supervisor: Andrei Lobov, NTNU.
