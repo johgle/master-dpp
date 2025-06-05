@@ -106,7 +106,7 @@ Submit a new product using its Onshape Document ID, Workspace ID, and Element ID
 <img src="https://github.com/user-attachments/assets/d2516db8-6797-4ae1-ba12-9754fbb5c43d" width="600"/>
 
 #### Read DPP
-View any existing DPP by scanning its QR code or navigating directly via its ID.
+View any existing DPP by scanning its QR code.
 <img src="https://github.com/user-attachments/assets/b0290f1a-36f6-4dd6-9631-8ae888f6095e" width="600"/>
 
 #### Update DPP
