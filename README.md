@@ -101,39 +101,38 @@ Sequence diagram for deleting an existing DPP from the KB. The stakeholder submi
 ## User Interface
 The DPP prototype includes a Web Portal built with Django, HTML and Tailwind CSS. It provides stakeholders with a front end for interacting with Digital Product Passports, and users to read the DPPs.
 
-### UI Features
-The interface supports the following actions:
+The interface supports the following features:
 
-#### Create DPP 
+### Create DPP 
 Submit a new product using its Onshape Document ID, Workspace ID, and Element ID. After processing, a QR code and summary view of the generated DPP are displayed.
 
-##### Create DPP Form
+#### Create DPP Form
 <img src="https://github.com/user-attachments/assets/8513d941-7e91-49a0-b08a-0258662e1f1e" width="600"/>
 
-##### Successfully created DPP
+#### Successfully created DPP
 <img src="https://github.com/user-attachments/assets/d2516db8-6797-4ae1-ba12-9754fbb5c43d" width="600"/>
 
-#### Read DPP
+### Read DPP
 View any existing DPP by scanning its QR code.
 
 <img src="https://github.com/user-attachments/assets/b0290f1a-36f6-4dd6-9631-8ae888f6095e" width="600"/>
 
-#### Update DPP
+### Update DPP
 Update a DPP’s data (currently limited to `timestamp` and `actorID`). The system checks input validity and reflects updates in real-time.
 
-##### Update DPP Form
+#### Update DPP Form
 <img src="https://github.com/user-attachments/assets/a0daa245-2f91-41bf-a4d6-8dd5b2ec4e2e" width="600"/>
 
-##### Successfully updated DPP
+#### Successfully updated DPP
 <img src="https://github.com/user-attachments/assets/4b15d640-9f7e-43aa-a1b6-75da107f9a0f" width="600"/>
 
-#### Delete DPP
+### Delete DPP
 Remove a DPP and its associated data from the Knowledge Base. A confirmation message is displayed upon success.
 
-##### Delete DPP Form
+#### Delete DPP Form
 <img src="https://github.com/user-attachments/assets/b1881f45-c189-400e-8b5f-9964d70eac5e" width="600"/>
 
-##### Successfully deleted DPP
+#### Successfully deleted DPP
 <img src="https://github.com/user-attachments/assets/e012bc37-9eaa-4567-a6ed-27e1ffd10706" width="600"/>
 
 ### Live Demo
