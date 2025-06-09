@@ -53,6 +53,7 @@ def product_view(request):
 
 @csrf_exempt
 def new_dpp_view(request):
+    """Handle the creation of a new Digital Product Passport."""
     success_create = False
     success_added_to_kb = False
     success_qr_code = False
