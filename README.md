@@ -125,7 +125,7 @@ Update a DPP’s data (currently limited to `timestamp` and `actorID`). The syst
 <img src="https://github.com/user-attachments/assets/a0daa245-2f91-41bf-a4d6-8dd5b2ec4e2e" width="600"/>
 
 ##### Successfully updated DPP
-<img src="https://github.com/user-attachments/assets/5b0a4200-9750-4a0e-bb63-04b8a0a99a84" width="600"/>
+<img src="https://github.com/user-attachments/assets/4b15d640-9f7e-43aa-a1b6-75da107f9a0f" width="600"/>
 
 #### Delete DPP
 Remove a DPP and its associated data from the Knowledge Base. A confirmation message is displayed upon success.
