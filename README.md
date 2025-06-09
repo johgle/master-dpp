@@ -101,41 +101,58 @@ Sequence diagram for deleting an existing DPP from the KB. The stakeholder submi
 ## User Interface
 The DPP prototype includes a Web Portal built with Django, HTML and Tailwind CSS. It provides stakeholders with a front end for interacting with Digital Product Passports, and users to read the DPPs.
 
-### UI Features
-The interface supports the following actions:
+The interface supports the following features:
 
-#### Create DPP 
+### Create DPP 
 Submit a new product using its Onshape Document ID, Workspace ID, and Element ID. After processing, a QR code and summary view of the generated DPP are displayed.
 
-##### Create DPP Form
+#### Create DPP Form
 <img src="https://github.com/user-attachments/assets/8513d941-7e91-49a0-b08a-0258662e1f1e" width="600"/>
 
-##### Successfully created DPP
+#### Successfully created DPP
 <img src="https://github.com/user-attachments/assets/d2516db8-6797-4ae1-ba12-9754fbb5c43d" width="600"/>
 
-#### Read DPP
+### Read DPP
 View any existing DPP by scanning its QR code.
+
 <img src="https://github.com/user-attachments/assets/b0290f1a-36f6-4dd6-9631-8ae888f6095e" width="600"/>
 
-#### Update DPP
-Update a DPP’s data (currently limited to `timestamp` and `responsible actor ID`). The system checks input validity and reflects updates in real-time.
+### Update DPP
+Update a DPP’s data (currently limited to `timestamp` and `actorID`). The system checks input validity and reflects updates in real-time.
 
-##### Update DPP Form
+#### Update DPP Form
 <img src="https://github.com/user-attachments/assets/a0daa245-2f91-41bf-a4d6-8dd5b2ec4e2e" width="600"/>
 
-##### Successfully updated DPP
-<img src="https://github.com/user-attachments/assets/5b0a4200-9750-4a0e-bb63-04b8a0a99a84" width="600"/>
+#### Successfully updated DPP
+<img src="https://github.com/user-attachments/assets/4b15d640-9f7e-43aa-a1b6-75da107f9a0f" width="600"/>
 
-#### Delete DPP
+### Delete DPP
 Remove a DPP and its associated data from the Knowledge Base. A confirmation message is displayed upon success.
 
-##### Delete DPP Form
+#### Delete DPP Form
 <img src="https://github.com/user-attachments/assets/b1881f45-c189-400e-8b5f-9964d70eac5e" width="600"/>
 
-##### Successfully deleted DPP
+#### Successfully deleted DPP
 <img src="https://github.com/user-attachments/assets/e012bc37-9eaa-4567-a6ed-27e1ffd10706" width="600"/>
 
 ### Live Demo
+This video demonstrates the full CRUD sequence for a digital passport:
+- A passport is created via the UI using IDs from OnShape
+- It is then displayed at the /product/?id={DPP_ID} endpoint
+- The passport's timestamp for invalidation is updated
+- Finally, the passport is deleted
+
+https://github.com/user-attachments/assets/e95bf5be-4f28-4cf8-8e9a-bd5e1f7ee2b0
+
+#### Scan a Physical QR Code on a Chair
+The video demonstrates scanning a physical QR code placed on a chair, which redirects the user to the DPP site on their mobile phone. (Note: The chair is used solely for illustrative purposes, I did not design or make it.)
+
+https://github.com/user-attachments/assets/3a042ae9-76f2-472d-81bb-8309fa51839b
+
+#### Scan a QR Code on a Computer Screen
+The video demonstrates scanning a QR code displayed on a computer screen, which redirects the user to the DPP site on their mobile phone.
+
+https://github.com/user-attachments/assets/2b60ee31-74d9-4615-8783-e7e03161e7d0
 
 ## Credits
 This prototype is part of a Master’s Thesis by Johanne Glende, NTNU, June 2025. Thesis title: Digital Product Passport as Enabler of the Circular Economy: Design, Implementation and Evaluation of a Functional DPP Prototype. Supervisor: Andrei Lobov, NTNU.
