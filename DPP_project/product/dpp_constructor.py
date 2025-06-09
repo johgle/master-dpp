@@ -26,7 +26,7 @@ def make_part_instance(DID, WID, EID):
         part_mass = round(mass_parts[part_id], 4)
         part_volume = round(volume_parts[part_id], 4)
         part_material = material_parts[part_id]
-        example_part_lifetime = 10.0
+        example_part_lifetime = 10
         specific_part_id = document_name.lower().replace(" ","_") + "_" + part_id
         product_part = Part(specific_part_id, part_name, example_part_lifetime, part_mass, part_volume, part_material)
         product_parts.append(product_part)
