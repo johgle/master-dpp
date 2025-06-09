@@ -110,7 +110,7 @@ def get_actor_data(actor_id):
     """Create a SPARQL query to check if an actor exists in the knowledge base."""
     try:
         results = ask_query(make_get_actor_data_query(actor_id))
-        print("results:",results)
+        # print("results:",results)
         if not results:
             return None
         return results
@@ -584,5 +584,5 @@ def make_get_actor_data_query(actor_id):
 
     }}
     '''
-    print(query)
+    # print(query)
     return query
