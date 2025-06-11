@@ -1,0 +1,466 @@
+@prefix : <http://www.semanticweb.org/johanne/ontologies/2025/2/dpp_ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@base <http://www.semanticweb.org/johanne/ontologies/2025/2/dpp_ontology/> .
+
+<http://www.semanticweb.org/johanne/ontologies/2025/2/dpp_ontology> rdf:type owl:Ontology .
+
+#################################################################
+#    Object Properties
+#################################################################
+
+###  http://www.semanticweb.org/johanne/ontologies/2025/2/dpp_ontology/buildOf
+:buildOf rdf:type owl:ObjectProperty ;
+         rdfs:domain :Part ;
+         rdfs:range :Feature ;
+         rdfs:comment "A part can be build of zero of multiple features"@en ;
+         rdfs:label "build of"@en .
+
+
+###  http://www.semanticweb.org/johanne/ontologies/2025/2/dpp_ontology/consistsOf
+:consistsOf rdf:type owl:ObjectProperty ;
+            rdfs:domain :Assembly ;
+            rdfs:range :Assembly ,
+                       :Part ;
+            rdfs:comment "One type of component consists of other types of components. I.e., an assembly can consist of other assemblies or other parts. A part consists none or multiple features."@en ;
+            rdfs:label "consists of"@en .
+
+
+###  http://www.semanticweb.org/johanne/ontologies/2025/2/dpp_ontology/describes
+:describes rdf:type owl:ObjectProperty ;
+           rdfs:domain :DPP ;
+           rdfs:range :Product ;
+           rdfs:comment "A DPP describes a product"@en .
+
+
+###  http://www.semanticweb.org/johanne/ontologies/2025/2/dpp_ontology/hasAssigned
+:hasAssigned rdf:type owl:ObjectProperty ;
+             rdfs:domain :Component ;
+             rdfs:range :Process ;
+             rdfs:comment "(Domain) has assigned (range). A relation between a component and some process relating to it."@en ;
+             rdfs:label "has assigned"@en .
+
+
+###  http://www.semanticweb.org/johanne/ontologies/2025/2/dpp_ontology/hasNextStep
+:hasNextStep rdf:type owl:ObjectProperty ;
+             owl:inverseOf :hasPreviousStep ;
+             rdfs:domain :ProcessStep ;
+             rdfs:range :ProcessStep .
+
+
+###  http://www.semanticweb.org/johanne/ontologies/2025/2/dpp_ontology/hasPreviousStep
+:hasPreviousStep rdf:type owl:ObjectProperty ;
+                 rdfs:domain :ProcessStep ;
+                 rdfs:range :ProcessStep .
+
+
+###  http://www.semanticweb.org/johanne/ontologies/2025/2/dpp_ontology/hasStep
+:hasStep rdf:type owl:ObjectProperty ;
+         rdfs:domain :Process ;
+         rdfs:range :ProcessStep .
+
+
+###  http://www.semanticweb.org/johanne/ontologies/2025/2/dpp_ontology/ownerOf
+:ownerOf rdf:type owl:ObjectProperty ;
+         rdfs:domain :Actor ;
+         rdfs:range :DPP ;
+         rdfs:comment "An actor is the owner of a DPP."@en ;
+         rdfs:label "owner of"@en .
+
+
+###  http://www.semanticweb.org/johanne/ontologies/2025/2/dpp_ontology/responsibleActor
+:responsibleActor rdf:type owl:ObjectProperty ;
+                  rdfs:domain :DPP ;
+                  rdfs:range :Actor ;
+                  rdfs:comment "An actor is repsonsible for the DPP. Do not need to be the same as the owner. Who the responsible actor is is stored in the DPP information"@en ;
+                  rdfs:label "responsible actor"@en .
+
+
+#################################################################
+#    Data properties
+#################################################################
+
+###  http://www.semanticweb.org/johanne/ontologies/2025/2/dpp_ontology/hasCarbonFootprint
+:hasCarbonFootprint rdf:type owl:DatatypeProperty ;
+                    rdfs:subPropertyOf :hasFootprint ;
+                    rdfs:label "carbon footprint"@en .
+
+
+###  http://www.semanticweb.org/johanne/ontologies/2025/2/dpp_ontology/hasEnvironmentalFootprint
+:hasEnvironmentalFootprint rdf:type owl:DatatypeProperty ;
+                           rdfs:subPropertyOf :hasFootprint ;
+                           rdfs:label "environmental footprint" .
+
+
+###  http://www.semanticweb.org/johanne/ontologies/2025/2/dpp_ontology/hasFootprint
+:hasFootprint rdf:type owl:DatatypeProperty ;
+              rdfs:domain :Product ;
+              rdfs:comment "Specified in EU's ESPR, Annex I."@en ,
+                           "Value = years"@en .
+
+
+###  http://www.semanticweb.org/johanne/ontologies/2025/2/dpp_ontology/hasID
+:hasID rdf:type owl:DatatypeProperty ;
+       rdfs:domain :Actor ,
+                   :DPP ,
+                   :Product ;
+       rdfs:range xsd:string ;
+       rdfs:comment "The ID of something, e.g. an actor, a product or a DPP."@en .
+
+
+###  http://www.semanticweb.org/johanne/ontologies/2025/2/dpp_ontology/hasLifetime
+:hasLifetime rdf:type owl:DatatypeProperty ;
+             rdfs:subPropertyOf owl:topDataProperty ;
+             rdfs:domain :Component ;
+             rdfs:range xsd:integer ;
+             rdfs:comment "Lifetime of a component."@en .
+
+
+###  http://www.semanticweb.org/johanne/ontologies/2025/2/dpp_ontology/hasMail
+:hasMail rdf:type owl:DatatypeProperty ;
+         rdfs:domain :Actor ;
+         rdfs:comment "E-mail of an actor."@en .
+
+
+###  http://www.semanticweb.org/johanne/ontologies/2025/2/dpp_ontology/hasMass
+:hasMass rdf:type owl:DatatypeProperty ;
+         rdfs:subPropertyOf owl:topDataProperty ;
+         rdfs:domain :Component ;
+         rdfs:range xsd:float ;
+         rdfs:comment "Mass of component."@en .
+
+
+###  http://www.semanticweb.org/johanne/ontologies/2025/2/dpp_ontology/hasMaterial
+:hasMaterial rdf:type owl:DatatypeProperty ;
+             rdfs:subPropertyOf owl:topDataProperty ;
+             rdfs:domain :Part ;
+             rdfs:range xsd:string ;
+             rdfs:comment "What a part is made up of."@en .
+
+
+###  http://www.semanticweb.org/johanne/ontologies/2025/2/dpp_ontology/hasMaterialFootprint
+:hasMaterialFootprint rdf:type owl:DatatypeProperty ;
+                      rdfs:subPropertyOf :hasFootprint ;
+                      rdfs:label "material footprint"@en .
+
+
+###  http://www.semanticweb.org/johanne/ontologies/2025/2/dpp_ontology/hasName
+:hasName rdf:type owl:DatatypeProperty ;
+         rdfs:domain :Actor ,
+                     :Product ;
+         rdfs:range xsd:string ;
+         rdfs:comment "Name of an actor."@en .
+
+
+###  http://www.semanticweb.org/johanne/ontologies/2025/2/dpp_ontology/hasProcessParameters
+:hasProcessParameters rdf:type owl:DatatypeProperty ;
+                      rdfs:domain :Process ;
+                      rdfs:label "process parameters"@en .
+
+
+###  http://www.semanticweb.org/johanne/ontologies/2025/2/dpp_ontology/hasRecycledMaterial
+:hasRecycledMaterial rdf:type owl:DatatypeProperty ;
+                     rdfs:domain :Product ;
+                     rdfs:comment "A value stating the amount of recycled material in the product."@en ,
+                                  "Specified in EU's ESPR, Annex I."@en ;
+                     rdfs:label "recycled material"@en .
+
+
+###  http://www.semanticweb.org/johanne/ontologies/2025/2/dpp_ontology/hasRenewableMaterial
+:hasRenewableMaterial rdf:type owl:DatatypeProperty ;
+                      rdfs:domain :Product ;
+                      rdfs:comment "A value stating the amount of renewable material in the product."@en ,
+                                   "Specified in EU's ESPR, Annex I."@en ;
+                      rdfs:label "renewable material"@en .
+
+
+###  http://www.semanticweb.org/johanne/ontologies/2025/2/dpp_ontology/hasTimeStamp
+:hasTimeStamp rdf:type owl:DatatypeProperty ;
+              rdfs:domain :DPP ;
+              rdfs:range xsd:dateTime ;
+              rdfs:comment "A time stamp related to a DPP some DPP information. E.g. when a DPP is created"@en ;
+              rdfs:label "time stamp"@en .
+
+
+###  http://www.semanticweb.org/johanne/ontologies/2025/2/dpp_ontology/hasTimeStampCreation
+:hasTimeStampCreation rdf:type owl:DatatypeProperty ;
+                      rdfs:subPropertyOf :hasTimeStamp ;
+                      rdfs:comment "A time stamp indicating when a DPP or other information was created (or added)."@en ;
+                      rdfs:label "time stamp creation"@en .
+
+
+###  http://www.semanticweb.org/johanne/ontologies/2025/2/dpp_ontology/hasTimeStampInvalid
+:hasTimeStampInvalid rdf:type owl:DatatypeProperty ;
+                     rdfs:subPropertyOf :hasTimeStamp ;
+                     rdfs:comment "A timestamp that signifies when a DPP or other information is set to become invalid."@en ;
+                     rdfs:label "time stamp invalid"@en .
+
+
+###  http://www.semanticweb.org/johanne/ontologies/2025/2/dpp_ontology/hasVolume
+:hasVolume rdf:type owl:DatatypeProperty ;
+           rdfs:subPropertyOf owl:topDataProperty ;
+           rdfs:domain :Component ;
+           rdfs:range xsd:float ;
+           rdfs:comment "Volume of component."@en .
+
+
+###  http://www.semanticweb.org/johanne/ontologies/2025/2/dpp_ontology/microplasticRelease
+:microplasticRelease rdf:type owl:DatatypeProperty ;
+                     rdfs:domain :Product ;
+                     rdfs:comment "Specified in EU's ESPR, Annex I."@en ;
+                     rdfs:label "microplastic release" .
+
+
+#################################################################
+#    Classes
+#################################################################
+
+###  http://www.semanticweb.org/johanne/ontologies/2025/2/dpp_ontology/Actor
+:Actor rdf:type owl:Class .
+
+
+###  http://www.semanticweb.org/johanne/ontologies/2025/2/dpp_ontology/Assembly
+:Assembly rdf:type owl:Class ;
+          rdfs:subClassOf :Component ;
+          rdfs:comment "An assembly consists of any number of subordinate assemblies and any number of parts. It is a logical container, not a physical component."@en .
+
+
+###  http://www.semanticweb.org/johanne/ontologies/2025/2/dpp_ontology/Authority
+:Authority rdf:type owl:Class ;
+           rdfs:subClassOf :Actor ;
+           rdfs:comment "An actor that is an authority. Can have special authority rights." ;
+           rdfs:label "Authority"@en .
+
+
+###  http://www.semanticweb.org/johanne/ontologies/2025/2/dpp_ontology/Component
+:Component rdf:type owl:Class ;
+           rdfs:subClassOf :Product ;
+           rdfs:comment "A component must be an assembly, a part or a feature, it is an abstract class."@en .
+
+
+###  http://www.semanticweb.org/johanne/ontologies/2025/2/dpp_ontology/Component_DPP
+:Component_DPP rdf:type owl:Class ;
+               rdfs:subClassOf :DPP ;
+               rdfs:comment "DPP of a component that is part of a bigger product."@en ;
+               rdfs:label "Component DPP"@en .
+
+
+###  http://www.semanticweb.org/johanne/ontologies/2025/2/dpp_ontology/DPP
+:DPP rdf:type owl:Class ;
+     rdfs:comment "A Digital Product Passport. Represents one, and only one, product on the market."@en ;
+     rdfs:label "DPP"@en .
+
+
+###  http://www.semanticweb.org/johanne/ontologies/2025/2/dpp_ontology/Disassembly_information
+:Disassembly_information rdf:type owl:Class ;
+                         rdfs:subClassOf :DPP ;
+                         rdfs:comment "Information on how to disassembly a product."@en ;
+                         rdfs:label "Disassembly Information"@en .
+
+
+###  http://www.semanticweb.org/johanne/ontologies/2025/2/dpp_ontology/Energy
+:Energy rdf:type owl:Class ;
+        rdfs:subClassOf :Process .
+
+
+###  http://www.semanticweb.org/johanne/ontologies/2025/2/dpp_ontology/Feature
+:Feature rdf:type owl:Class ;
+         rdfs:subClassOf :Component ;
+         rdfs:comment "A feature can be e.g. a hole, chamfer etc."@en .
+
+
+###  http://www.semanticweb.org/johanne/ontologies/2025/2/dpp_ontology/Landfill
+:Landfill rdf:type owl:Class ;
+          rdfs:subClassOf :Process ;
+          rdfs:comment "The process of a product ending up in a landfill at its end-of-life stage, and the emissions that follows."@en .
+
+
+###  http://www.semanticweb.org/johanne/ontologies/2025/2/dpp_ontology/Material_production
+:Material_production rdf:type owl:Class ;
+                     rdfs:subClassOf :Process ;
+                     rdfs:comment "The process of producing a material."@en ;
+                     rdfs:label "Material production"@en .
+
+
+###  http://www.semanticweb.org/johanne/ontologies/2025/2/dpp_ontology/Part
+:Part rdf:type owl:Class ;
+      rdfs:subClassOf :Component ;
+      rdfs:comment "A part consists of any number of features, and has assigned only one material."@en .
+
+
+###  http://www.semanticweb.org/johanne/ontologies/2025/2/dpp_ontology/Process
+:Process rdf:type owl:Class ;
+         rdfs:comment "Processes connected to the components of a product. E.g. material production, transport, landfill."@en .
+
+
+###  http://www.semanticweb.org/johanne/ontologies/2025/2/dpp_ontology/ProcessStep
+:ProcessStep rdf:type owl:Class .
+
+
+###  http://www.semanticweb.org/johanne/ontologies/2025/2/dpp_ontology/Product
+:Product rdf:type owl:Class ;
+         rdfs:comment "A product placed on the market. Has an associated DPP"@en ;
+         rdfs:label "Product"@en .
+
+
+###  http://www.semanticweb.org/johanne/ontologies/2025/2/dpp_ontology/Product_DPP
+:Product_DPP rdf:type owl:Class ;
+             rdfs:subClassOf :DPP ;
+             rdfs:comment "DPP of a market product. Can contain data from other component DPPs (sub DPPs)."@en ;
+             rdfs:label "Product DPP"@en .
+
+
+###  http://www.semanticweb.org/johanne/ontologies/2025/2/dpp_ontology/Production
+:Production rdf:type owl:Class ;
+            rdfs:subClassOf :Process ;
+            rdfs:comment "Production of a component or product."@en .
+
+
+###  http://www.semanticweb.org/johanne/ontologies/2025/2/dpp_ontology/Recycle
+:Recycle rdf:type owl:Class ;
+         rdfs:subClassOf :Process .
+
+
+###  http://www.semanticweb.org/johanne/ontologies/2025/2/dpp_ontology/Recycle_information
+:Recycle_information rdf:type owl:Class ;
+                     rdfs:subClassOf :DPP ;
+                     rdfs:comment "Information on how to recycle a product."@en ;
+                     rdfs:label "Recycle Information"@en .
+
+
+###  http://www.semanticweb.org/johanne/ontologies/2025/2/dpp_ontology/Repair_Information
+:Repair_Information rdf:type owl:Class ;
+                    rdfs:subClassOf :DPP ;
+                    rdfs:comment "Information on how to repair a product."@en ;
+                    rdfs:label "Repair Information"@en .
+
+
+###  http://www.semanticweb.org/johanne/ontologies/2025/2/dpp_ontology/Transport
+:Transport rdf:type owl:Class ;
+           rdfs:subClassOf :Process ;
+           rdfs:comment "Transport of product or component."@en .
+
+
+###  http://www.semanticweb.org/johanne/ontologies/2025/2/dpp_ontology/User
+:User rdf:type owl:Class ;
+      rdfs:subClassOf :Actor ;
+      rdfs:comment "An end-user of the product, e.g. consumer." ;
+      rdfs:label "User"@en .
+
+
+###  http://www.semanticweb.org/johanne/ontologies/2025/2/dpp_ontology/Value_chain_actor
+:Value_chain_actor rdf:type owl:Class ;
+                   rdfs:subClassOf :Actor ;
+                   rdfs:comment "An actor that is participating the the product's value chain. E.g. a manufacturer, distributor, recycler, or other actor"@en ;
+                   rdfs:label "Value chain actor"@en .
+
+
+#################################################################
+#    Individuals
+#################################################################
+
+###  http://www.semanticweb.org/johanne/ontologies/2025/2/dpp_ontology/Back001
+:Back001 rdf:type owl:NamedIndividual ,
+                  :Part ;
+         :hasID "backplate001" ;
+         :hasLifetime 20 ;
+         :hasMass 0.8 ;
+         :hasMaterial "wood" ;
+         :hasName "Back Plate" ;
+         :hasVolume 0.01 .
+
+
+###  http://www.semanticweb.org/johanne/ontologies/2025/2/dpp_ontology/Chair001
+:Chair001 rdf:type owl:NamedIndividual ,
+                   :Product ;
+          :consistsOf :Leg001 ,
+                      :Leg002 ,
+                      :Leg003 ,
+                      :Leg004 ;
+          :hasID "chair001" ;
+          :hasLifetime 20 ;
+          :hasMass 5.3 ;
+          :hasName "Wooden Chair, Kitchen Model A" ;
+          :hasVolume 0.04708 .
+
+
+###  http://www.semanticweb.org/johanne/ontologies/2025/2/dpp_ontology/Leg001
+:Leg001 rdf:type owl:NamedIndividual ,
+                 :Part ;
+        :hasID "leg001" ;
+        :hasLifetime 20 ;
+        :hasMass 0.6 ;
+        :hasMaterial "wood" ;
+        :hasName "Chair Leg" ;
+        :hasVolume 0.003 .
+
+
+###  http://www.semanticweb.org/johanne/ontologies/2025/2/dpp_ontology/Leg002
+:Leg002 rdf:type owl:NamedIndividual ,
+                 :Part ;
+        :hasID "leg002" ;
+        :hasLifetime 20 ;
+        :hasMass 0.6 ;
+        :hasMaterial "wood" ;
+        :hasName "Chair Leg" ;
+        :hasVolume 0.003 .
+
+
+###  http://www.semanticweb.org/johanne/ontologies/2025/2/dpp_ontology/Leg003
+:Leg003 rdf:type owl:NamedIndividual ,
+                 :Part ;
+        :hasID "leg003" ;
+        :hasLifetime 20 ;
+        :hasMass 0.6 ;
+        :hasMaterial "wood" ;
+        :hasName "Chair Leg" ;
+        :hasVolume 0.003 .
+
+
+###  http://www.semanticweb.org/johanne/ontologies/2025/2/dpp_ontology/Leg004
+:Leg004 rdf:type owl:NamedIndividual ,
+                 :Part ;
+        :hasID "leg004" ;
+        :hasLifetime 20 ;
+        :hasMass 0.6 ;
+        :hasMaterial "wood" ;
+        :hasName "Chair Leg" ;
+        :hasVolume 0.003 .
+
+
+###  http://www.semanticweb.org/johanne/ontologies/2025/2/dpp_ontology/Seat001
+:Seat001 rdf:type owl:NamedIndividual ,
+                  :Part ;
+         :hasID "seat001" ;
+         :hasLifetime 20 ;
+         :hasMass 1.5 ;
+         :hasMaterial "wood" ;
+         :hasName "Seat Plate" ;
+         :hasVolume 0.02 .
+
+
+###  http://www.semanticweb.org/johanne/ontologies/2025/2/dpp_ontology/disassembleWoodenParts
+:disassembleWoodenParts rdf:type owl:NamedIndividual ,
+                                 :ProcessStep ;
+                        rdfs:comment "Disassemble all wooden components"@en .
+
+
+###  http://www.semanticweb.org/johanne/ontologies/2025/2/dpp_ontology/recycleChair
+:recycleChair rdf:type owl:NamedIndividual ,
+                       :Recycle ;
+              :hasStep :disassembleWoodenParts ,
+                       :unscrewScrews ;
+              rdfs:comment "Process of recycling a wooden chair."@en .
+
+
+###  http://www.semanticweb.org/johanne/ontologies/2025/2/dpp_ontology/unscrewScrews
+:unscrewScrews rdf:type owl:NamedIndividual ,
+                        :ProcessStep ;
+               :hasNextStep :disassembleWoodenParts ;
+               rdfs:comment "Unscrew all screws"@en .
+
+
+###  Generated by the OWL API (version 4.5.29.2024-05-13T12:11:03Z) https://github.com/owlcs/owlapi
