@@ -7,12 +7,13 @@ A functional proof-of-concept implementation of a Digital Product Passport (DPP)
 ## Table of Contents
 - [Overview](#overview)
 - [Features](#features)
-- [Installation](#installation)
+- [Quick Start](#quick-start)
 - [Architecture](#architecture)
 - [Tech Stack](#tech-stack)
 - [Ontology](#ontology)
 - [Sequence Diagrams](#sequence-diagrams)
 - [User Interface](#user-interface)
+- [Installation](#installation)
 - [Credits](#credits)
 
 ## Overview
@@ -32,8 +33,80 @@ The DPP prototype includes:
 - QR code generation and access to DPP data
 - End-to-end performance testing for CRUD operations
 
-## Installation
-...
+## Quick Start
+
+1. **Clone the repository:**
+   ```sh
+   git clone https://github.com/johgle/master-dpp.git
+   ```
+   
+2. **Create and activate a virtual environment:**
+   ```sh
+   python -m venv dpp_venv
+   dpp_venv\Scripts\activate
+   ```
+   
+3. **Install dependencies:**
+   ```sh
+   pip install -r requirements.txt
+   ```
+   
+4. **Set up Django secret key:**
+
+   Create a .env file in the root of the DPP_project directory (same level as manage.py), and add:
+
+   ```
+   DJANGO_SECRET_KEY=your-secret-key
+   ```
+
+6. **Set up Onshape API keys:**
+
+   Create `ACCESS_KEY` and `SECRET_KEY` for OnShape API integration. See how to generate API keys here: https://onshape-public.github.io/docs/auth/apikeys/.
+   
+   When creating keys, choose:
+   1. Read profile information
+   2. Read your documents
+   3. Write to your documents
+
+   Set the keys as environment variables:
+    ```sh
+    set ONSHAPE_API_ACCESS_KEY=your-access-key
+    set ONSHAPE_API_SECRET_KEY=your-secret-key
+    ```
+
+7. **Download Apache Jena Fuseki Server:**
+
+   Go to [https://jena.apache.org/download/index.cgi](https://jena.apache.org/download/index.cgi) and download the newest version of `apache-jena-fuseki-<version>.zip` under Apache Jena Binary Distributions (prototype uses: 5.3.0)
+
+8. **Start the Fuseki server:**
+
+   Open a new terminal, navigate to the folder where you extracted Apache Jena Fuseki, and start the server:
+    ```sh
+    cd path\to\apache-jena-fuseki-x.x.x
+    fuseki-server
+    ```
+    Leave this terminal window open while using the DPP system.
+    
+9. **Start the development server:**
+
+   Open a new terminal, navigate to the folder where the `manage.py` file is located, and start the server:
+  
+    ```sh
+    cd path\to\manage.py
+    python manage.py runserver
+    ```
+    Leave this terminal window open while using the DPP system.
+
+10. **Access the application:**
+
+   Open [http://127.0.0.1:8000](http://127.0.0.1:8000) in your browser.
+
+   Available pages:
+
+   - [Create DPP](http://127.0.0.1:8000/new_dpp/)
+   - [View DPP](http://127.0.0.1:8000/product/?id=DPP_ID) #Note: replace `DPP_ID` in the url with your DPP.
+   - [Update DPP](http://127.0.0.1:8000/update_dpp/)
+   - [Delete DPP](http://127.0.0.1:8000/delete_dpp/)
 
 ## Architecture
 The figure illustrates the architecture of the prototype system, with specific components, technologies, and communications. 
@@ -153,6 +226,9 @@ https://github.com/user-attachments/assets/3a042ae9-76f2-472d-81bb-8309fa51839b
 The video demonstrates scanning a QR code displayed on a computer screen, which redirects the user to the DPP site on their mobile phone.
 
 https://github.com/user-attachments/assets/2b60ee31-74d9-4615-8783-e7e03161e7d0
+
+## Installation
+...
 
 ## Credits
 This prototype is part of a Master’s Thesis by Johanne Glende, NTNU, June 2025. Thesis title: Digital Product Passport as Enabler of the Circular Economy: Design, Implementation and Evaluation of a Functional DPP Prototype. Supervisor: Andrei Lobov, NTNU.
