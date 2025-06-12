@@ -104,7 +104,7 @@ The DPP prototype includes:
    Available pages:
 
    - [Create DPP](http://127.0.0.1:8000/new_dpp/)
-   - [View DPP](http://127.0.0.1:8000/product/?id=DPP_ID) #Note: replace `DPP_ID` in the url with your DPP.
+   - [View DPP](http://127.0.0.1:8000/product/?id=DPP_ID)   (replace `DPP_ID` in the url with your DPP)
    - [Update DPP](http://127.0.0.1:8000/update_dpp/)
    - [Delete DPP](http://127.0.0.1:8000/delete_dpp/)
 
