@@ -1,15 +1,15 @@
-# Ignorer virtual environment
+# Ignore virtual environments
 venv/
 dpp_venv/
 
-# Ignorer cache-filer
+# Ignore cache-files
 __pycache__/
 *.pyc
 
-# Ignorer databasefiler (hvis du bruker SQLite)
+# Ignore database files (if using SQLite)
 db.sqlite3
 
-# Ignorer OS-filer (Mac/Windows)
+# Ignore OS-files (Mac/Windows)
 .DS_Store
 Thumbs.db
 
