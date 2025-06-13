@@ -13,12 +13,6 @@ from product.actual_product.product import Product
 from product.actor.actor import Actor
 from product.digital_product_passport.product_dpp import DPP
 
-
-# For å starte Fuseki server:
-# kjør i Command prompt:
-# cd C:\Users\Johanne\Downloads\apache-jena-fuseki-5.3.0\apache-jena-fuseki-5.3.0
-# fuseki-server
-
 URL = "http://127.0.0.1:3030/dpp"
 
 # Method to ask query to the knowledge base
