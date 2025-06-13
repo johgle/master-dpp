@@ -97,7 +97,6 @@ The DPP prototype includes:
     
 8. **Start the development server:**
 
-   Update the `ALLOWED_HOSTS` list in the `settings.py` file to include your local IP address.
    
    Open a new terminal, navigate to the folder where the `manage.py` file is located, and start the server:
   
@@ -109,13 +108,15 @@ The DPP prototype includes:
 
    **To access the server from another device (e.g., your phone) on the same WiFi:**
 
+   Update the `ALLOWED_HOSTS` list in the `settings.py` file to include your local IP address.
+
    Start the server with:
 
    ```sh
    python manage.py runserver 0.0.0.0:8000
    ```
    
-9. **Access the application:**
+10. **Access the application:**
 
    Open [http://127.0.0.1:8000](http://127.0.0.1:8000) in your browser.
 
