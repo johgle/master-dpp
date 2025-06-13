@@ -253,4 +253,4 @@ https://github.com/user-attachments/assets/2b60ee31-74d9-4615-8783-e7e03161e7d0
 ...
 
 ## Credits
-This prototype is part of a Master’s Thesis by Johanne Glende, NTNU, June 2025. Thesis title: Digital Product Passport as Enabler of the Circular Economy: Design, Implementation and Evaluation of a Functional DPP Prototype. Supervisor: Andrei Lobov, NTNU.
+This prototype is part of a master thesis by Johanne Glende, NTNU, June 2025. Thesis title: Digital Product Passport as Enabler of the Circular Economy - Design, Implementation, and Evaluation of a Functional DPP Prototype. Supervisor: Andrei Lobov, NTNU.
