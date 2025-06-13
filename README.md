@@ -53,11 +53,19 @@ The DPP prototype includes:
    
 4. **Set up Django secret key:**
 
-   Create a .env file in the root of the DPP_project directory (same level as manage.py), and add:
+   Create a `.env` file in the root of the DPP_project directory (same level as manage.py), and add:
 
    ```
    DJANGO_SECRET_KEY=your-secret-key
    ```
+
+   To generate a new, secure Django secret key, run this command in your terminal:
+   
+   ```sh
+   python -c "from django.core.management.utils import get_random_secret_key; print(get_random_secret_key())"
+   ```
+   
+   Copy the generated key and use it as `your-secret-key` in the .env file.
 
 6. **Set up Onshape API keys:**
 
