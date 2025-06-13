@@ -80,7 +80,7 @@ The DPP prototype includes:
 
 8. **Start the Fuseki server:**
 
-   Open a new terminal, navigate to the folder where you extracted Apache Jena Fuseki, and start the server:
+   Open a new terminal, navigate into the folder where you extracted Apache Jena Fuseki to, and start the server:
     ```sh
     cd path\to\apache-jena-fuseki-x.x.x
     fuseki-server
