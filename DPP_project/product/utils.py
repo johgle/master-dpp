@@ -1,15 +1,11 @@
-import qrcode
-import os
-from django.conf import settings
+"""
+Utilities for the project.
+Includes a function to get the local ip adress of the server
 
-def generate_qr_code_file(url, filename):
-    """
-    Generates a QR code for 'url' and saves it as 'filename'.
-    """
-    img = qrcode.make(url)
-    os.makedirs(os.path.dirname(filename), exist_ok=True)
-    img.save(filename)
-
+Author: Johanne Glende
+Date: Spring 2025
+Master thesis DPP, NTNU
+"""
 
 def get_local_ip_address():
     """
