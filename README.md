@@ -116,7 +116,7 @@ The DPP prototype includes:
    python manage.py runserver 0.0.0.0:8000
    ```
    
-10. **Access the application:**
+9. **Access the application:**
 
    Open [http://127.0.0.1:8000](http://127.0.0.1:8000) in your browser.
 
