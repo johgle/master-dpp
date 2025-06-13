@@ -253,25 +253,20 @@ https://github.com/user-attachments/assets/2b60ee31-74d9-4615-8783-e7e03161e7d0
 
 This guide walks you step-by-step through setting up and running the Digital Product Passport (DPP) Prototype on your local machine. Note: the prototype is only tested on Windows.
 
-### System Requirements
+### Before You Begin
 
 To run the DPP prototype, ensure your system has the following installed:
 
 - **Python 3.12** (tested; should also work with newer versions)
 - **Git**
 - **pip** (Python package manager)
-- **Apache Jena Fuseki 5.3.0** (tested; should also work with newer versions)
-
+  
   Additionally, you must have an **Onshape account** (to generate API keys and OnShape documents).
 
 Optional but highly recommended:
 - `venv` (Python’s built-in virtual environment tool)
 - A modern browser (Chrome, Firefox, etc.)
-
-### Dependencies
-
-See `requirements.txt` file.
-
+  
 --------
 
 ### Environment Setup
