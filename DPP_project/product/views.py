@@ -2,11 +2,15 @@
 Django views for the product app.
 This file contains the logic for handling requests and rendering templates.
 
+Declaration of Assistance
+This file was developed with the assistance of GitHub Copilot, which provided suggestions during the coding
+process. The author adapted and integrated these suggestions to align with the project's structure and
+objectives. All code has been critically reviewed and approved by the author.
+
 Author: Johanne Glende
 Date: Spring 2025
 Master thesis DPP, NTNU
 """
-
 
 from django.shortcuts import render
 from django.http import HttpResponse
