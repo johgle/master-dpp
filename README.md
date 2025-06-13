@@ -67,7 +67,7 @@ The DPP prototype includes:
    
    Copy the generated key and use it as `your-secret-key` in the .env file.
 
-6. **Set up Onshape API keys:**
+5. **Set up Onshape API keys:**
 
    Create `ACCESS_KEY` and `SECRET_KEY` for OnShape API integration. See how to generate API keys here: https://onshape-public.github.io/docs/auth/apikeys/.
    
@@ -82,11 +82,11 @@ The DPP prototype includes:
     set ONSHAPE_API_SECRET_KEY=your-secret-key
     ```
 
-7. **Download Apache Jena Fuseki Server:**
+6. **Download Apache Jena Fuseki Server:**
 
    Go to [https://jena.apache.org/download/index.cgi](https://jena.apache.org/download/index.cgi) and download the newest version of `apache-jena-fuseki-<version>.zip` under Apache Jena Binary Distributions (prototype uses: 5.3.0)
 
-8. **Start the Fuseki server:**
+7. **Start the Fuseki server:**
 
    Open a new terminal, navigate into the folder where you extracted Apache Jena Fuseki to, and start the server:
     ```sh
@@ -95,8 +95,10 @@ The DPP prototype includes:
     ```
     Leave this terminal window open while using the DPP system.
     
-9. **Start the development server:**
+8. **Start the development server:**
 
+   Update the `ALLOWED_HOSTS` list in the `settings.py` file to include your local IP address.
+   
    Open a new terminal, navigate to the folder where the `manage.py` file is located, and start the server:
   
     ```sh
@@ -105,7 +107,15 @@ The DPP prototype includes:
     ```
     Leave this terminal window open while using the DPP system.
 
-10. **Access the application:**
+   **To access the server from another device (e.g., your phone) on the same WiFi:**
+
+   Start the server with:
+
+   ```sh
+   python manage.py runserver 0.0.0.0:8000
+   ```
+   
+9. **Access the application:**
 
    Open [http://127.0.0.1:8000](http://127.0.0.1:8000) in your browser.
 
@@ -115,6 +125,9 @@ The DPP prototype includes:
    - [View DPP](http://127.0.0.1:8000/product/?id=DPP_ID)   (replace `DPP_ID` in the url with the ID of your DPP)
    - [Update DPP](http://127.0.0.1:8000/update_dpp/)
    - [Delete DPP](http://127.0.0.1:8000/delete_dpp/)
+
+
+
 
 ## Architecture
 The figure illustrates the architecture of the prototype system, with specific components, technologies, and communications. 
