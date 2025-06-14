@@ -56,6 +56,7 @@ Optional but highly recommended:
    ```sh
    git clone https://github.com/johgle/master-dpp.git
    ```
+   step into the master-dpp folder: `cd master-dpp`
    
 2. **Create and activate a virtual environment:**
    ```sh
