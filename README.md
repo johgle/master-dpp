@@ -118,8 +118,10 @@ Optional but highly recommended:
     fuseki-server
     ```
     Leave this terminal window open while using the DPP system. Fuseki must be running for the system to work.
+
+   Upload the `dpp_ontology.ttl` file (find it in the repo) to the Fuseki server, via [http://127.0.0.1:3030/#/manage](http://127.0.0.1:3030/#/manage)
     
-7. **Start the development server:**
+8. **Start the development server:**
    
    Open a new terminal, navigate into the folder DPP_project (where the `manage.py` file is located), and start the server:
   
@@ -142,7 +144,7 @@ Optional but highly recommended:
    You can then access the site via your local IP from a phone or another computer on the same network.
 
    
-8. **Access the application:**
+9. **Access the application:**
 
    Open [http://127.0.0.1:8000](http://127.0.0.1:8000) in your browser.
 
