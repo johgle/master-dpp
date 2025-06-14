@@ -56,7 +56,7 @@ Optional but highly recommended:
    ```sh
    git clone https://github.com/johgle/master-dpp.git
    ```
-   step into the master-dpp folder: `cd master-dpp`
+   navigate into the master-dpp folder: `cd master-dpp`
    
 2. **Create and activate a virtual environment:**
    ```sh
@@ -65,11 +65,14 @@ Optional but highly recommended:
    ```
    
 3. **Install dependencies:**
-   ```sh
+
+   navigate into the DPP_project folder: `cd DPP_project`
+
+    ```sh
    pip install -r requirements.txt
    ```
    
-4. **Set up Django secret key:**
+5. **Set up Django secret key:**
 
    Create a `.env` file in the root of the DPP_project directory (same level as manage.py), and add:
 
@@ -85,7 +88,7 @@ Optional but highly recommended:
    
    Copy the generated key and use it as `your-secret-key` in the .env file.
 
-5. **Set up Onshape API keys:**
+6. **Set up Onshape API keys:**
 
    Make sure you have an OnShape account. You need it to create OnShape documents and to generate API keys.
 
