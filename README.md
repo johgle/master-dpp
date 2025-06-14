@@ -7,13 +7,12 @@ A functional proof-of-concept implementation of a Digital Product Passport (DPP)
 ## Table of Contents
 - [Overview](#overview)
 - [Features](#features)
-- [Quick Start](#quick-start)
+- [Installations & Quick Start](#installations--quick-start)
 - [Architecture](#architecture)
 - [Tech Stack](#tech-stack)
 - [Ontology](#ontology)
 - [Sequence Diagrams](#sequence-diagrams)
 - [User Interface](#user-interface)
-- [Installation](#installation)
 - [Credits](#credits)
 
 ## Overview
@@ -33,7 +32,25 @@ The DPP prototype includes:
 - QR code generation and access to DPP data
 - End-to-end performance testing for CRUD operations
 
-## Quick Start
+## Installations & Quick Start
+
+This guide walks you step-by-step through setting up and running the Digital Product Passport (DPP) Prototype on your local machine. Note: the prototype is only tested on Windows.
+
+### Before You Begin
+
+To run the DPP prototype, ensure your system has the following installed:
+
+- **Python 3.12** (tested; should also work with newer versions)
+- **Git**
+- **pip** (Python package manager)
+  
+  Additionally, you must have an **Onshape account** (to generate OnShape documents and API keys).
+
+Optional but highly recommended:
+- **venv** (Python’s built-in virtual environment tool)
+- A modern browser (Chrome, Firefox, etc.)
+
+### Installation Steps
 
 1. **Clone the repository:**
    ```sh
@@ -69,44 +86,46 @@ The DPP prototype includes:
 
 5. **Set up Onshape API keys:**
 
+   Make sure you have an OnShape account. You need it to create OnShape documents and to generate API keys.
+
    Create `ACCESS_KEY` and `SECRET_KEY` for OnShape API integration for your OnShape user. See how to generate API keys here: https://onshape-public.github.io/docs/auth/apikeys/.
    
    When creating keys, choose:
    1. Read profile information
    2. Read your documents
    3. Write to your documents
-
+   
    Set the keys as environment variables:
-    ```sh
-    set ONSHAPE_API_ACCESS_KEY=your-access-key
-    set ONSHAPE_API_SECRET_KEY=your-secret-key
-    ```
 
-6. **Download Apache Jena Fuseki Server:**
+   - Windows Search → “Edit the system environment variables” → “Environment Variables…”
+   - Add or edit under user variables
+        - ONSHAPE_API_ACCESS_KEY=your-access-key
+        - ONSHAPE_API_SECRET_KEY=your-secret-key
 
-   Go to [https://jena.apache.org/download/index.cgi](https://jena.apache.org/download/index.cgi) and download the newest version of `apache-jena-fuseki-<version>.zip` under Apache Jena Binary Distributions (prototype uses: 5.3.0)
+5. **Download Apache Jena Fuseki Server:**
 
-7. **Start the Fuseki server:**
+   Go to [https://jena.apache.org/download/index.cgi](https://jena.apache.org/download/index.cgi) and download the newest version of `apache-jena-fuseki-<version>.zip` under Apache Jena Binary Distributions (prototype tested with 5.3.0, should work with newer)
+
+6. **Start the Fuseki server:**
 
    Open a new terminal, navigate into the folder where you extracted Apache Jena Fuseki to, and start the server:
     ```sh
     cd path\to\apache-jena-fuseki-x.x.x
     fuseki-server
     ```
-    Leave this terminal window open while using the DPP system.
+    Leave this terminal window open while using the DPP system. Fuseki must be running for the system to work.
     
-8. **Start the development server:**
-
+7. **Start the development server:**
    
-   Open a new terminal, navigate to the folder where the `manage.py` file is located, and start the server:
+   Open a new terminal, navigate into the folder DPP_project (where the `manage.py` file is located), and start the server:
   
     ```sh
-    cd path\to\manage.py
+    cd path\to\DPP_Project
     python manage.py runserver
     ```
-    Leave this terminal window open while using the DPP system.
+    Leave this terminal window open while using the DPP system. Django server must be running for the system to work.
 
-   **To access the server from another device (e.g., your phone) on the same WiFi:**
+   ##### To access the server from another device (e.g., your phone) on your network:
 
    Update the `ALLOWED_HOSTS` list in the `settings.py` file to include your local IP address.
 
@@ -115,8 +134,11 @@ The DPP prototype includes:
    ```sh
    python manage.py runserver 0.0.0.0:8000
    ```
+
+   You can then access the site via your local IP from a phone or another computer on the same network.
+
    
-9. **Access the application:**
+8. **Access the application:**
 
    Open [http://127.0.0.1:8000](http://127.0.0.1:8000) in your browser.
 
@@ -127,7 +149,16 @@ The DPP prototype includes:
    - [Update DPP](http://127.0.0.1:8000/update_dpp/)
    - [Delete DPP](http://127.0.0.1:8000/delete_dpp/)
 
+   Try creating a new DPP using valid Onshape IDs to verify that the entire system is functional.
 
+### Troubleshooting
+
+| Problem                        | Likely Cause                                     | Solution                                               |
+|-------------------------------|--------------------------------------------------|--------------------------------------------------------|
+| Fuseki won’t start            | Java not installed or incorrect directory        | Install Java and navigate to the correct path          |
+| Onshape integration fails     | Invalid or missing API keys                      | Check permissions of API keys, regenerate if needed    |
+| Server unreachable on phone   | IP not in `ALLOWED_HOSTS` or firewall blocking   | Add IP address in `settings.py` and ensure port 8000 is open   |
+| Environment variables missing | Not set correctly                                | Double-check `.env` and your local environment variables       |
 
 
 ## Architecture
@@ -248,154 +279,6 @@ https://github.com/user-attachments/assets/3a042ae9-76f2-472d-81bb-8309fa51839b
 The video demonstrates scanning a QR code displayed on a computer screen, which redirects the user to the DPP site on their mobile phone.
 
 https://github.com/user-attachments/assets/2b60ee31-74d9-4615-8783-e7e03161e7d0
-
-## Installation
-
-This guide walks you step-by-step through setting up and running the Digital Product Passport (DPP) Prototype on your local machine. Note: the prototype is only tested on Windows.
-
-### Before You Begin
-
-To run the DPP prototype, ensure your system has the following installed:
-
-- **Python 3.12** (tested; should also work with newer versions)
-- **Git**
-- **pip** (Python package manager)
-  
-  Additionally, you must have an **Onshape account** (to generate API keys and OnShape documents).
-
-Optional but highly recommended:
-- `venv` (Python’s built-in virtual environment tool)
-- A modern browser (Chrome, Firefox, etc.)
-  
---------
-
-### Environment Setup
-
-#### 1. Clone the repository
-
-```sh
-git clone https://github.com/johgle/master-dpp.git
-```
-
-#### 2. Create and activate a virtual environment
-
-##### On Windows:
-
-```sh
-python -m venv dpp_venv
-dpp_venv\Scripts\activate
-```
-
-#### 3. Install dependencies:
-
-```sh
-pip install -r requirements.txt
-```
-
-### Set Up Environment Variables
-
-#### 1. Django Secret Key
-
-Create a `.env` file in the root of the DPP_project directory (same level as manage.py), and add:
-
-```
-DJANGO_SECRET_KEY=your-secret-key
-```
-
-To generate a new, secure Django secret key, run this command in your terminal:
-
-```sh
-python -c "from django.core.management.utils import get_random_secret_key; print(get_random_secret_key())"
-```
-
-Copy the generated key and use it as your-secret-key in the .env file.
-
-#### 2. Onshape API Keys
-
-Make sure you have an OnShape account. You need it to create OnShape documents of you products and to generate API keys.
-
-Create `ACCESS_KEY` and `SECRET_KEY` for OnShape API integration. See how to generate API keys here: https://onshape-public.github.io/docs/auth/apikeys/.
-
-Select the following scopes when generating keys:
-- Read profile information
-- Read your documents
-- Write to your documents
-
-Then, set them as environment variables:
-
-```sh
-set ONSHAPE_API_ACCESS_KEY=your-access-key
-set ONSHAPE_API_SECRET_KEY=your-secret-key
-```
-
-### Install and Run Apache Jena Fuseki
-
-#### 1. Download Apache Jena Fuseki
-
-Visit: https://jena.apache.org/download/index.cgi  
-Download the newest version of `apache-jena-fuseki-<version>.zip` from Apache Jena Binary Distributions (prototype tested with: 5.3.0) and extract it.
-
-#### 2. Start the Fuseki server
-
-Open a new terminal, navigate into the folder where you extracted Apache Jena Fuseki to, and start the server:
-
-```sh
-cd path/to/apache-jena-fuseki-x.x.x
-fuseki-server
-```
-
-Leave this terminal window open. Fuseki must be running for the system to work.
-
-### Start the Django Development Server
-
-#### 1. Navigate to the Django project directory
-
-```sh
-cd path/to/DPP_project
-```
-
-#### 2. Run the server
-
-```sh
-python manage.py runserver
-```
-
-Leave this terminal window open. Django server must be running for the system to work.
-
-##### To access from another device on your network:
-
-- Update the `ALLOWED_HOSTS` setting in `settings.py` to include your local IP address.
-- Run:
-
-```sh
-python manage.py runserver 0.0.0.0:8000
-```
-
-You can then access the site via your local IP from a phone or another computer on the same network.
-
-### Verify Installation
-
-Open your browser and go to:
-
-[http://127.0.0.1:8000](http://127.0.0.1:8000)
-
-Available pages:
-
-   - [Create DPP](http://127.0.0.1:8000/new_dpp/)
-   - [View DPP](http://127.0.0.1:8000/product/?id=DPP_ID)   (replace `DPP_ID` in the url with the ID of your DPP)
-   - [Update DPP](http://127.0.0.1:8000/update_dpp/)
-   - [Delete DPP](http://127.0.0.1:8000/delete_dpp/)
-
-Try creating a new DPP using valid Onshape IDs to verify that the entire system is functional.
-
-### Troubleshooting
-
-| Problem                        | Likely Cause                                     | Solution                                               |
-|-------------------------------|--------------------------------------------------|--------------------------------------------------------|
-| Fuseki won’t start            | Java not installed or incorrect directory        | Install Java and navigate to the correct path          |
-| Onshape integration fails     | Invalid or missing API keys                      | Check permissions of API keys, regenerate if needed    |
-| Server unreachable on phone   | IP not in `ALLOWED_HOSTS` or firewall blocking   | Add IP address in `settings.py` and ensure port 8000 is open   |
-| Environment variables missing | Not set correctly                                | Double-check `.env` and your local environment variables       |
 
 ## Credits
 This prototype is part of a master thesis by Johanne Glende, NTNU, June 2025. Thesis title: Digital Product Passport as Enabler of the Circular Economy - Design, Implementation, and Evaluation of a Functional DPP Prototype. Supervisor: Andrei Lobov, NTNU.
