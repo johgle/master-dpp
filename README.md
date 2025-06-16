@@ -57,7 +57,7 @@ Optional but highly recommended:
    ```sh
    git clone https://github.com/johgle/master-dpp.git
    ```
-   navigate into the master-dpp folder: `cd master-dpp`
+   Navigate into the master-dpp folder: `cd master-dpp`
    
 2. **Create and activate a virtual environment:**
    ```sh
@@ -67,13 +67,13 @@ Optional but highly recommended:
    
 3. **Install dependencies:**
 
-   navigate into the DPP_project folder: `cd DPP_project`
+   Navigate into the DPP_project folder: `cd DPP_project`. You should be within your activated venv.
 
     ```sh
    pip install -r requirements.txt
    ```
    
-5. **Set up Django secret key:**
+4. **Set up Django secret key:**
 
    Create a `.env` file in the root of the DPP_project directory (same level as manage.py), and add:
 
@@ -89,7 +89,7 @@ Optional but highly recommended:
    
    Copy the generated key and use it as `your-secret-key` in the .env file.
 
-6. **Set up Onshape API keys:**
+5. **Set up Onshape API keys:**
 
    Make sure you have an OnShape account. You need it to create OnShape documents and to generate API keys.
 
@@ -107,11 +107,11 @@ Optional but highly recommended:
         - ONSHAPE_API_ACCESS_KEY=your-access-key
         - ONSHAPE_API_SECRET_KEY=your-secret-key
 
-5. **Download Apache Jena Fuseki Server:**
+6. **Download Apache Jena Fuseki Server:**
 
    Go to [https://jena.apache.org/download/index.cgi](https://jena.apache.org/download/index.cgi) and download the newest version of `apache-jena-fuseki-<version>.zip` under Apache Jena Binary Distributions (prototype tested with 5.3.0, should work with newer)
 
-6. **Start the Fuseki server:**
+7. **Start the Fuseki server:**
 
    Open a new terminal, navigate into the folder where you extracted Apache Jena Fuseki to, and start the server:
     ```sh
@@ -166,6 +166,7 @@ Optional but highly recommended:
 | Onshape integration fails     | Invalid or missing API keys                      | Check permissions of API keys, regenerate if needed    |
 | Server unreachable on phone   | IP not in `ALLOWED_HOSTS` or firewall blocking   | Add IP address in `settings.py` and ensure port 8000 is open   |
 | Environment variables missing | Not set correctly                                | Double-check `.env` and your local environment variables       |
+| Module not found              | Virtual environment not activated or missing dependencies  | Double-check that the venv is activated and that all required packages are installed correctly |
 
 
 ## Architecture
